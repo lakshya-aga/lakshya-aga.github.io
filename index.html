@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lakshya Agarwal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0c0e;
+      --surface: #111417;
+      --surface2: #181c21;
+      --border: #1e2530;
+      --accent: #c8a96e;
+      --accent2: #4ea8de;
+      --text: #d4d8df;
+      --muted: #5a6272;
+      --mono: 'IBM Plex Mono', monospace;
+      --serif: 'Playfair Display', serif;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--mono);
+      font-size: 14px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.5;
+    }
+    .grid-bg {
+      position: fixed; inset: 0;
+      background-image:
+        linear-gradient(rgba(78,168,222,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(78,168,222,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 3rem;
+      border-bottom: 1px solid var(--border);
+      background: rgba(10,12,14,0.85);
+      backdrop-filter: blur(12px);
+    }
+    .nav-logo { font-family: var(--serif); font-size: 1.15rem; color: var(--accent); letter-spacing: 0.02em; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--accent); }
+    .wrapper { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 0 2.5rem; }
+    #hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding-top: 80px; }
+    .hero-tag { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent2); margin-bottom: 1.2rem; opacity: 0; animation: fadeUp 0.6s 0.2s forwards; }
+    h1 { font-family: var(--serif); font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 700; line-height: 1.0; color: #f0f2f5; letter-spacing: -0.02em; opacity: 0; animation: fadeUp 0.6s 0.35s forwards; }
+    h1 span { color: var(--accent); }
+    .hero-sub { margin-top: 1.8rem; max-width: 560px; font-size: 0.88rem; color: var(--muted); line-height: 1.9; opacity: 0; animation: fadeUp 0.6s 0.5s forwards; }
+    .hero-sub strong { color: var(--text); }
+    .focus-banner { margin-top: 1.8rem; padding: 0.9rem 1.4rem; border: 1px solid rgba(200,169,110,0.25); background: rgba(200,169,110,0.04); display: inline-flex; align-items: center; gap: 0.9rem; opacity: 0; animation: fadeUp 0.6s 0.62s forwards; }
+    .focus-banner .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent); flex-shrink: 0; animation: pulse 2s infinite; }
+    .focus-banner span { font-size: 0.73rem; color: var(--accent); letter-spacing: 0.05em; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
+    .hero-links { margin-top: 2.2rem; display: flex; gap: 1.2rem; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.6s 0.75s forwards; }
+    .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.65rem 1.4rem; border: 1px solid var(--border); color: var(--text); text-decoration: none; font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.08em; transition: all 0.2s; background: var(--surface); }
+    .btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(200,169,110,0.05); }
+    .btn.primary { border-color: var(--accent); color: var(--accent); }
+    .btn.primary:hover { background: var(--accent); color: var(--bg); }
+    .hero-stats { margin-top: 3.5rem; display: flex; gap: 3rem; opacity: 0; animation: fadeUp 0.6s 0.9s forwards; }
+    .stat-num { font-family: var(--serif); font-size: 2rem; color: var(--accent); line-height: 1; }
+    .stat-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.12em; margin-top: 0.3rem; }
+    section { padding: 6rem 0; }
+    .section-header { display: flex; align-items: baseline; gap: 1.2rem; margin-bottom: 3rem; }
+    .section-num { font-size: 0.7rem; color: var(--accent2); letter-spacing: 0.15em; }
+    h2 { font-family: var(--serif); font-size: 1.8rem; font-weight: 500; color: #f0f2f5; }
+    .section-line { flex: 1; height: 1px; background: var(--border); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+    .about-text p { color: var(--muted); margin-bottom: 1rem; font-size: 0.85rem; line-height: 1.9; }
+    .about-text p strong { color: var(--text); }
+    .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .skill-group h4 { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--accent); margin-bottom: 0.6rem; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .tag { font-size: 0.7rem; padding: 0.2rem 0.55rem; border: 1px solid var(--border); color: var(--muted); background: var(--surface); }
+    .tag.accent { border-color: rgba(200,169,110,0.4); color: var(--accent); background: rgba(200,169,110,0.05); }
+    .exp-list { display: flex; flex-direction: column; }
+    .exp-item { display: grid; grid-template-columns: 200px 1fr; gap: 0 2rem; padding: 2rem 0; border-bottom: 1px solid var(--border); position: relative; }
+    .exp-item::before { content: ''; position: absolute; left: 194px; top: 0; bottom: 0; width: 1px; background: var(--border); }
+    .exp-date { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.08em; }
+    .exp-company { font-size: 0.8rem; color: var(--accent2); margin-top: 0.3rem; }
+    .exp-role { font-family: var(--serif); font-size: 1.05rem; color: #f0f2f5; margin-bottom: 0.8rem; }
+    .exp-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.8; }
+    .exp-desc li { list-style: none; padding-left: 1rem; position: relative; margin-bottom: 0.3rem; }
+    .exp-desc li::before { content: '›'; position: absolute; left: 0; color: var(--accent); }
+    .featured-label { margin-bottom: 1rem; }
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+    .project-card { background: var(--surface); padding: 1.8rem; transition: background 0.2s; cursor: pointer; text-decoration: none; display: block; }
+    .project-card:hover { background: var(--surface2); }
+    .project-card.featured-card { border-left: 2px solid var(--accent); }
+    .project-type { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--accent2); margin-bottom: 0.8rem; }
+    .project-card.featured-card .project-type { color: var(--accent); }
+    .project-title { font-family: var(--serif); font-size: 1.05rem; color: #f0f2f5; margin-bottom: 0.6rem; }
+    .project-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.7; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
+    .projects-divider { height: 1px; background: var(--border); }
+    .project-card.add-card { border: 1px dashed var(--border); background: transparent; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; min-height: 180px; color: var(--muted); }
+    .project-card.add-card .plus { font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--border); }
+    .project-card.add-card span { font-size: 0.72rem; letter-spacing: 0.1em; }
+    .edu-list { display: flex; flex-direction: column; }
+    .edu-item { display: grid; grid-template-columns: 200px 1fr; gap: 0 2rem; padding: 1.5rem 0; border-bottom: 1px solid var(--border); }
+    .edu-deg { font-family: var(--serif); font-size: 1rem; color: #f0f2f5; margin-bottom: 0.3rem; }
+    .edu-school { font-size: 0.8rem; color: var(--accent2); margin-bottom: 0.5rem; }
+    .edu-detail { font-size: 0.78rem; color: var(--muted); }
+    .honors-list { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .honor-item { padding: 1.2rem 1.5rem; border: 1px solid var(--border); background: var(--surface); }
+    .honor-year { font-size: 0.68rem; color: var(--accent); letter-spacing: 0.1em; }
+    .honor-title { font-size: 0.85rem; color: var(--text); margin-top: 0.3rem; }
+    #contact { border-top: 1px solid var(--border); padding: 4rem 0; }
+    .contact-inner { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 2rem; }
+    .contact-cta h3 { font-family: var(--serif); font-size: 2rem; color: #f0f2f5; margin-bottom: 0.5rem; }
+    .contact-cta p { font-size: 0.82rem; color: var(--muted); }
+    .contact-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .footer-bottom { border-top: 1px solid var(--border); padding: 1.5rem 0; display: flex; justify-content: space-between; align-items: center; }
+    .footer-bottom p { font-size: 0.7rem; color: var(--muted); }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s, transform 0.6s; }
+    .reveal.visible { opacity: 1; transform: none; }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); }
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .wrapper { padding: 0 1.5rem; }
+      .about-grid { grid-template-columns: 1fr; }
+      .exp-item { grid-template-columns: 1fr; }
+      .exp-item::before { display: none; }
+      .edu-item { grid-template-columns: 1fr; }
+      .honors-list { grid-template-columns: 1fr; }
+      .contact-inner { flex-direction: column; }
+      h1 { font-size: 2.5rem; }
+      .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+
+<nav>
+  <div class="nav-logo">LA</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="wrapper">
+  <section id="hero">
+    <p class="hero-tag">// Agentic AI &nbsp;&middot;&nbsp; Quantitative Finance &nbsp;&middot;&nbsp; High-Performance Systems</p>
+    <h1>Lakshya<br><span>Agarwal</span></h1>
+    <p class="hero-sub">
+      Building at the intersection of <strong>agentic AI</strong> and <strong>quantitative finance</strong> &mdash;
+      autonomous systems that reason, act, and trade. MSc Financial Engineering at WorldQuant University.
+      Previously at Astignes Capital, Banach Technologies, Rolls-Royce.
+    </p>
+    <div class="focus-banner">
+      <div class="dot"></div>
+      <span>Current focus: LLM agents + MCP tooling for quantitative research workflows</span>
+    </div>
+    <div class="hero-links">
+      <a href="https://github.com/lakshya-aga" target="_blank" class="btn primary">&#8599; GitHub</a>
+      <a href="https://www.linkedin.com/in/lakshya-agarwal" target="_blank" class="btn">&#8599; LinkedIn</a>
+      <a href="mailto:lakshya001@e.ntu.edu.sg" class="btn">&#9993; Email</a>
+      <a href="https://github.com/lakshya-aga/ubiquitous-enigma" target="_blank" class="btn">&#128211; Obsidian Vault</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-num">4.4</div><div class="stat-label">CGPA / 5.0</div></div>
+      <div><div class="stat-num">7+</div><div class="stat-label">Internships</div></div>
+      <div><div class="stat-num">94%</div><div class="stat-label">Best Model Accuracy</div></div>
+      <div><div class="stat-num">ISC&rsquo;23</div><div class="stat-label">Cluster Competition Winner</div></div>
+    </div>
+  </section>
+</div>
+
+<div class="wrapper">
+  <section id="about">
+    <div class="section-header reveal">
+      <span class="section-num">01</span>
+      <h2>About</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>I&rsquo;m a <strong>Computer Science graduate</strong> from Nanyang Technological University (Honours, Distinction), building at the frontier of <strong>agentic AI and quantitative finance</strong> &mdash; systems where LLM-powered agents reason over market data, execute multi-step strategies, and compound knowledge autonomously.</p>
+        <p>My work spans <strong>AI agent architecture</strong>, MCP tooling, quantitative strategy research, derivative pricing, and high-performance data pipelines. I care about performance at every layer: from agent tool-use design to compile-time flags on HPC clusters.</p>
+        <p>Pursuing an <strong>MSc in Financial Engineering</strong> at WorldQuant University. I maintain a public <strong>research knowledge base</strong> in Obsidian, documenting findings from papers, agent experiments, and trading ideas.</p>
+      </div>
+      <div class="reveal">
+        <div class="skills-grid">
+          <div class="skill-group">
+            <h4>Languages</h4>
+            <div class="skill-tags">
+              <span class="tag">Python</span><span class="tag">C++</span><span class="tag">C#</span><span class="tag">Go</span><span class="tag">Julia</span><span class="tag">Java</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <h4>Agentic AI</h4>
+            <div class="skill-tags">
+              <span class="tag">MCP</span><span class="tag">RAG</span><span class="tag">ChromaDB</span><span class="tag">LLM Tool Use</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <h4>Quant</h4>
+            <div class="skill-tags">
+              <span class="tag">QuantLib</span><span class="tag">QuantConnect</span><span class="tag">Monte Carlo</span><span class="tag">Kelly Criterion</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <h4>ML / Data</h4>
+            <div class="skill-tags">
+              <span class="tag">PyTorch</span><span class="tag">TensorFlow</span><span class="tag">Pandas</span><span class="tag">Polars</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <h4>Systems</h4>
+            <div class="skill-tags">
+              <span class="tag">Linux</span><span class="tag">HPC</span><span class="tag">MPI/OpenMP</span><span class="tag">FastAPI</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="wrapper">
+  <section id="experience">
+    <div class="section-header reveal">
+      <span class="section-num">02</span>
+      <h2>Experience</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="exp-list">
+
+      <div class="exp-item reveal">
+        <div>
+          <div class="exp-date">Sep &ndash; Nov 2024</div>
+          <div class="exp-company">Astignes Capital Asia</div>
+        </div>
+        <div>
+          <div class="exp-role">Quantitative Developer Intern</div>
+          <ul class="exp-desc">
+            <li>Researched FX risk-neutral trade strategies using GDELT, forecast data, and bank positioning.</li>
+            <li>Applied Kelly&rsquo;s Criterion and regression for optimal weight allocation in a long-short basket strategy, improving Sharpe ratio by 16%.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div>
+          <div class="exp-date">May &ndash; Jul 2024</div>
+          <div class="exp-company">Astignes Capital Asia</div>
+        </div>
+        <div>
+          <div class="exp-role">Technology Intern</div>
+          <ul class="exp-desc">
+            <li>Built FastAPI endpoints for data transformation using Polars after rigorous performance benchmarking against Pandas.</li>
+            <li>Developed a WinForms task scheduler in C#/.NET, reducing maintenance overhead by 99%.</li>
+            <li>Priced binary options in C++ via Monte Carlo methods in QuantLib; tested with Erlang NIFs.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div>
+          <div class="exp-date">May 2023 &ndash; Present</div>
+          <div class="exp-company">WorldQuant BRAIN</div>
+        </div>
+        <div>
+          <div class="exp-role">Research Consultant</div>
+          <ul class="exp-desc">
+            <li>Research and backtest alphas for quantitative trading using statistical arbitrage from academic papers and personal hypotheses.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div>
+          <div class="exp-date">May &ndash; Jul 2023</div>
+          <div class="exp-company">Banach Technologies</div>
+        </div>
+        <div>
+          <div class="exp-role">Machine Learning Intern</div>
+          <ul class="exp-desc">
+            <li>Calibrated stochastic and local volatility models from option data; used correlation matrices for structured product pricing.</li>
+            <li>Built a Golang backend with authentication for pricing, backtesting, and derivative pricing workflows.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div>
+          <div class="exp-date">Aug 2022 &ndash; Dec 2023</div>
+          <div class="exp-company">NTU HPC Club</div>
+        </div>
+        <div>
+          <div class="exp-role">System Administrator</div>
+          <ul class="exp-desc">
+            <li>Ran benchmarks for Student Cluster Competition, identifying bottlenecks through profiling to optimally distribute workload across nodes and GPUs.</li>
+            <li>Optimised compile-time flags; maintained software dependencies of NTU&rsquo;s HPC cluster.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div>
+          <div class="exp-date">Aug &ndash; Nov 2022</div>
+          <div class="exp-company">MSD / ITRMS</div>
+        </div>
+        <div>
+          <div class="exp-role">ML Consultant (NTU EDGE)</div>
+          <ul class="exp-desc">
+            <li>Fine-tuned BERT on a Qualys dataset to classify cybersecurity articles &mdash; 95% accuracy vs 73% from Google AutoAI.</li>
+            <li>Deployed via AWS Lambda as a POSTMAN-accessible API; presented findings to industry professionals.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div>
+          <div class="exp-date">May &ndash; Jul 2022</div>
+          <div class="exp-company">Rolls-Royce @ NTU</div>
+        </div>
+        <div>
+          <div class="exp-role">Research Intern</div>
+          <ul class="exp-desc">
+            <li>Analysed battery cycle-life data under extreme conditions for the EPSILON project, identifying anomalies across 1000+ data points.</li>
+            <li>Designed experiments to simulate operational conditions for energy management systems.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<div class="wrapper">
+  <section id="projects">
+    <div class="section-header reveal">
+      <span class="section-num">03</span>
+      <h2>Projects &amp; Repositories</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="featured-label reveal">
+      <span style="font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(200,169,110,0.3);padding:0.25rem 0.7rem;background:rgba(200,169,110,0.05);">&#9733; Agentic AI &times; Quant Finance</span>
+    </div>
+
+    <div class="projects-grid" style="border-bottom:none;" id="featured-grid">
+      <a class="project-card featured-card reveal" href="https://github.com/lakshya-aga/finagent_v2" target="_blank">
+        <div class="project-type">&#129302; Agentic AI &middot; Quant Finance</div>
+        <div class="project-title">FinAgent v2</div>
+        <div class="project-desc">An autonomous financial agent that reasons over market data and executes multi-step quantitative strategies &mdash; bringing together LLM decision-making and quant finance in a single agentic loop.</div>
+        <div class="project-tags">
+          <span class="tag accent">Agentic AI</span><span class="tag">Python</span><span class="tag">LLM</span><span class="tag">Quant</span>
+        </div>
+      </a>
+      <a class="project-card featured-card reveal" href="https://github.com/lakshya-aga/fruit-thrower" target="_blank">
+        <div class="project-type">&#127795; MCP Server &middot; Code RAG</div>
+        <div class="project-title">fruit-thrower</div>
+        <div class="project-desc">MCP server that parses, vectorises, and exposes internal Python libraries to AI agents via AST extraction and ChromaDB/TF-IDF search. Claude finds your existing code before writing new code &mdash; O(N&sup2;) knowledge growth.</div>
+        <div class="project-tags">
+          <span class="tag accent">MCP</span><span class="tag">RAG</span><span class="tag">ChromaDB</span><span class="tag">Python</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="projects-divider"></div>
+
+    <div class="projects-grid" id="projects-grid" style="border-top:none;">
+      <a class="project-card reveal" href="https://github.com/lakshya-aga/ubiquitous-enigma" target="_blank">
+        <div class="project-type">&#128211; Knowledge Base</div>
+        <div class="project-title">ubiquitous-enigma</div>
+        <div class="project-desc">Personal Obsidian vault &mdash; research notes spanning quant finance, ML papers, systems topics, agent experiments, and trading ideas.</div>
+        <div class="project-tags"><span class="tag">Obsidian</span><span class="tag">Research</span><span class="tag">Notes</span></div>
+      </a>
+      <a class="project-card reveal" href="https://github.com/lakshya-aga" target="_blank">
+        <div class="project-type">&#9939; Blockchain</div>
+        <div class="project-title">Dutch Auction Smart Contract</div>
+        <div class="project-desc">Smart contract to distribute newly minted tokens via the Dutch auction mechanism on-chain.</div>
+        <div class="project-tags"><span class="tag">Solidity</span><span class="tag">Ethereum</span></div>
+      </a>
+      <a class="project-card reveal" href="https://github.com/lakshya-aga" target="_blank">
+        <div class="project-type">&#128736; Full-Stack App</div>
+        <div class="project-title">Fashion Sense</div>
+        <div class="project-desc">Wardrobe management web app with AI-driven outfit suggestions from prompts and images. React + FastAPI + Alembic migrations.</div>
+        <div class="project-tags"><span class="tag">React</span><span class="tag">FastAPI</span><span class="tag">Python</span></div>
+      </a>
+      <a class="project-card reveal" href="https://github.com/lakshya-aga" target="_blank">
+        <div class="project-type">&#128202; Quant Research</div>
+        <div class="project-title">Stock Portfolio Optimizer</div>
+        <div class="project-desc">ARIMA-based equity forecasting for a subsequent month with rank-based portfolio diversification.</div>
+        <div class="project-tags"><span class="tag">Python</span><span class="tag">ARIMA</span><span class="tag">Jupyter</span></div>
+      </a>
+      <a class="project-card reveal" href="https://github.com/lakshya-aga" target="_blank">
+        <div class="project-type">&#9881; Backend Tool</div>
+        <div class="project-title">GenieGo</div>
+        <div class="project-desc">Golang backend server for pricing Fixed Coupon Notes, with user authentication and computation APIs.</div>
+        <div class="project-tags"><span class="tag">Go</span><span class="tag">Derivatives</span><span class="tag">Pricing</span></div>
+      </a>
+      <a class="project-card reveal" href="https://github.com/lakshya-aga" target="_blank">
+        <div class="project-type">&#128452; Systems / C++</div>
+        <div class="project-title">Database B+ Tree</div>
+        <div class="project-desc">C++ implementation of B+ Tree indexes for efficient data manipulation and lookup, mirroring production database internals.</div>
+        <div class="project-tags"><span class="tag">C++</span><span class="tag">Databases</span></div>
+      </a>
+      <a class="project-card reveal" href="https://github.com/lakshya-aga" target="_blank">
+        <div class="project-type">&#128269; Dev Tool</div>
+        <div class="project-title">Query Visualization Program</div>
+        <div class="project-desc">React + Flask tool to visualize PostgreSQL query plans, with sub-query dissection and bottleneck identification.</div>
+        <div class="project-tags"><span class="tag">React</span><span class="tag">Flask</span><span class="tag">PostgreSQL</span></div>
+      </a>
+      <a class="project-card reveal" href="https://github.com/lakshya-aga" target="_blank">
+        <div class="project-type">&#129302; ML Research</div>
+        <div class="project-title">Construction Safety CV</div>
+        <div class="project-desc">YOLOv7-based system detecting safety pitfalls in construction sites. 94% accuracy. 300+ manually labelled images, 1000+ labels.</div>
+        <div class="project-tags"><span class="tag">YOLOv7</span><span class="tag">Computer Vision</span><span class="tag">Python</span></div>
+      </a>
+      <div class="project-card add-card reveal">
+        <div class="plus">+</div>
+        <span>More repositories<br>Add yours via README.md</span>
+      </div>
+    </div>
+
+    <div id="additional-repos" style="margin-top:3rem;"></div>
+  </section>
+</div>
+
+<div class="wrapper">
+  <section id="education">
+    <div class="section-header reveal">
+      <span class="section-num">04</span>
+      <h2>Education &amp; Honors</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="edu-list">
+      <div class="edu-item reveal">
+        <div>
+          <div class="exp-date">Apr 2025 &ndash; Present</div>
+          <div class="exp-company">WorldQuant University &middot; Online</div>
+        </div>
+        <div>
+          <div class="edu-deg">Master of Science in Financial Engineering</div>
+          <div class="edu-detail">Advanced coursework in financial mathematics, derivatives, and quantitative methods.</div>
+        </div>
+      </div>
+      <div class="edu-item reveal">
+        <div>
+          <div class="exp-date">Aug 2021 &ndash; Jan 2025</div>
+          <div class="exp-company">Nanyang Technological University &middot; Singapore</div>
+        </div>
+        <div>
+          <div class="edu-deg">BEng Computer Science &mdash; Honours (Distinction)</div>
+          <div class="edu-school">Second Major in Business &middot; Minor in Mathematics &middot; CGPA 4.4 / 5.0</div>
+          <div class="edu-detail">Financial Mathematics, Neural Networks &amp; Deep Learning, Operating Systems, Database Systems, Probability &amp; Statistics, Linear Algebra, Software Engineering.</div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:3rem;">
+      <h3 style="font-family:var(--serif);font-size:1.1rem;color:var(--muted);margin-bottom:1.5rem;font-weight:400;">Honors &amp; Awards</h3>
+      <div class="honors-list">
+        <div class="honor-item reveal"><div class="honor-year">2023</div><div class="honor-title">ISC23 Student Cluster Competition &mdash; Winner</div></div>
+        <div class="honor-item reveal"><div class="honor-year">2023</div><div class="honor-title">NTU President Research Scholar</div></div>
+        <div class="honor-item reveal"><div class="honor-year">2022</div><div class="honor-title">Techfest &mdash; Winner (Attention Management System, CNN)</div></div>
+        <div class="honor-item reveal"><div class="honor-year">2020</div><div class="honor-title">State CISCE Chess U17 &mdash; Runner-Up &amp; Team Leader</div></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="wrapper">
+  <section id="contact">
+    <div class="contact-inner">
+      <div class="contact-cta reveal">
+        <h3>Let&rsquo;s build<br>agents that trade.</h3>
+        <p>Open to roles at the intersection of agentic AI and quantitative finance.</p>
+      </div>
+      <div class="contact-links reveal">
+        <a href="mailto:lakshya001@e.ntu.edu.sg" class="btn primary">&#9993; lakshya001@e.ntu.edu.sg</a>
+        <a href="https://github.com/lakshya-aga" target="_blank" class="btn">&#8599; GitHub</a>
+        <a href="https://www.linkedin.com/in/lakshya-agarwal" target="_blank" class="btn">&#8599; LinkedIn</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Lakshya Agarwal</p>
+      <p>+65 8539 0106</p>
+    </div>
+  </section>
+</div>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  document.querySelectorAll('.project-card').forEach((card, i) => {
+    card.style.transitionDelay = (i * 0.07) + 's';
+  });
+
+  const tag = document.querySelector('.hero-tag');
+  if (tag) {
+    const cursor = document.createElement('span');
+    cursor.style.cssText = 'border-right:2px solid var(--accent2);animation:blink 1s step-end infinite;margin-left:4px;display:inline-block;width:6px;vertical-align:middle;';
+    tag.appendChild(cursor);
+  }
+  const blinkStyle = document.createElement('style');
+  blinkStyle.textContent = '@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}';
+  document.head.appendChild(blinkStyle);
+</script>
+</body>
+</html>
