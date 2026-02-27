@@ -29,7 +29,7 @@ import fs from "fs/promises";
 
 // ── CONFIGURE THESE ──────────────────────────────────────────────────────────
 const NPSSO = "wuGPlJW7rq4NyBBfWkjmemsANrL8LiWCO7z7E4qgWeHi57RII3rfflu518FkdtwI";
-const PSN_ID = process.env.PSN_ID ?? "YourPSNID";
+const PSN_ID = process.env.PSN_ID ?? "alakshya2648";
 const MAX_GAMES     = 200;                  // How many games to fetch (max 500)
 const RARE_THRESHOLD = 10;                 // Trophy earn rate % below which = "rare"
 // ─────────────────────────────────────────────────────────────────────────────
