@@ -1,819 +1,338 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Trophy Cabinet</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Trophies — Lakshya Agarwal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#111215;--surface:#1a1c20;--border:#252830;
+      --text:#ffffff;--sub:#8b9099;
+      --plat:#9bb0d4;--gold:#c8961e;--silver:#7e9ab5;--bronze:#9b5f2e;
+      --green:#1db954;
+    }
+    body{background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,sans-serif;font-size:14px;-webkit-font-smoothing:antialiased;min-height:100vh;}
+    .page{max-width:680px;margin:0 auto;padding-bottom:60px;}
 
-    :root {
-      --bg:       #080b12;
-      --surface:  #0d1220;
-      --card:     #111827;
-      --border:   #1e2d45;
-      --accent:   #00d4ff;
-      --gold:     #f5c842;
-      --silver:   #c0c8d8;
-      --bronze:   #c87941;
-      --platinum: #b794f4;
-      --rare:     #ff4d8f;
-      --text:     #e2e8f0;
-      --muted:    #64748b;
-      --glow:     0 0 20px rgba(0,212,255,0.3);
-    }
+    /* PROFILE */
+    .profile{padding:28px 20px 18px;display:flex;align-items:center;gap:14px;}
+    .av-wrap{position:relative;flex-shrink:0;}
+    .av{width:60px;height:60px;border-radius:50%;background:#2a2d35;border:2px solid #333;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:1.5rem;}
+    .av img{width:100%;height:100%;object-fit:cover;}
+    .dot{position:absolute;bottom:1px;right:1px;width:12px;height:12px;border-radius:50%;background:var(--green);border:2.5px solid var(--bg);}
+    .handle{font-size:.75rem;color:var(--sub);margin-bottom:2px;}
+    .dname{font-size:1.2rem;font-weight:700;}
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 16px;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
+    /* LEVEL ROW */
+    .level-row{display:flex;align-items:center;gap:20px;padding:18px 20px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
 
-    /* ── Scanline overlay ── */
-    body::before {
-      content: '';
-      position: fixed; inset: 0;
-      background: repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(0,0,0,0.04) 2px,
-        rgba(0,0,0,0.04) 4px
-      );
-      pointer-events: none;
-      z-index: 9999;
-    }
+    /* Level trophy badge */
+    .badge-col{display:flex;flex-direction:column;align-items:center;gap:5px;flex-shrink:0;}
+    .badge-svg{width:60px;height:60px;}
+    .badge-lbl{font-size:.7rem;color:var(--sub);font-weight:500;letter-spacing:.04em;}
 
-    /* ── Grid bg ── */
-    .grid-bg {
-      position: fixed; inset: 0;
-      background-image:
-        linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
-      background-size: 60px 60px;
-      pointer-events: none;
-    }
+    /* Circle ring */
+    .ring-col{position:relative;flex-shrink:0;width:76px;height:76px;}
+    .ring-col svg{transform:rotate(-90deg);}
+    .rtrack{fill:none;stroke:#2a2d35;stroke-width:6;}
+    .rfill{fill:none;stroke-width:6;stroke-linecap:butt;stroke:#ccc;transition:stroke-dashoffset 1.2s cubic-bezier(.4,0,.2,1);}
+    .ring-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;}
+    .ring-pct{font-size:1rem;font-weight:700;}
+    .ring-sub{font-size:.6rem;color:var(--sub);font-weight:500;}
 
-    /* ── HEADER ── */
-    header {
-      position: relative;
-      padding: 60px 40px 40px;
-      border-bottom: 1px solid var(--border);
-      background: linear-gradient(180deg, rgba(0,212,255,0.04) 0%, transparent 100%);
-    }
+    /* Total */
+    .total-col{flex:1;}
+    .total-num{font-size:2.2rem;font-weight:700;line-height:1;}
+    .total-lbl{font-size:.8rem;color:var(--sub);margin-top:3px;}
 
-    .header-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      gap: 32px;
-    }
+    /* TROPHY COUNTS */
+    .tcounts{display:flex;padding:0 20px 20px;gap:0;}
+    .tci{display:flex;align-items:center;gap:8px;flex:1;}
+    .tci-num{font-size:1.25rem;font-weight:700;}
+    .tci.plat .tci-num{color:var(--plat);}
+    .tci.gold .tci-num{color:var(--gold);}
+    .tci.silv .tci-num{color:var(--silver);}
+    .tci.bron .tci-num{color:var(--bronze);}
 
-    .psn-avatar {
-      width: 88px; height: 88px;
-      border-radius: 50%;
-      border: 2px solid var(--accent);
-      box-shadow: var(--glow);
-      background: var(--surface);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 2.5rem;
-      flex-shrink: 0;
-      overflow: hidden;
-    }
-    .psn-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    /* GAMES */
+    .games-wrap{padding:0 20px;}
+    .games-lbl{font-size:1rem;font-weight:600;margin-bottom:12px;}
+    .controls{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
+    .src{flex:1;min-width:130px;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:7px 14px;color:var(--text);font-family:inherit;font-size:.84rem;outline:none;}
+    .src:focus{border-color:#404350;}
+    .src::placeholder{color:var(--sub);}
+    .fb{background:var(--surface);border:1px solid var(--border);color:var(--sub);padding:7px 14px;border-radius:20px;cursor:pointer;font-family:inherit;font-size:.8rem;font-weight:500;transition:all .15s;white-space:nowrap;}
+    .fb:hover{color:var(--text);}
+    .fb.on{background:var(--text);border-color:var(--text);color:#111;}
 
-    .header-text h1 {
-      font-family: 'Orbitron', monospace;
-      font-size: clamp(1.4rem, 3vw, 2.2rem);
-      font-weight: 900;
-      letter-spacing: 0.1em;
-      color: var(--accent);
-      text-shadow: var(--glow);
-    }
+    /* GAME LIST */
+    .glist{display:flex;flex-direction:column;}
+    .grow{border-bottom:1px solid var(--border);overflow:hidden;}
+    .grow:first-child{border-top:1px solid var(--border);}
+    .gmain{display:flex;align-items:center;gap:14px;padding:14px 0;cursor:pointer;user-select:none;}
+    .gcover{width:90px;height:90px;border-radius:10px;background:#0a0a0a;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.8rem;overflow:hidden;}
+    .gcover img{width:100%;height:100%;object-fit:contain;object-position:center;}
+    .gbody{flex:1;min-width:0;}
+    .gtitle{font-size:.94rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:8px;}
+    .gpips{display:flex;gap:12px;align-items:center;margin-bottom:8px;}
+    .pip{display:flex;align-items:center;gap:4px;font-size:.82rem;font-weight:500;color:var(--sub);}
+    .gbar{height:2px;background:var(--border);border-radius:1px;overflow:hidden;}
+    .gbarfill{height:100%;border-radius:1px;width:0;transition:width 1s ease;}
+    .gright{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0;padding-left:8px;}
+    .gpct{font-size:.95rem;font-weight:600;}
+    .chev{color:var(--sub);font-size:.7rem;transition:transform .25s;}
+    .grow.open .chev{transform:rotate(180deg);}
 
-    .psn-id {
-      font-size: 0.9rem;
-      color: var(--muted);
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      margin-top: 4px;
-    }
-
-    .level-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 10px;
-      background: rgba(0,212,255,0.08);
-      border: 1px solid rgba(0,212,255,0.2);
-      padding: 4px 14px;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      color: var(--accent);
-    }
-
-    /* ── STATS GRID ── */
-    .stats-bar {
-      max-width: 1200px;
-      margin: 32px auto;
-      padding: 0 40px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 16px;
-    }
-
-    .stat-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 20px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-      transition: border-color 0.2s, transform 0.2s;
-    }
-    .stat-card:hover { border-color: var(--accent); transform: translateY(-2px); }
-    .stat-card::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0;
-      height: 2px;
-    }
-    .stat-card.platinum::before { background: var(--platinum); }
-    .stat-card.gold::before    { background: var(--gold); }
-    .stat-card.silver::before  { background: var(--silver); }
-    .stat-card.bronze::before  { background: var(--bronze); }
-    .stat-card.total::before   { background: var(--accent); }
-
-    .stat-icon { font-size: 1.8rem; margin-bottom: 8px; }
-    .stat-value {
-      font-family: 'Orbitron', monospace;
-      font-size: 2rem;
-      font-weight: 700;
-    }
-    .stat-card.platinum .stat-value { color: var(--platinum); }
-    .stat-card.gold .stat-value     { color: var(--gold); }
-    .stat-card.silver .stat-value   { color: var(--silver); }
-    .stat-card.bronze .stat-value   { color: var(--bronze); }
-    .stat-card.total .stat-value    { color: var(--accent); }
-
-    .stat-label {
-      font-size: 0.8rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      margin-top: 4px;
-    }
-
-    /* ── CONTROLS ── */
-    .controls {
-      max-width: 1200px;
-      margin: 0 auto 24px;
-      padding: 0 40px;
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
-    .search-box {
-      flex: 1;
-      min-width: 200px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 10px 16px;
-      color: var(--text);
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 1rem;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-    .search-box:focus { border-color: var(--accent); }
-    .search-box::placeholder { color: var(--muted); }
-
-    .filter-btn {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      color: var(--muted);
-      padding: 10px 18px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      transition: all 0.2s;
-    }
-    .filter-btn:hover,
-    .filter-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(0,212,255,0.06); }
-
-    /* ── GAME LIST ── */
-    .game-list {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 40px 80px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .game-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      overflow: hidden;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    .game-card:hover { border-color: rgba(0,212,255,0.3); box-shadow: 0 0 30px rgba(0,212,255,0.06); }
-
-    .game-header {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      padding: 20px 24px;
-      cursor: pointer;
-      user-select: none;
-    }
-
-    .game-cover {
-      width: 64px; height: 64px;
-      border-radius: 8px;
-      object-fit: cover;
-      background: var(--surface);
-      flex-shrink: 0;
-      border: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.6rem;
-      overflow: hidden;
-    }
-    .game-cover img { width: 100%; height: 100%; object-fit: cover; }
-
-    .game-info { flex: 1; min-width: 0; }
-    .game-title {
-      font-family: 'Orbitron', monospace;
-      font-size: 1rem;
-      font-weight: 700;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    }
-
-    .game-meta {
-      display: flex;
-      gap: 12px;
-      margin-top: 6px;
-      flex-wrap: wrap;
-    }
-    .trophy-pip {
-      display: flex; align-items: center; gap: 4px;
-      font-size: 0.85rem;
-    }
-    .trophy-pip .dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-    }
-    .pip-platinum .dot { background: var(--platinum); }
-    .pip-gold .dot     { background: var(--gold); }
-    .pip-silver .dot   { background: var(--silver); }
-    .pip-bronze .dot   { background: var(--bronze); }
-
-    .game-right { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; flex-shrink: 0; }
-
-    .completion-ring {
-      position: relative;
-      width: 56px; height: 56px;
-    }
-    .completion-ring svg { transform: rotate(-90deg); }
-    .completion-ring .track { fill: none; stroke: var(--border); stroke-width: 5; }
-    .completion-ring .fill  { fill: none; stroke-width: 5; stroke-linecap: round; transition: stroke-dashoffset 0.8s ease; }
-    .completion-pct {
-      position: absolute; inset: 0;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Orbitron', monospace;
-      font-size: 0.6rem;
-      font-weight: 700;
-    }
-
-    .chevron {
-      color: var(--muted);
-      font-size: 1.2rem;
-      transition: transform 0.3s;
-    }
-    .game-card.open .chevron { transform: rotate(180deg); }
-
-    /* ── TROPHY LIST ── */
-    .trophy-list {
-      display: none;
-      padding: 0 24px 20px;
-      border-top: 1px solid var(--border);
-    }
-    .game-card.open .trophy-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; padding-top: 20px; }
-
-    .trophy-item {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 14px;
-      display: flex;
-      gap: 14px;
-      align-items: flex-start;
-      transition: border-color 0.2s;
-      position: relative;
-    }
-    .trophy-item:hover { border-color: rgba(0,212,255,0.25); }
-    .trophy-item.locked { opacity: 0.45; }
-
-    .trophy-item.rare-badge { border-color: rgba(255,77,143,0.4); }
-    .trophy-item.rare-badge::after {
-      content: '★ RARE';
-      position: absolute;
-      top: 8px; right: 8px;
-      font-size: 0.65rem;
-      color: var(--rare);
-      letter-spacing: 0.1em;
-      font-family: 'Orbitron', monospace;
-    }
-
-    .trophy-icon {
-      width: 40px; height: 40px;
-      border-radius: 6px;
-      object-fit: cover;
-      flex-shrink: 0;
-      background: var(--card);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.4rem;
-      overflow: hidden;
-    }
-    .trophy-icon img { width: 100%; height: 100%; object-fit: cover; }
-
-    .trophy-info { flex: 1; min-width: 0; }
-    .trophy-name {
-      font-size: 0.9rem;
-      font-weight: 600;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    }
-    .trophy-desc {
-      font-size: 0.8rem;
-      color: var(--muted);
-      margin-top: 2px;
-      line-height: 1.4;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-    .trophy-grade {
-      font-size: 0.7rem;
-      margin-top: 6px;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-    }
-    .grade-platinum { color: var(--platinum); }
-    .grade-gold     { color: var(--gold); }
-    .grade-silver   { color: var(--silver); }
-    .grade-bronze   { color: var(--bronze); }
-
-    /* ── EMPTY / LOADING ── */
-    .status-msg {
-      text-align: center;
-      padding: 80px 40px;
-      color: var(--muted);
-      font-size: 1.1rem;
-    }
-
-    /* ── PROGRESS BAR ── */
-    .progress-bar {
-      height: 3px;
-      background: var(--border);
-      border-radius: 2px;
-      margin-top: 8px;
-      overflow: hidden;
-    }
-    .progress-fill {
-      height: 100%;
-      border-radius: 2px;
-      transition: width 1s ease;
-    }
-
-    /* ── SETUP BANNER ── */
-    .setup-banner {
-      max-width: 700px;
-      margin: 48px auto;
-      padding: 0 40px;
-    }
-    .banner-box {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 36px;
-    }
-    .banner-box h2 {
-      font-family: 'Orbitron', monospace;
-      font-size: 1.1rem;
-      color: var(--accent);
-      margin-bottom: 16px;
-    }
-    .banner-box p, .banner-box li {
-      color: var(--muted);
-      font-size: 0.95rem;
-      line-height: 1.7;
-    }
-    .banner-box ol { padding-left: 20px; margin-top: 8px; }
-    .banner-box code {
-      background: rgba(0,212,255,0.08);
-      border: 1px solid rgba(0,212,255,0.15);
-      padding: 2px 8px;
-      border-radius: 4px;
-      font-size: 0.85rem;
-      color: var(--accent);
-    }
-    .banner-box .input-row {
-      display: flex; gap: 10px; margin-top: 20px;
-    }
-    .banner-box input {
-      flex: 1;
-      background: var(--card);
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 10px 14px;
-      border-radius: 6px;
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 0.95rem;
-      outline: none;
-    }
-    .banner-box input:focus { border-color: var(--accent); }
-    .load-btn {
-      background: var(--accent);
-      color: #000;
-      border: none;
-      padding: 10px 24px;
-      border-radius: 6px;
-      font-family: 'Orbitron', monospace;
-      font-size: 0.8rem;
-      font-weight: 700;
-      cursor: pointer;
-      letter-spacing: 0.05em;
-      transition: opacity 0.2s;
-    }
-    .load-btn:hover { opacity: 0.85; }
-
-    @media (max-width: 640px) {
-      header, .stats-bar, .controls, .game-list { padding-left: 16px; padding-right: 16px; }
-      .game-header { gap: 14px; }
-      .game-cover { width: 48px; height: 48px; }
-    }
+    /* TROPHY PANEL */
+    .tpanel{display:none;flex-direction:column;padding-bottom:6px;}
+    .grow.open .tpanel{display:flex;}
+    .trow{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--border);}
+    .timg{width:54px;height:54px;border-radius:8px;background:var(--surface);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.3rem;overflow:hidden;}
+    .timg img{width:100%;height:100%;object-fit:contain;background:#1a1c20;}
+    .tbody{flex:1;min-width:0;}
+    .tname{font-size:.87rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .tdesc{font-size:.75rem;color:var(--sub);margin-top:2px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+    .tright{flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:3px;}
+    .trare{font-size:.63rem;color:#c9485b;font-weight:600;letter-spacing:.04em;}
+    .trow.locked{opacity:.35;}
+    .empty{padding:36px 0;text-align:center;color:var(--sub);}
+    @keyframes fu{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+    .grow{animation:fu .28s ease both;}
   </style>
 </head>
 <body>
-<div class="grid-bg"></div>
+<div class="page">
+  <div class="profile">
+    <div class="av-wrap">
+      <div class="av" id="avEl">👤</div>
+      <div class="dot"></div>
+    </div>
+    <div>
+      <div class="handle" id="hdEl"></div>
+      <div class="dname" id="dnEl">—</div>
+    </div>
+  </div>
 
-<!-- ══════════════════════════════════ HEADER ══════════════════════════════════ -->
-<header>
-  <div class="header-inner">
-    <div class="psn-avatar" id="avatarEl">🎮</div>
-    <div class="header-text">
-      <h1 id="displayNameEl">TROPHY CABINET</h1>
-      <div class="psn-id" id="psnIdEl">LOADING…</div>
-      <div class="level-badge" id="levelBadge">
-        <span>⚡</span>
-        <span id="levelText">LVL —</span>
+  <div class="level-row">
+    <div class="badge-col">
+      <svg class="badge-svg" viewBox="0 0 80 80" fill="none">
+        <path d="M8 42Q1 32 8 23Q17 30 18 40Z" fill="#8B5E3C" opacity=".85"/>
+        <path d="M72 42Q79 32 72 23Q63 30 62 40Z" fill="#8B5E3C" opacity=".85"/>
+        <path d="M3 46Q-1 34 8 27Q15 36 16 46Z" fill="#7A4C2C" opacity=".6"/>
+        <path d="M77 46Q81 34 72 27Q65 36 64 46Z" fill="#7A4C2C" opacity=".6"/>
+        <path d="M25 14H55V42A15 15 0 0 1 25 42Z" fill="url(#cg)"/>
+        <path d="M17 16H25V34A7 7 0 0 1 12 28V20A4 4 0 0 1 17 16Z" fill="#a05e35"/>
+        <path d="M63 16H55V34A7 7 0 0 0 68 28V20A4 4 0 0 0 63 16Z" fill="#a05e35"/>
+        <rect x="36" y="57" width="8" height="9" rx="1" fill="#c0724a"/>
+        <rect x="27" y="65" width="26" height="5" rx="2" fill="#b06030"/>
+        <path d="M29 18Q36 23 34 36" stroke="rgba(255,255,255,.22)" stroke-width="3" stroke-linecap="round"/>
+        <defs><linearGradient id="cg" x1="25" y1="14" x2="55" y2="57" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#e08050"/><stop offset="100%" stop-color="#8B3A18"/></linearGradient></defs>
+      </svg>
+      <div class="badge-lbl">Level <span id="lvEl">—</span></div>
+    </div>
+
+    <div class="ring-col">
+      <svg width="76" height="76" viewBox="0 0 76 76">
+        <circle class="rtrack" cx="38" cy="38" r="30"/>
+        <circle class="rfill" id="rfill" cx="38" cy="38" r="30" stroke-dasharray="188.5" stroke-dashoffset="188.5"/>
+      </svg>
+      <div class="ring-inner">
+        <div class="ring-pct" id="rpct">0%</div>
+        <div class="ring-sub">next level</div>
       </div>
     </div>
-  </div>
-</header>
 
-<!-- ══════════════════════════════════ STATS ══════════════════════════════════ -->
-<div class="stats-bar">
-  <div class="stat-card total">
-    <div class="stat-icon">🏆</div>
-    <div class="stat-value" id="totalCount">—</div>
-    <div class="stat-label">Total Trophies</div>
-  </div>
-  <div class="stat-card platinum">
-    <div class="stat-icon">💎</div>
-    <div class="stat-value" id="platCount">—</div>
-    <div class="stat-label">Platinum</div>
-  </div>
-  <div class="stat-card gold">
-    <div class="stat-icon">🥇</div>
-    <div class="stat-value" id="goldCount">—</div>
-    <div class="stat-label">Gold</div>
-  </div>
-  <div class="stat-card silver">
-    <div class="stat-icon">🥈</div>
-    <div class="stat-value" id="silverCount">—</div>
-    <div class="stat-label">Silver</div>
-  </div>
-  <div class="stat-card bronze">
-    <div class="stat-icon">🥉</div>
-    <div class="stat-value" id="bronzeCount">—</div>
-    <div class="stat-label">Bronze</div>
-  </div>
-  <div class="stat-card total">
-    <div class="stat-icon">🎮</div>
-    <div class="stat-value" id="gamesCount">—</div>
-    <div class="stat-label">Games Played</div>
-  </div>
-</div>
-
-<!-- ══════════════════════════════════ CONTROLS ══════════════════════════════════ -->
-<div class="controls">
-  <input class="search-box" type="text" id="searchBox" placeholder="Search games…" />
-  <button class="filter-btn active" data-filter="all">All</button>
-  <button class="filter-btn" data-filter="platinum">Platinum</button>
-  <button class="filter-btn" data-filter="incomplete">Incomplete</button>
-  <button class="filter-btn" data-filter="complete">100%</button>
-</div>
-
-<!-- ══════════════════════════════════ GAME LIST ══════════════════════════════════ -->
-<div class="game-list" id="gameList">
-  <div class="status-msg" id="statusMsg">Loading trophy data…</div>
-</div>
-
-<!-- ══════════════════════════════════ SETUP BANNER ══════════════════════════════════ -->
-<div class="setup-banner" id="setupBanner" style="display:none">
-  <div class="banner-box">
-    <h2>⚙ CONNECT YOUR PSN ACCOUNT</h2>
-    <p>This page loads your trophy data from a local JSON file generated by the Node.js fetch script. To get started:</p>
-    <ol>
-      <li>Run <code>node fetch-trophies.js</code> from your project folder (see the included script).</li>
-      <li>It will create <code>trophies.json</code> in the same directory.</li>
-      <li>Make sure <code>trophies.json</code> is in the same folder as this HTML file.</li>
-      <li>Reload this page — your trophies will appear automatically.</li>
-    </ol>
-    <p style="margin-top:16px">Or paste the path to a local JSON file:</p>
-    <div class="input-row">
-      <input type="text" id="jsonPathInput" placeholder="trophies.json" value="trophies.json" />
-      <button class="load-btn" onclick="loadFromPath()">LOAD</button>
+    <div class="total-col">
+      <div class="total-num" id="totalEl">—</div>
+      <div class="total-lbl">Total Trophies</div>
     </div>
+  </div>
+
+  <div class="tcounts" id="tcoEl">
+    <div class="tci plat"><svg width="36" height="36" viewBox="0 0 40 40" id="svgP"></svg><span class="tci-num" id="pN">—</span></div>
+    <div class="tci gold"><svg width="36" height="36" viewBox="0 0 40 40" id="svgG"></svg><span class="tci-num" id="gN">—</span></div>
+    <div class="tci silv"><svg width="36" height="36" viewBox="0 0 40 40" id="svgS"></svg><span class="tci-num" id="sN">—</span></div>
+    <div class="tci bron"><svg width="36" height="36" viewBox="0 0 40 40" id="svgB"></svg><span class="tci-num" id="bN">—</span></div>
+  </div>
+
+  <div class="games-wrap">
+    <div class="games-lbl">Games played</div>
+    <div class="controls">
+      <input class="src" type="text" id="srcEl" placeholder="Search games…"/>
+      <button class="fb on" data-f="all">All</button>
+      <button class="fb" data-f="platinum">Platinum</button>
+      <button class="fb" data-f="complete">100%</button>
+      <button class="fb" data-f="incomplete">Incomplete</button>
+    </div>
+    <div class="glist" id="glist"><div class="empty">Loading…</div></div>
   </div>
 </div>
 
 <script>
-// ─── DEMO DATA — replace with real data from fetch-trophies.js output ───
-const DEMO_DATA = {
-  profile: {
-    onlineId: "YourPSNID",
-    displayName: "Your Name",
-    avatarUrl: null,
-    trophyLevel: 42,
-    progress: 78,
-    earnedTrophies: { platinum: 7, gold: 84, silver: 210, bronze: 543 }
-  },
-  games: [
-    {
-      id: "game-1",
-      title: "God of War Ragnarök",
-      coverUrl: null,
-      coverEmoji: "⚔️",
-      platform: "PS5",
-      trophies: {
-        earned: { platinum: 1, gold: 4, silver: 7, bronze: 29 },
-        total:  { platinum: 1, gold: 5, silver: 8, bronze: 33 }
-      },
-      completion: 89,
-      hasPlatinum: true,
-      trophyList: [
-        { name: "Father and Son", desc: "Obtain all other trophies.", grade: "platinum", earned: true, iconEmoji: "💎", rare: false },
-        { name: "Grave Digger", desc: "Send Odin to his grave.", grade: "gold", earned: true, iconEmoji: "🪦", rare: false },
-        { name: "Blood Debt", desc: "Find all of Odin's ravens.", grade: "gold", earned: false, iconEmoji: "🐦‍⬛", rare: true },
-        { name: "A Grizzly Situation", desc: "Defeat Björn.", grade: "silver", earned: true, iconEmoji: "🐻", rare: false },
-        { name: "Spartan Ways", desc: "Obtain all upgrades for Kratos.", grade: "silver", earned: true, iconEmoji: "🛡️", rare: false },
-        { name: "Making Amends", desc: "Free the Hafgufa.", grade: "bronze", earned: true, iconEmoji: "🌊", rare: false },
-      ]
-    },
-    {
-      id: "game-2",
-      title: "Elden Ring",
-      coverUrl: null,
-      coverEmoji: "🌑",
-      platform: "PS5",
-      trophies: {
-        earned: { platinum: 0, gold: 2, silver: 6, bronze: 18 },
-        total:  { platinum: 1, gold: 5, silver: 9, bronze: 27 }
-      },
-      completion: 61,
-      hasPlatinum: false,
-      trophyList: [
-        { name: "Elden Ring", desc: "You have become Elden Lord.", grade: "platinum", earned: false, iconEmoji: "💎", rare: true },
-        { name: "Rune Bear Down", desc: "Defeat the Runebear.", grade: "gold", earned: true, iconEmoji: "🐻", rare: true },
-        { name: "Shardbearer Margit", desc: "Defeat Margit the Fell Omen.", grade: "silver", earned: true, iconEmoji: "⚔️", rare: false },
-        { name: "Maliketh Slain", desc: "Defeat Maliketh, the Black Blade.", grade: "gold", earned: true, iconEmoji: "🗡️", rare: true },
-        { name: "Great Rune", desc: "Restore a Great Rune at a Divine Tower.", grade: "bronze", earned: true, iconEmoji: "💠", rare: false },
-        { name: "Roundtable Hold", desc: "Arrive at Roundtable Hold.", grade: "bronze", earned: true, iconEmoji: "🏰", rare: false },
-      ]
-    },
-    {
-      id: "game-3",
-      title: "Marvel's Spider-Man 2",
-      coverUrl: null,
-      coverEmoji: "🕷️",
-      platform: "PS5",
-      trophies: {
-        earned: { platinum: 1, gold: 5, silver: 8, bronze: 33 },
-        total:  { platinum: 1, gold: 5, silver: 8, bronze: 33 }
-      },
-      completion: 100,
-      hasPlatinum: true,
-      trophyList: [
-        { name: "Great Power", desc: "Earn all other trophies.", grade: "platinum", earned: true, iconEmoji: "💎", rare: false },
-        { name: "Symbiote Slayer", desc: "Defeat Venom.", grade: "gold", earned: true, iconEmoji: "🖤", rare: false },
-        { name: "Together Again", desc: "Find a way to heal Harry.", grade: "gold", earned: true, iconEmoji: "🕸️", rare: false },
-      ]
-    },
-    {
-      id: "game-4",
-      title: "Baldur's Gate 3",
-      coverUrl: null,
-      coverEmoji: "🎲",
-      platform: "PS5",
-      trophies: {
-        earned: { platinum: 0, gold: 1, silver: 3, bronze: 12 },
-        total:  { platinum: 1, gold: 8, silver: 14, bronze: 35 }
-      },
-      completion: 28,
-      hasPlatinum: false,
-      trophyList: [
-        { name: "Absolute Adversary", desc: "Defeat the Absolute.", grade: "platinum", earned: false, iconEmoji: "💎", rare: true },
-        { name: "Devil's in the Details", desc: "Make a deal with Raphael.", grade: "gold", earned: true, iconEmoji: "😈", rare: true },
-        { name: "Shar's Embrace", desc: "Complete Shadowheart's story.", grade: "silver", earned: false, iconEmoji: "🌙", rare: false },
-      ]
-    }
+const GRADE={
+  platinum:{f:'#9bb0d4',s:'#7a94b8'},
+  gold:    {f:'#c8961e',s:'#a07010'},
+  silver:  {f:'#7e9ab5',s:'#5a7a95'},
+  bronze:  {f:'#9b5f2e',s:'#7a4020'},
+};
+
+function cupInner(g){
+  const c=GRADE[g]||GRADE.bronze;
+  const hi='rgba(255,255,255,0.22)';
+  return `
+<path d="M11 3H29V21A9 9 0 0 1 11 21Z" fill="${c.f}"/>
+<path d="M11 3H29V10H11Z" fill="${c.f}"/>
+<ellipse cx="20" cy="21" rx="9" ry="2.5" fill="${c.s}"/>
+<path d="M5 5H11V17C5 17 3 13 3 10V7C3 5.9 3.9 5 5 5Z" fill="${c.s}"/>
+<path d="M35 5H29V17C35 17 37 13 37 10V7C37 5.9 36.1 5 35 5Z" fill="${c.s}"/>
+<rect x="17" y="23" width="6" height="5" rx="1" fill="${c.s}"/>
+<rect x="12" y="27.5" width="16" height="3.5" rx="1.5" fill="${c.f}"/>
+<rect x="12" y="30.5" width="16" height="2" rx="1" fill="${c.s}"/>
+<path d="M13 5Q16 10 15 18" stroke="${hi}" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+<path d="M20 5V18" stroke="${hi}" stroke-width="1" stroke-linecap="round" fill="none" opacity="0.4"/>
+`;
+}
+
+function cupSVG(g,sz){return `<svg width="${sz}" height="${sz}" viewBox="0 0 40 40">${cupInner(g)}</svg>`;}
+
+// Inject tc icons
+['svgP','svgG','svgS','svgB'].forEach((id,i)=>{
+  document.getElementById(id).innerHTML=cupInner(['platinum','gold','silver','bronze'][i]);
+});
+
+function barColor(p){
+  if(p===100)return '#c8961e';
+  if(p>=70)return '#1db954';
+  if(p>=30)return '#2e6db4';
+  return '#4a4d55';
+}
+
+const DEMO={
+  profile:{onlineId:'alakshya2648',displayName:'Lakshya Agarwal',avatarUrl:null,trophyLevel:240,progress:20,earnedTrophies:{platinum:6,gold:65,silver:277,bronze:1138}},
+  games:[
+    {id:'g1',title:'Sekiro™: Shadows Die Twice',coverEmoji:'⚔️',trophies:{earned:{platinum:0,gold:1,silver:7,bronze:16},total:{platinum:1,gold:2,silver:9,bronze:24}},completion:56,hasPlatinum:false,trophyList:[
+      {name:'Immortal Severance',desc:'Achieve the Immortal Severance ending.',grade:'gold',earned:true,iconEmoji:'🗡️',rare:false},
+      {name:'Master of the Prosthetic',desc:'Acquire all Prosthetic Tools and fully upgrade them.',grade:'silver',earned:true,iconEmoji:'🦾',rare:true},
+      {name:'Shura',desc:'Obey the Iron Code, achieve Shura.',grade:'platinum',earned:false,iconEmoji:'💎',rare:true},
+    ]},
+    {id:'g2',title:'Grand Theft Auto V',coverEmoji:'🚗',trophies:{earned:{platinum:0,gold:1,silver:7,bronze:29},total:{platinum:1,gold:3,silver:12,bronze:50}},completion:45,hasPlatinum:false,trophyList:[
+      {name:'Los Santos Legend',desc:"You're Vinewood's biggest star.",grade:'gold',earned:true,iconEmoji:'⭐',rare:false},
+      {name:'Career Criminal',desc:'Attain 100% Game Completion.',grade:'gold',earned:false,iconEmoji:'🏆',rare:true},
+    ]},
+    {id:'g3',title:'Black Myth: Wukong',coverEmoji:'🐒',trophies:{earned:{platinum:0,gold:2,silver:5,bronze:20},total:{platinum:1,gold:4,silver:8,bronze:30}},completion:62,hasPlatinum:false,trophyList:[
+      {name:'Equal of Heaven',desc:'Complete all six chapters.',grade:'gold',earned:true,iconEmoji:'☁️',rare:false},
+      {name:'The Destined One',desc:'Obtain all trophies.',grade:'platinum',earned:false,iconEmoji:'💎',rare:true},
+    ]},
+    {id:'g4',title:'Trackmania',coverEmoji:'🏎️',trophies:{earned:{platinum:0,gold:1,silver:2,bronze:9},total:{platinum:1,gold:3,silver:8,bronze:22}},completion:29,hasPlatinum:false,trophyList:[
+      {name:'Time Keeper',desc:'Beat all time limits on all tracks.',grade:'gold',earned:true,iconEmoji:'⏱️',rare:false},
+      {name:'Trackmania Legend',desc:'Earn all trophies.',grade:'platinum',earned:false,iconEmoji:'💎',rare:true},
+    ]},
+    {id:'g5',title:'Injustice 2',coverEmoji:'🦸',trophies:{earned:{platinum:0,gold:0,silver:0,bronze:2},total:{platinum:1,gold:5,silver:12,bronze:38}},completion:2,hasPlatinum:false,trophyList:[
+      {name:'First Blood',desc:'Win your first online match.',grade:'bronze',earned:true,iconEmoji:'🩸',rare:false},
+      {name:'The Pinnacle',desc:'Collect all other trophies.',grade:'platinum',earned:false,iconEmoji:'💎',rare:true},
+    ]},
   ]
 };
 
-// ─── STATE ───────────────────────────────────────────────────────────────────
-let allGames = [];
-let currentFilter = 'all';
+let allG=[],af='all';
 
-// ─── INIT ─────────────────────────────────────────────────────────────────────
-async function init() {
-  // Try to load real JSON first
-  try {
-    const res = await fetch('trophies.json');
-    if (res.ok) {
-      const data = await res.json();
-      render(data);
-      return;
-    }
-  } catch(e) {}
-
-  // Fall back to demo
-  render(DEMO_DATA);
-  document.getElementById('psnIdEl').textContent = '[ DEMO MODE — see fetch-trophies.js ]';
+async function init(){
+  try{const r=await fetch('trophies.json');if(r.ok){render(await r.json());return;}}catch(e){}
+  render(DEMO);
 }
 
-function loadFromPath() {
-  const path = document.getElementById('jsonPathInput').value.trim() || 'trophies.json';
-  fetch(path)
-    .then(r => r.json())
-    .then(data => { document.getElementById('setupBanner').style.display = 'none'; render(data); })
-    .catch(() => alert('Could not load ' + path + '. Make sure the file exists and the path is correct.'));
+function render(data){
+  const{profile,games}=data;
+  allG=[...games].sort((a,b)=>b.completion-a.completion);
+
+  if(profile.avatarUrl)document.getElementById('avEl').innerHTML=`<img src="${profile.avatarUrl}" alt=""/>`;
+  document.getElementById('hdEl').textContent=profile.onlineId||'';
+  document.getElementById('dnEl').textContent=profile.displayName||'Player';
+  document.getElementById('lvEl').textContent=profile.trophyLevel||0;
+
+  const pct=profile.progress||0;
+  document.getElementById('rpct').textContent=pct+'%';
+  const circ=2*Math.PI*30;
+  setTimeout(()=>{document.getElementById('rfill').style.strokeDashoffset=circ-(pct/100)*circ;},120);
+
+  const t=profile.earnedTrophies||{};
+  const tot=(t.platinum||0)+(t.gold||0)+(t.silver||0)+(t.bronze||0);
+  document.getElementById('totalEl').textContent=tot.toLocaleString();
+  document.getElementById('pN').textContent=t.platinum||0;
+  document.getElementById('gN').textContent=t.gold||0;
+  document.getElementById('sN').textContent=t.silver||0;
+  document.getElementById('bN').textContent=t.bronze||0;
+
+  renderG();
 }
 
-// ─── RENDER ───────────────────────────────────────────────────────────────────
-function render(data) {
-  const { profile, games } = data;
-  allGames = games;
-
-  // Profile
-  document.getElementById('displayNameEl').textContent = profile.displayName || 'TROPHY CABINET';
-  document.getElementById('psnIdEl').textContent = profile.onlineId ? '◆ ' + profile.onlineId.toUpperCase() : '';
-  document.getElementById('levelText').textContent = 'LVL ' + (profile.trophyLevel || '—');
-  if (profile.avatarUrl) {
-    document.getElementById('avatarEl').innerHTML = `<img src="${profile.avatarUrl}" alt="avatar" />`;
-  }
-
-  // Stats
-  const t = profile.earnedTrophies || {};
-  const total = (t.platinum||0) + (t.gold||0) + (t.silver||0) + (t.bronze||0);
-  document.getElementById('totalCount').textContent  = total;
-  document.getElementById('platCount').textContent   = t.platinum || 0;
-  document.getElementById('goldCount').textContent   = t.gold || 0;
-  document.getElementById('silverCount').textContent = t.silver || 0;
-  document.getElementById('bronzeCount').textContent = t.bronze || 0;
-  document.getElementById('gamesCount').textContent  = games.length;
-
-  renderGames();
-}
-
-function renderGames() {
-  const search = document.getElementById('searchBox').value.toLowerCase();
-  let games = allGames.filter(g => {
-    if (search && !g.title.toLowerCase().includes(search)) return false;
-    if (currentFilter === 'platinum') return g.hasPlatinum;
-    if (currentFilter === 'complete') return g.completion === 100;
-    if (currentFilter === 'incomplete') return g.completion < 100;
+function renderG(){
+  const q=document.getElementById('srcEl').value.toLowerCase();
+  const gs=allG.filter(g=>{
+    if(q&&!g.title.toLowerCase().includes(q))return false;
+    if(af==='platinum')return g.hasPlatinum;
+    if(af==='complete')return g.completion===100;
+    if(af==='incomplete')return g.completion<100;
     return true;
   });
+  const list=document.getElementById('glist');
+  if(!gs.length){list.innerHTML='<div class="empty">No games found.</div>';return;}
 
-  const list = document.getElementById('gameList');
-
-  if (!games.length) {
-    list.innerHTML = '<div class="status-msg">No games match your filter.</div>';
-    return;
-  }
-
-  list.innerHTML = games.map(g => gameCardHTML(g)).join('');
-  // Animate rings
-  document.querySelectorAll('.completion-ring .fill').forEach(el => {
-    const pct = parseFloat(el.dataset.pct);
-    const c = 2 * Math.PI * 24;
-    el.style.strokeDasharray = c;
-    el.style.strokeDashoffset = c;
-    setTimeout(() => { el.style.strokeDashoffset = c - (pct / 100) * c; }, 50);
-  });
-}
-
-function gameCardHTML(g) {
-  const e = g.trophies.earned;
-  const t = g.trophies.total;
-  const pct = g.completion;
-  const ringColor = pct === 100 ? 'var(--gold)' : pct > 50 ? 'var(--accent)' : 'var(--muted)';
-  const c = 2 * Math.PI * 24;
-
-  const coverHTML = g.coverUrl
-    ? `<img src="${g.coverUrl}" alt="${g.title}" />`
-    : g.coverEmoji;
-
-  const trophyList = (g.trophyList || []).map(tr => {
-    const gradeColor = `grade-${tr.grade}`;
-    const rareCls = tr.rare ? 'rare-badge' : '';
-    const lockedCls = tr.earned ? '' : 'locked';
-    const iconHTML = tr.iconUrl ? `<img src="${tr.iconUrl}" alt="" />` : tr.iconEmoji || '🏆';
-    return `<div class="trophy-item ${rareCls} ${lockedCls}">
-      <div class="trophy-icon">${iconHTML}</div>
-      <div class="trophy-info">
-        <div class="trophy-name">${tr.name}</div>
-        <div class="trophy-desc">${tr.desc}</div>
-        <div class="trophy-grade ${gradeColor}">${tr.grade.toUpperCase()}${tr.earned ? ' · EARNED' : ' · LOCKED'}</div>
+  list.innerHTML=gs.map((g,i)=>{
+    const e=g.trophies?.earned||{};
+    const p=g.completion||0;
+    const col=barColor(p);
+    const cov=g.coverUrl?`<img src="${g.coverUrl}" alt=""/>`:(g.coverEmoji||'🎮');
+    const trs=(g.trophyList||[]).map(t=>`
+      <div class="trow ${t.earned?'':'locked'}">
+        <div class="timg">${t.iconUrl?`<img src="${t.iconUrl}" alt=""/>`:t.iconEmoji||'🏆'}</div>
+        <div class="tbody">
+          <div class="tname">${t.name}</div>
+          <div class="tdesc">${t.desc}</div>
+        </div>
+        <div class="tright">
+          ${cupSVG(t.grade,24)}
+          ${t.rare?'<div class="trare">RARE</div>':''}
+        </div>
+      </div>`).join('');
+    return `<div class="grow" id="${g.id}" style="animation-delay:${i*28}ms">
+      <div class="gmain" onclick="tog('${g.id}')">
+        <div class="gcover">${cov}</div>
+        <div class="gbody">
+          <div class="gtitle">${g.title}</div>
+          <div class="gpips">
+            ${['platinum','gold','silver','bronze'].map(gr=>`<div class="pip">${cupSVG(gr,16)}<span>${e[gr]||0}</span></div>`).join('')}
+          </div>
+          <div class="gbar"><div class="gbarfill" data-w="${p}" style="background:${col}"></div></div>
+        </div>
+        <div class="gright">
+          <div class="gpct">${p}%</div>
+          <div class="chev">▾</div>
+        </div>
       </div>
+      <div class="tpanel">${trs||'<div style="padding:10px 0;color:var(--sub);font-size:.83rem">No trophy details available.</div>'}</div>
     </div>`;
   }).join('');
 
-  return `<div class="game-card" id="${g.id}">
-    <div class="game-header" onclick="toggleCard('${g.id}')">
-      <div class="game-cover">${coverHTML}</div>
-      <div class="game-info">
-        <div class="game-title">${g.title}</div>
-        <div class="game-meta">
-          ${e.platinum ? `<span class="trophy-pip pip-platinum"><span class="dot"></span> ${e.platinum}P</span>` : ''}
-          <span class="trophy-pip pip-gold"><span class="dot"></span> ${e.gold}/${t.gold} G</span>
-          <span class="trophy-pip pip-silver"><span class="dot"></span> ${e.silver}/${t.silver} S</span>
-          <span class="trophy-pip pip-bronze"><span class="dot"></span> ${e.bronze}/${t.bronze} B</span>
-        </div>
-        <div class="progress-bar" style="margin-top:10px">
-          <div class="progress-fill" style="width:${pct}%; background:${ringColor}"></div>
-        </div>
-      </div>
-      <div class="game-right">
-        <div class="completion-ring">
-          <svg width="56" height="56" viewBox="0 0 56 56">
-            <circle class="track" cx="28" cy="28" r="24"/>
-            <circle class="fill" cx="28" cy="28" r="24"
-              stroke="${ringColor}"
-              style="stroke-dasharray:${c}; stroke-dashoffset:${c}"
-              data-pct="${pct}"/>
-          </svg>
-          <div class="completion-pct" style="color:${ringColor}">${pct}%</div>
-        </div>
-        <div class="chevron">▾</div>
-      </div>
-    </div>
-    <div class="trophy-list">${trophyList || '<div style="padding:12px;color:var(--muted)">No trophy details loaded.</div>'}</div>
-  </div>`;
+  requestAnimationFrame(()=>setTimeout(()=>{
+    document.querySelectorAll('.gbarfill').forEach(el=>{el.style.width=el.dataset.w+'%';});
+  },80));
 }
 
-function toggleCard(id) {
-  const card = document.getElementById(id);
-  card.classList.toggle('open');
-  // Trigger ring animation on open
-  if (card.classList.contains('open')) {
-    card.querySelectorAll('.fill').forEach(el => {
-      const pct = parseFloat(el.dataset.pct);
-      const c = 2 * Math.PI * 24;
-      el.style.strokeDasharray = c;
-      el.style.strokeDashoffset = c - (pct / 100) * c;
-    });
-  }
+function tog(id){
+  document.querySelectorAll('.grow.open').forEach(r=>{if(r.id!==id)r.classList.remove('open');});
+  document.getElementById(id).classList.toggle('open');
 }
 
-// ─── FILTER + SEARCH ──────────────────────────────────────────────────────────
-document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    currentFilter = btn.dataset.filter;
-    renderGames();
+document.querySelectorAll('.fb').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('.fb').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');af=b.dataset.f;renderG();
   });
 });
-
-document.getElementById('searchBox').addEventListener('input', renderGames);
-
-// ─── GO ───────────────────────────────────────────────────────────────────────
+document.getElementById('srcEl').addEventListener('input',renderG);
 init();
 </script>
 </body>
