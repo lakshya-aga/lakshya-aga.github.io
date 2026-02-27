@@ -28,8 +28,8 @@ import {
 import fs from "fs/promises";
 
 // ── CONFIGURE THESE ──────────────────────────────────────────────────────────
-const NPSSO         = "PASTE_YOUR_64_CHARACTER_NPSSO_HERE";
-const PSN_ID        = "YourPSNID";         // Your PSN online ID
+const NPSSO         = "wuGPlJW7rq4NyBBfWkjmemsANrL8LiWCO7z7E4qgWeHi57RII3rfflu518FkdtwI";
+const PSN_ID        = "alakshya2648";         // Your PSN online ID
 const MAX_GAMES     = 50;                  // How many games to fetch (max 500)
 const RARE_THRESHOLD = 10;                 // Trophy earn rate % below which = "rare"
 // ─────────────────────────────────────────────────────────────────────────────
