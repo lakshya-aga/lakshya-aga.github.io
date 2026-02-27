@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trophies</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #121214; --surface: #1c1c1f; --sep: rgba(255,255,255,0.08);
+      --text: #ffffff; --sub: #98989e; --blue: #4a9eff; --green: #32d74b;
+      --plat: #a8c8f8; --gold: #d4a428; --silver: #9ab0c8; --bronze: #c07840; --rare: #ff375f;
+    }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; min-height: 100vh; }
+    .page { max-width: 680px; margin: 0 auto; padding: 0 0 80px; }
+
+    /* PROFILE */
+    .profile-section { padding: 40px 20px 20px; display: flex; align-items: center; gap: 14px; }
+    .avatar-wrap { position: relative; flex-shrink: 0; }
+    .avatar { width: 56px; height: 56px; border-radius: 50%; background: #2c2c2e; overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .online-dot { position: absolute; bottom: 1px; right: 1px; width: 11px; height: 11px; background: var(--green); border-radius: 50%; border: 2px solid var(--bg); }
+    .psn-id   { font-size: 0.78rem; color: var(--sub); margin-bottom: 2px; }
+    .psn-name { font-size: 1.15rem; font-weight: 700; }
+
+    /* LEVEL + TOTAL */
+    .level-total-row { padding: 16px 20px 20px; display: flex; align-items: center; gap: 24px; }
+    .ring-outer { position: relative; width: 80px; height: 80px; flex-shrink: 0; }
+    .ring-outer svg { position: absolute; inset: 0; transform: rotate(-90deg); }
+    .ring-track { fill: none; stroke: rgba(255,255,255,0.12); stroke-width: 5; }
+    .ring-fill { fill: none; stroke: #ffffff; stroke-width: 5; stroke-linecap: round; transition: stroke-dashoffset 1.2s cubic-bezier(0.4,0,0.2,1); }
+    .ring-center { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+    .level-meta { display: flex; flex-direction: column; gap: 2px; }
+    .level-meta-num { font-size: 0.82rem; color: var(--sub); }
+    .level-meta-pct { font-size: 0.75rem; color: var(--sub); }
+    .total-block { margin-left: auto; text-align: right; }
+    .total-num { font-size: 2.1rem; font-weight: 700; letter-spacing: -0.02em; }
+    .total-label { font-size: 0.82rem; color: var(--sub); }
+
+    /* TROPHY TYPE ROW */
+    .trophy-type-row { display: flex; justify-content: space-around; padding: 4px 20px 24px; }
+    .type-cell { display: flex; flex-direction: column; align-items: center; gap: 7px; }
+    .type-num { font-size: 1.3rem; font-weight: 700; }
+    .type-cell.plat   .type-num { color: var(--plat); }
+    .type-cell.gold   .type-num { color: var(--gold); }
+    .type-cell.silver .type-num { color: var(--silver); }
+    .type-cell.bronze .type-num { color: var(--bronze); }
+
+    /* SECTION */
+    .section-header { padding: 8px 20px 10px; font-size: 1.05rem; font-weight: 600; }
+    .controls { display: flex; gap: 8px; padding: 0 20px 14px; flex-wrap: wrap; }
+    .search-box { flex: 1; min-width: 140px; background: #2c2c2e; border: none; border-radius: 10px; padding: 9px 14px; color: var(--text); font-family: inherit; font-size: 0.88rem; outline: none; }
+    .search-box::placeholder { color: var(--sub); }
+    .filter-btn { background: #2c2c2e; border: none; color: var(--sub); padding: 9px 14px; border-radius: 10px; cursor: pointer; font-family: inherit; font-size: 0.8rem; font-weight: 500; transition: all 0.15s; white-space: nowrap; }
+    .filter-btn:hover { color: var(--text); }
+    .filter-btn.active { background: var(--blue); color: #fff; }
+
+    /* GAME ROWS */
+    .game-list { display: flex; flex-direction: column; }
+    .game-row { border-top: 1px solid var(--sep); }
+    .game-row:last-child { border-bottom: 1px solid var(--sep); }
+    .game-summary { display: flex; align-items: center; gap: 14px; padding: 14px 20px; cursor: pointer; user-select: none; transition: background 0.1s; }
+    .game-summary:hover { background: rgba(255,255,255,0.03); }
+    .game-cover { width: 72px; height: 72px; border-radius: 8px; background: #2c2c2e; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; overflow: hidden; }
+    .game-cover img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; }
+    .game-body { flex: 1; min-width: 0; }
+    .game-title { font-size: 0.95rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 8px; }
+    .game-pips { display: flex; gap: 14px; align-items: center; margin-bottom: 7px; }
+    .pip { display: flex; align-items: center; gap: 5px; font-size: 0.8rem; color: var(--sub); font-weight: 500; }
+    .game-bar { height: 2px; background: rgba(255,255,255,0.1); border-radius: 1px; overflow: hidden; }
+    .game-bar-fill { height: 100%; border-radius: 1px; width: 0; transition: width 0.9s ease; }
+    .game-pct { font-size: 0.95rem; font-weight: 600; color: var(--sub); flex-shrink: 0; min-width: 38px; text-align: right; }
+
+    /* TROPHY PANEL */
+    .trophy-panel { display: none; flex-direction: column; background: var(--surface); border-top: 1px solid var(--sep); }
+    .game-row.open .trophy-panel { display: flex; }
+    .trophy-item { display: flex; align-items: center; gap: 14px; padding: 13px 20px; border-bottom: 1px solid var(--sep); transition: background 0.1s; }
+    .trophy-item:last-child { border-bottom: none; }
+    .trophy-item:hover { background: rgba(255,255,255,0.03); }
+    .trophy-item.locked { opacity: 0.35; }
+    .t-icon { width: 48px; height: 48px; border-radius: 8px; background: #2c2c2e; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; overflow: hidden; }
+    .t-icon img { width: 100%; height: 100%; object-fit: cover; }
+    .t-text { flex: 1; min-width: 0; }
+    .t-name { font-size: 0.88rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .t-desc { font-size: 0.76rem; color: var(--sub); margin-top: 2px; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .t-right { flex-shrink: 0; display: flex; flex-direction: column; align-items: flex-end; gap: 3px; }
+    .t-rare { font-size: 0.62rem; color: var(--rare); font-weight: 600; letter-spacing: 0.04em; }
+    .empty { text-align: center; padding: 48px 20px; color: var(--sub); font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <div class="profile-section">
+    <div class="avatar-wrap">
+      <div class="avatar" id="avatarEl">👤</div>
+      <div class="online-dot"></div>
+    </div>
+    <div>
+      <div class="psn-id"   id="psnIdEl">—</div>
+      <div class="psn-name" id="psnNameEl">—</div>
+    </div>
+  </div>
+
+  <div class="level-total-row">
+    <div class="ring-outer">
+      <svg width="80" height="80" viewBox="0 0 80 80">
+        <circle class="ring-track" cx="40" cy="40" r="34"/>
+        <circle class="ring-fill" id="levelRing" cx="40" cy="40" r="34"/>
+      </svg>
+      <div class="ring-center">
+        <svg width="46" height="46" viewBox="0 0 44 44" fill="none">
+          <circle cx="22" cy="22" r="22" fill="#8B1A1A"/>
+          <circle cx="22" cy="22" r="20" fill="#A52020"/>
+          <path d="M8 24 Q4 20 6 16 Q10 18 11 22Z" fill="#C83030"/>
+          <path d="M36 24 Q40 20 38 16 Q34 18 33 22Z" fill="#C83030"/>
+          <path d="M16 14h12v8a6 6 0 01-12 0V14z" fill="#fff" opacity="0.92"/>
+          <path d="M13 15h3v6a2.5 2.5 0 01-3-2V15zM31 15h-3v6a2.5 2.5 0 003-2V15z" fill="#fff" opacity="0.6"/>
+          <rect x="19" y="26" width="6" height="2.5" rx="1" fill="#fff" opacity="0.92"/>
+          <rect x="17" y="28.5" width="10" height="2" rx="1" fill="#fff" opacity="0.92"/>
+        </svg>
+      </div>
+    </div>
+    <div class="level-meta">
+      <div class="level-meta-num">Level <span id="levelNumEl">—</span></div>
+      <div class="level-meta-pct"><span id="ringPctEl">—</span>% to next level</div>
+    </div>
+    <div class="total-block">
+      <div class="total-num" id="totalEl">—</div>
+      <div class="total-label">Total Trophies</div>
+    </div>
+  </div>
+
+  <div class="trophy-type-row">
+    <div class="type-cell plat">
+      <svg width="46" height="46" viewBox="0 0 46 46" fill="none">
+        <path d="M13 6h20v16a10 10 0 01-20 0V6z" fill="#a8c8f8"/>
+        <path d="M7 8h6v12a5 5 0 01-6-4.5V8zM39 8h-6v12a5 5 0 006-4.5V8z" fill="#7aaae8"/>
+        <rect x="18" y="32" width="10" height="4" rx="2" fill="#a8c8f8"/>
+        <rect x="15" y="35.5" width="16" height="3.5" rx="1.5" fill="#a8c8f8"/>
+      </svg>
+      <div class="type-num" id="platEl">—</div>
+    </div>
+    <div class="type-cell gold">
+      <svg width="46" height="46" viewBox="0 0 46 46" fill="none">
+        <path d="M13 6h20v16a10 10 0 01-20 0V6z" fill="#d4a428"/>
+        <path d="M7 8h6v12a5 5 0 01-6-4.5V8zM39 8h-6v12a5 5 0 006-4.5V8z" fill="#b88010"/>
+        <rect x="18" y="32" width="10" height="4" rx="2" fill="#d4a428"/>
+        <rect x="15" y="35.5" width="16" height="3.5" rx="1.5" fill="#d4a428"/>
+      </svg>
+      <div class="type-num" id="goldEl">—</div>
+    </div>
+    <div class="type-cell silver">
+      <svg width="46" height="46" viewBox="0 0 46 46" fill="none">
+        <path d="M13 6h20v16a10 10 0 01-20 0V6z" fill="#9ab0c8"/>
+        <path d="M7 8h6v12a5 5 0 01-6-4.5V8zM39 8h-6v12a5 5 0 006-4.5V8z" fill="#7090a8"/>
+        <rect x="18" y="32" width="10" height="4" rx="2" fill="#9ab0c8"/>
+        <rect x="15" y="35.5" width="16" height="3.5" rx="1.5" fill="#9ab0c8"/>
+      </svg>
+      <div class="type-num" id="silverEl">—</div>
+    </div>
+    <div class="type-cell bronze">
+      <svg width="46" height="46" viewBox="0 0 46 46" fill="none">
+        <path d="M13 6h20v16a10 10 0 01-20 0V6z" fill="#c07840"/>
+        <path d="M7 8h6v12a5 5 0 01-6-4.5V8zM39 8h-6v12a5 5 0 006-4.5V8z" fill="#905820"/>
+        <rect x="18" y="32" width="10" height="4" rx="2" fill="#c07840"/>
+        <rect x="15" y="35.5" width="16" height="3.5" rx="1.5" fill="#c07840"/>
+      </svg>
+      <div class="type-num" id="bronzeEl">—</div>
+    </div>
+  </div>
+
+  <div class="section-header">Games played</div>
+  <div class="controls">
+    <input class="search-box" id="searchBox" type="text" placeholder="Search games…" />
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="platinum">Platinum</button>
+    <button class="filter-btn" data-filter="complete">100%</button>
+    <button class="filter-btn" data-filter="incomplete">Incomplete</button>
+  </div>
+  <div class="game-list" id="gameList"><div class="empty">Loading…</div></div>
+
+</div>
+<script>
+function smallCup(grade) {
+  const c={platinum:['#a8c8f8','#7aaae8'],gold:['#d4a428','#b88010'],silver:['#9ab0c8','#7090a8'],bronze:['#c07840','#905820']};
+  const [f,s]=c[grade]??c.bronze;
+  return `<svg width="18" height="18" viewBox="0 0 46 46" fill="none"><path d="M13 6h20v16a10 10 0 01-20 0V6z" fill="${f}"/><path d="M7 8h6v12a5 5 0 01-6-4.5V8zM39 8h-6v12a5 5 0 006-4.5V8z" fill="${s}"/><rect x="18" y="32" width="10" height="4" rx="2" fill="${f}"/><rect x="15" y="35.5" width="16" height="3.5" rx="1.5" fill="${f}"/></svg>`;
+}
+function barColor(p){return p===100?'#d4a428':p>=60?'#32d74b':'#4a9eff';}
+
+const DEMO={profile:{onlineId:"alakshya2648",displayName:"Lakshya Agarwal",avatarUrl:null,trophyLevel:240,progress:20,earnedTrophies:{platinum:6,gold:65,silver:277,bronze:1138}},games:[{id:"g1",title:"Sekiro™: Shadows Die Twice",coverEmoji:"⚔️",trophies:{earned:{platinum:0,gold:1,silver:7,bronze:16}},completion:56,hasPlatinum:false,trophyList:[{name:"Immortal Severance",desc:"Achieve the Immortal Severance ending.",grade:"gold",earned:true,iconEmoji:"🗡️",rare:false},{name:"Master of the Prosthetic",desc:"Acquire all Prosthetic Tools.",grade:"silver",earned:true,iconEmoji:"🦾",rare:true},{name:"Shura",desc:"Obey the Iron Code, severance awaits.",grade:"platinum",earned:false,iconEmoji:"💎",rare:true}]},{id:"g2",title:"Grand Theft Auto V",coverEmoji:"🚗",trophies:{earned:{platinum:0,gold:1,silver:7,bronze:29}},completion:45,hasPlatinum:false,trophyList:[{name:"Los Santos Legend",desc:"Vinewood's biggest star.",grade:"gold",earned:true,iconEmoji:"⭐",rare:false},{name:"Career Criminal",desc:"Attain 100% Game Completion.",grade:"gold",earned:false,iconEmoji:"🏆",rare:true}]},{id:"g3",title:"Black Myth: Wukong",coverEmoji:"🐒",trophies:{earned:{platinum:0,gold:2,silver:5,bronze:20}},completion:62,hasPlatinum:false,trophyList:[{name:"Equal of Heaven",desc:"Complete all six chapters.",grade:"gold",earned:true,iconEmoji:"☁️",rare:false},{name:"The Destined One",desc:"Obtain all trophies.",grade:"platinum",earned:false,iconEmoji:"💎",rare:true}]},{id:"g4",title:"Trackmania",coverEmoji:"🏎️",trophies:{earned:{platinum:0,gold:1,silver:2,bronze:9}},completion:29,hasPlatinum:false,trophyList:[{name:"Time Keeper",desc:"Beat all time limits.",grade:"gold",earned:true,iconEmoji:"⏱️",rare:false}]},{id:"g5",title:"Injustice 2 Trophies",coverEmoji:"🦸",trophies:{earned:{platinum:0,gold:0,silver:0,bronze:2}},completion:2,hasPlatinum:false,trophyList:[{name:"First Blood",desc:"Win your first online match.",grade:"bronze",earned:true,iconEmoji:"🩸",rare:false}]}]};
+
+let allGames=[],activeFilter='all';
+
+async function init(){
+  try{const r=await fetch('trophies.json');if(r.ok){hydrate(await r.json());return;}}catch(e){}
+  hydrate(DEMO);
+}
+
+function hydrate(data){
+  const p=data.profile;
+  allGames=[...(data.games??[])].sort((a,b)=>b.completion-a.completion);
+  document.getElementById('psnIdEl').textContent=p.onlineId??'';
+  document.getElementById('psnNameEl').textContent=p.displayName??'';
+  if(p.avatarUrl)document.getElementById('avatarEl').innerHTML=`<img src="${p.avatarUrl}" alt=""/>`;
+  document.getElementById('levelNumEl').textContent=p.trophyLevel??'—';
+  const pct=p.progress??0;
+  document.getElementById('ringPctEl').textContent=pct;
+  const circ=2*Math.PI*34;
+  const ring=document.getElementById('levelRing');
+  ring.setAttribute('stroke-dasharray',circ);
+  ring.setAttribute('stroke-dashoffset',circ);
+  setTimeout(()=>{ring.style.strokeDashoffset=circ-(pct/100)*circ;},120);
+  const t=p.earnedTrophies??{};
+  const total=(t.platinum??0)+(t.gold??0)+(t.silver??0)+(t.bronze??0);
+  document.getElementById('totalEl').textContent=total.toLocaleString();
+  document.getElementById('platEl').textContent=t.platinum??0;
+  document.getElementById('goldEl').textContent=t.gold??0;
+  document.getElementById('silverEl').textContent=t.silver??0;
+  document.getElementById('bronzeEl').textContent=t.bronze??0;
+  renderGames();
+}
+
+function renderGames(){
+  const q=document.getElementById('searchBox').value.toLowerCase();
+  const games=allGames.filter(g=>{
+    if(q&&!g.title.toLowerCase().includes(q))return false;
+    if(activeFilter==='platinum')return g.hasPlatinum;
+    if(activeFilter==='complete')return g.completion===100;
+    if(activeFilter==='incomplete')return g.completion<100;
+    return true;
+  });
+  const list=document.getElementById('gameList');
+  if(!games.length){list.innerHTML='<div class="empty">No games found.</div>';return;}
+  list.innerHTML=games.map(g=>{
+    const e=g.trophies?.earned??{};
+    const pct=g.completion??0;
+    const col=barColor(pct);
+    const cover=g.coverUrl?`<img src="${g.coverUrl}" alt="${g.title}"/>`:(g.coverEmoji??'🎮');
+    const tRows=(g.trophyList??[]).map(t=>`<div class="trophy-item ${t.earned?'':'locked'}"><div class="t-icon">${t.iconUrl?`<img src="${t.iconUrl}" alt=""/>`:t.iconEmoji??'🏆'}</div><div class="t-text"><div class="t-name">${t.name}</div><div class="t-desc">${t.desc}</div></div><div class="t-right">${smallCup(t.grade)}${t.rare?'<div class="t-rare">RARE</div>':''}</div></div>`).join('');
+    return `<div class="game-row" id="${g.id}"><div class="game-summary" onclick="toggle('${g.id}')"><div class="game-cover">${cover}</div><div class="game-body"><div class="game-title">${g.title}</div><div class="game-pips">${['platinum','gold','silver','bronze'].map(gr=>`<div class="pip">${smallCup(gr)}<span>${e[gr]??0}</span></div>`).join('')}</div><div class="game-bar"><div class="game-bar-fill" data-pct="${pct}" style="background:${col}"></div></div></div><div class="game-pct">${pct}%</div></div><div class="trophy-panel">${tRows}</div></div>`;
+  }).join('');
+  setTimeout(()=>{list.querySelectorAll('.game-bar-fill').forEach(el=>{el.style.width=el.dataset.pct+'%';});},60);
+}
+
+function toggle(id){
+  const row=document.getElementById(id);
+  const was=row.classList.contains('open');
+  document.querySelectorAll('.game-row.open').forEach(r=>r.classList.remove('open'));
+  if(!was)row.classList.add('open');
+}
+
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');activeFilter=btn.dataset.filter;renderGames();
+  });
+});
+document.getElementById('searchBox').addEventListener('input',renderGames);
+init();
+</script>
+</body>
+</html>
