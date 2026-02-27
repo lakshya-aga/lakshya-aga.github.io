@@ -29,7 +29,7 @@ import fs from "fs/promises";
 
 // ── CONFIGURE THESE ──────────────────────────────────────────────────────────
 const NPSSO         = "wuGPlJW7rq4NyBBfWkjmemsANrL8LiWCO7z7E4qgWeHi57RII3rfflu518FkdtwI";
-const PSN_ID        = "alakshya2648";         // Your PSN online ID
+const PSN_ID        = "alakshya2648";      // Your PSN online ID
 const MAX_GAMES     = 50;                  // How many games to fetch (max 500)
 const RARE_THRESHOLD = 10;                 // Trophy earn rate % below which = "rare"
 // ─────────────────────────────────────────────────────────────────────────────
@@ -47,16 +47,27 @@ async function main() {
   // Get profile — avatar + display name
   let profile = { onlineId: PSN_ID, displayName: PSN_ID, avatarUrl: null, trophyLevel: 0, progress: 0, earnedTrophies: { platinum: 0, gold: 0, silver: 0, bronze: 0 } };
   try {
-    const { profile: psn } = await getProfileFromUserName(auth, PSN_ID);
+    const response = await getProfileFromUserName(auth, PSN_ID);
+
+    // Log the full response so we can see exactly what fields are available
+    console.log("🔍 Raw profile response:", JSON.stringify(response, null, 2));
+
+    const psn = response.profile ?? response;
     profile.onlineId    = psn.onlineId ?? PSN_ID;
     profile.displayName = psn.personalDetail?.firstName
       ? `${psn.personalDetail.firstName} ${psn.personalDetail.lastName ?? ''}`.trim()
       : (psn.onlineId ?? PSN_ID);
-    // Avatar: pick the largest available image
-    const avatars = psn.avatars ?? [];
-    const big = avatars.find(a => a.size === "xl") ?? avatars.find(a => a.size === "l") ?? avatars[0];
-    profile.avatarUrl = big?.url ?? null;
-    console.log("✅ Profile fetched:", profile.onlineId, "| avatar:", profile.avatarUrl ? "✓" : "none");
+
+    // Try every known avatar field path psn-api may return
+    profile.avatarUrl =
+      psn.avatarUrls?.[0]?.avatarUrl               // most common
+      ?? psn.avatars?.[0]?.url                      // alternate shape
+      ?? psn.profile?.avatarUrls?.[0]?.avatarUrl    // nested profile
+      ?? psn.avatar?.url                            // flat
+      ?? psn.avatarUrl                              // direct string
+      ?? null;
+
+    console.log("✅ Profile:", profile.onlineId, "| avatar:", profile.avatarUrl ?? "not found");
   } catch (e) {
     console.warn("⚠ Could not fetch profile:", e.message);
   }
