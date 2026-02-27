@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trophy Cabinet</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #080b12;
+      --surface:  #0d1220;
+      --card:     #111827;
+      --border:   #1e2d45;
+      --accent:   #00d4ff;
+      --gold:     #f5c842;
+      --silver:   #c0c8d8;
+      --bronze:   #c87941;
+      --platinum: #b794f4;
+      --rare:     #ff4d8f;
+      --text:     #e2e8f0;
+      --muted:    #64748b;
+      --glow:     0 0 20px rgba(0,212,255,0.3);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 16px;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Scanline overlay ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.04) 2px,
+        rgba(0,0,0,0.04) 4px
+      );
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ── Grid bg ── */
+    .grid-bg {
+      position: fixed; inset: 0;
+      background-image:
+        linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: relative;
+      padding: 60px 40px 40px;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(0,212,255,0.04) 0%, transparent 100%);
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .psn-avatar {
+      width: 88px; height: 88px;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      box-shadow: var(--glow);
+      background: var(--surface);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.5rem;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    .psn-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+    .header-text h1 {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      text-shadow: var(--glow);
+    }
+
+    .psn-id {
+      font-size: 0.9rem;
+      color: var(--muted);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .level-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+      background: rgba(0,212,255,0.08);
+      border: 1px solid rgba(0,212,255,0.2);
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      color: var(--accent);
+    }
+
+    /* ── STATS GRID ── */
+    .stats-bar {
+      max-width: 1200px;
+      margin: 32px auto;
+      padding: 0 40px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .stat-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .stat-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 2px;
+    }
+    .stat-card.platinum::before { background: var(--platinum); }
+    .stat-card.gold::before    { background: var(--gold); }
+    .stat-card.silver::before  { background: var(--silver); }
+    .stat-card.bronze::before  { background: var(--bronze); }
+    .stat-card.total::before   { background: var(--accent); }
+
+    .stat-icon { font-size: 1.8rem; margin-bottom: 8px; }
+    .stat-value {
+      font-family: 'Orbitron', monospace;
+      font-size: 2rem;
+      font-weight: 700;
+    }
+    .stat-card.platinum .stat-value { color: var(--platinum); }
+    .stat-card.gold .stat-value     { color: var(--gold); }
+    .stat-card.silver .stat-value   { color: var(--silver); }
+    .stat-card.bronze .stat-value   { color: var(--bronze); }
+    .stat-card.total .stat-value    { color: var(--accent); }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-top: 4px;
+    }
+
+    /* ── CONTROLS ── */
+    .controls {
+      max-width: 1200px;
+      margin: 0 auto 24px;
+      padding: 0 40px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .search-box {
+      flex: 1;
+      min-width: 200px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px 16px;
+      color: var(--text);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .search-box:focus { border-color: var(--accent); }
+    .search-box::placeholder { color: var(--muted); }
+
+    .filter-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 10px 18px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover,
+    .filter-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(0,212,255,0.06); }
+
+    /* ── GAME LIST ── */
+    .game-list {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .game-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .game-card:hover { border-color: rgba(0,212,255,0.3); box-shadow: 0 0 30px rgba(0,212,255,0.06); }
+
+    .game-header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 20px 24px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .game-cover {
+      width: 64px; height: 64px;
+      border-radius: 8px;
+      object-fit: cover;
+      background: var(--surface);
+      flex-shrink: 0;
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem;
+      overflow: hidden;
+    }
+    .game-cover img { width: 100%; height: 100%; object-fit: cover; }
+
+    .game-info { flex: 1; min-width: 0; }
+    .game-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 1rem;
+      font-weight: 700;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+
+    .game-meta {
+      display: flex;
+      gap: 12px;
+      margin-top: 6px;
+      flex-wrap: wrap;
+    }
+    .trophy-pip {
+      display: flex; align-items: center; gap: 4px;
+      font-size: 0.85rem;
+    }
+    .trophy-pip .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+    }
+    .pip-platinum .dot { background: var(--platinum); }
+    .pip-gold .dot     { background: var(--gold); }
+    .pip-silver .dot   { background: var(--silver); }
+    .pip-bronze .dot   { background: var(--bronze); }
+
+    .game-right { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; flex-shrink: 0; }
+
+    .completion-ring {
+      position: relative;
+      width: 56px; height: 56px;
+    }
+    .completion-ring svg { transform: rotate(-90deg); }
+    .completion-ring .track { fill: none; stroke: var(--border); stroke-width: 5; }
+    .completion-ring .fill  { fill: none; stroke-width: 5; stroke-linecap: round; transition: stroke-dashoffset 0.8s ease; }
+    .completion-pct {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Orbitron', monospace;
+      font-size: 0.6rem;
+      font-weight: 700;
+    }
+
+    .chevron {
+      color: var(--muted);
+      font-size: 1.2rem;
+      transition: transform 0.3s;
+    }
+    .game-card.open .chevron { transform: rotate(180deg); }
+
+    /* ── TROPHY LIST ── */
+    .trophy-list {
+      display: none;
+      padding: 0 24px 20px;
+      border-top: 1px solid var(--border);
+    }
+    .game-card.open .trophy-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; padding-top: 20px; }
+
+    .trophy-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      transition: border-color 0.2s;
+      position: relative;
+    }
+    .trophy-item:hover { border-color: rgba(0,212,255,0.25); }
+    .trophy-item.locked { opacity: 0.45; }
+
+    .trophy-item.rare-badge { border-color: rgba(255,77,143,0.4); }
+    .trophy-item.rare-badge::after {
+      content: '★ RARE';
+      position: absolute;
+      top: 8px; right: 8px;
+      font-size: 0.65rem;
+      color: var(--rare);
+      letter-spacing: 0.1em;
+      font-family: 'Orbitron', monospace;
+    }
+
+    .trophy-icon {
+      width: 40px; height: 40px;
+      border-radius: 6px;
+      object-fit: cover;
+      flex-shrink: 0;
+      background: var(--card);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      overflow: hidden;
+    }
+    .trophy-icon img { width: 100%; height: 100%; object-fit: cover; }
+
+    .trophy-info { flex: 1; min-width: 0; }
+    .trophy-name {
+      font-size: 0.9rem;
+      font-weight: 600;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .trophy-desc {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 2px;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .trophy-grade {
+      font-size: 0.7rem;
+      margin-top: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .grade-platinum { color: var(--platinum); }
+    .grade-gold     { color: var(--gold); }
+    .grade-silver   { color: var(--silver); }
+    .grade-bronze   { color: var(--bronze); }
+
+    /* ── EMPTY / LOADING ── */
+    .status-msg {
+      text-align: center;
+      padding: 80px 40px;
+      color: var(--muted);
+      font-size: 1.1rem;
+    }
+
+    /* ── PROGRESS BAR ── */
+    .progress-bar {
+      height: 3px;
+      background: var(--border);
+      border-radius: 2px;
+      margin-top: 8px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      border-radius: 2px;
+      transition: width 1s ease;
+    }
+
+    /* ── SETUP BANNER ── */
+    .setup-banner {
+      max-width: 700px;
+      margin: 48px auto;
+      padding: 0 40px;
+    }
+    .banner-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 36px;
+    }
+    .banner-box h2 {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.1rem;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .banner-box p, .banner-box li {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    .banner-box ol { padding-left: 20px; margin-top: 8px; }
+    .banner-box code {
+      background: rgba(0,212,255,0.08);
+      border: 1px solid rgba(0,212,255,0.15);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      color: var(--accent);
+    }
+    .banner-box .input-row {
+      display: flex; gap: 10px; margin-top: 20px;
+    }
+    .banner-box input {
+      flex: 1;
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 10px 14px;
+      border-radius: 6px;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.95rem;
+      outline: none;
+    }
+    .banner-box input:focus { border-color: var(--accent); }
+    .load-btn {
+      background: var(--accent);
+      color: #000;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 6px;
+      font-family: 'Orbitron', monospace;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      letter-spacing: 0.05em;
+      transition: opacity 0.2s;
+    }
+    .load-btn:hover { opacity: 0.85; }
+
+    @media (max-width: 640px) {
+      header, .stats-bar, .controls, .game-list { padding-left: 16px; padding-right: 16px; }
+      .game-header { gap: 14px; }
+      .game-cover { width: 48px; height: 48px; }
+    }
+  </style>
+</head>
+<body>
+<div class="grid-bg"></div>
+
+<!-- ══════════════════════════════════ HEADER ══════════════════════════════════ -->
+<header>
+  <div class="header-inner">
+    <div class="psn-avatar" id="avatarEl">🎮</div>
+    <div class="header-text">
+      <h1 id="displayNameEl">TROPHY CABINET</h1>
+      <div class="psn-id" id="psnIdEl">LOADING…</div>
+      <div class="level-badge" id="levelBadge">
+        <span>⚡</span>
+        <span id="levelText">LVL —</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ══════════════════════════════════ STATS ══════════════════════════════════ -->
+<div class="stats-bar">
+  <div class="stat-card total">
+    <div class="stat-icon">🏆</div>
+    <div class="stat-value" id="totalCount">—</div>
+    <div class="stat-label">Total Trophies</div>
+  </div>
+  <div class="stat-card platinum">
+    <div class="stat-icon">💎</div>
+    <div class="stat-value" id="platCount">—</div>
+    <div class="stat-label">Platinum</div>
+  </div>
+  <div class="stat-card gold">
+    <div class="stat-icon">🥇</div>
+    <div class="stat-value" id="goldCount">—</div>
+    <div class="stat-label">Gold</div>
+  </div>
+  <div class="stat-card silver">
+    <div class="stat-icon">🥈</div>
+    <div class="stat-value" id="silverCount">—</div>
+    <div class="stat-label">Silver</div>
+  </div>
+  <div class="stat-card bronze">
+    <div class="stat-icon">🥉</div>
+    <div class="stat-value" id="bronzeCount">—</div>
+    <div class="stat-label">Bronze</div>
+  </div>
+  <div class="stat-card total">
+    <div class="stat-icon">🎮</div>
+    <div class="stat-value" id="gamesCount">—</div>
+    <div class="stat-label">Games Played</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════ CONTROLS ══════════════════════════════════ -->
+<div class="controls">
+  <input class="search-box" type="text" id="searchBox" placeholder="Search games…" />
+  <button class="filter-btn active" data-filter="all">All</button>
+  <button class="filter-btn" data-filter="platinum">Platinum</button>
+  <button class="filter-btn" data-filter="incomplete">Incomplete</button>
+  <button class="filter-btn" data-filter="complete">100%</button>
+</div>
+
+<!-- ══════════════════════════════════ GAME LIST ══════════════════════════════════ -->
+<div class="game-list" id="gameList">
+  <div class="status-msg" id="statusMsg">Loading trophy data…</div>
+</div>
+
+<!-- ══════════════════════════════════ SETUP BANNER ══════════════════════════════════ -->
+<div class="setup-banner" id="setupBanner" style="display:none">
+  <div class="banner-box">
+    <h2>⚙ CONNECT YOUR PSN ACCOUNT</h2>
+    <p>This page loads your trophy data from a local JSON file generated by the Node.js fetch script. To get started:</p>
+    <ol>
+      <li>Run <code>node fetch-trophies.js</code> from your project folder (see the included script).</li>
+      <li>It will create <code>trophies.json</code> in the same directory.</li>
+      <li>Make sure <code>trophies.json</code> is in the same folder as this HTML file.</li>
+      <li>Reload this page — your trophies will appear automatically.</li>
+    </ol>
+    <p style="margin-top:16px">Or paste the path to a local JSON file:</p>
+    <div class="input-row">
+      <input type="text" id="jsonPathInput" placeholder="trophies.json" value="trophies.json" />
+      <button class="load-btn" onclick="loadFromPath()">LOAD</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── DEMO DATA — replace with real data from fetch-trophies.js output ───
+const DEMO_DATA = {
+  profile: {
+    onlineId: "YourPSNID",
+    displayName: "Your Name",
+    avatarUrl: null,
+    trophyLevel: 42,
+    progress: 78,
+    earnedTrophies: { platinum: 7, gold: 84, silver: 210, bronze: 543 }
+  },
+  games: [
+    {
+      id: "game-1",
+      title: "God of War Ragnarök",
+      coverUrl: null,
+      coverEmoji: "⚔️",
+      platform: "PS5",
+      trophies: {
+        earned: { platinum: 1, gold: 4, silver: 7, bronze: 29 },
+        total:  { platinum: 1, gold: 5, silver: 8, bronze: 33 }
+      },
+      completion: 89,
+      hasPlatinum: true,
+      trophyList: [
+        { name: "Father and Son", desc: "Obtain all other trophies.", grade: "platinum", earned: true, iconEmoji: "💎", rare: false },
+        { name: "Grave Digger", desc: "Send Odin to his grave.", grade: "gold", earned: true, iconEmoji: "🪦", rare: false },
+        { name: "Blood Debt", desc: "Find all of Odin's ravens.", grade: "gold", earned: false, iconEmoji: "🐦‍⬛", rare: true },
+        { name: "A Grizzly Situation", desc: "Defeat Björn.", grade: "silver", earned: true, iconEmoji: "🐻", rare: false },
+        { name: "Spartan Ways", desc: "Obtain all upgrades for Kratos.", grade: "silver", earned: true, iconEmoji: "🛡️", rare: false },
+        { name: "Making Amends", desc: "Free the Hafgufa.", grade: "bronze", earned: true, iconEmoji: "🌊", rare: false },
+      ]
+    },
+    {
+      id: "game-2",
+      title: "Elden Ring",
+      coverUrl: null,
+      coverEmoji: "🌑",
+      platform: "PS5",
+      trophies: {
+        earned: { platinum: 0, gold: 2, silver: 6, bronze: 18 },
+        total:  { platinum: 1, gold: 5, silver: 9, bronze: 27 }
+      },
+      completion: 61,
+      hasPlatinum: false,
+      trophyList: [
+        { name: "Elden Ring", desc: "You have become Elden Lord.", grade: "platinum", earned: false, iconEmoji: "💎", rare: true },
+        { name: "Rune Bear Down", desc: "Defeat the Runebear.", grade: "gold", earned: true, iconEmoji: "🐻", rare: true },
+        { name: "Shardbearer Margit", desc: "Defeat Margit the Fell Omen.", grade: "silver", earned: true, iconEmoji: "⚔️", rare: false },
+        { name: "Maliketh Slain", desc: "Defeat Maliketh, the Black Blade.", grade: "gold", earned: true, iconEmoji: "🗡️", rare: true },
+        { name: "Great Rune", desc: "Restore a Great Rune at a Divine Tower.", grade: "bronze", earned: true, iconEmoji: "💠", rare: false },
+        { name: "Roundtable Hold", desc: "Arrive at Roundtable Hold.", grade: "bronze", earned: true, iconEmoji: "🏰", rare: false },
+      ]
+    },
+    {
+      id: "game-3",
+      title: "Marvel's Spider-Man 2",
+      coverUrl: null,
+      coverEmoji: "🕷️",
+      platform: "PS5",
+      trophies: {
+        earned: { platinum: 1, gold: 5, silver: 8, bronze: 33 },
+        total:  { platinum: 1, gold: 5, silver: 8, bronze: 33 }
+      },
+      completion: 100,
+      hasPlatinum: true,
+      trophyList: [
+        { name: "Great Power", desc: "Earn all other trophies.", grade: "platinum", earned: true, iconEmoji: "💎", rare: false },
+        { name: "Symbiote Slayer", desc: "Defeat Venom.", grade: "gold", earned: true, iconEmoji: "🖤", rare: false },
+        { name: "Together Again", desc: "Find a way to heal Harry.", grade: "gold", earned: true, iconEmoji: "🕸️", rare: false },
+      ]
+    },
+    {
+      id: "game-4",
+      title: "Baldur's Gate 3",
+      coverUrl: null,
+      coverEmoji: "🎲",
+      platform: "PS5",
+      trophies: {
+        earned: { platinum: 0, gold: 1, silver: 3, bronze: 12 },
+        total:  { platinum: 1, gold: 8, silver: 14, bronze: 35 }
+      },
+      completion: 28,
+      hasPlatinum: false,
+      trophyList: [
+        { name: "Absolute Adversary", desc: "Defeat the Absolute.", grade: "platinum", earned: false, iconEmoji: "💎", rare: true },
+        { name: "Devil's in the Details", desc: "Make a deal with Raphael.", grade: "gold", earned: true, iconEmoji: "😈", rare: true },
+        { name: "Shar's Embrace", desc: "Complete Shadowheart's story.", grade: "silver", earned: false, iconEmoji: "🌙", rare: false },
+      ]
+    }
+  ]
+};
+
+// ─── STATE ───────────────────────────────────────────────────────────────────
+let allGames = [];
+let currentFilter = 'all';
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+async function init() {
+  // Try to load real JSON first
+  try {
+    const res = await fetch('trophies.json');
+    if (res.ok) {
+      const data = await res.json();
+      render(data);
+      return;
+    }
+  } catch(e) {}
+
+  // Fall back to demo
+  render(DEMO_DATA);
+  document.getElementById('psnIdEl').textContent = '[ DEMO MODE — see fetch-trophies.js ]';
+}
+
+function loadFromPath() {
+  const path = document.getElementById('jsonPathInput').value.trim() || 'trophies.json';
+  fetch(path)
+    .then(r => r.json())
+    .then(data => { document.getElementById('setupBanner').style.display = 'none'; render(data); })
+    .catch(() => alert('Could not load ' + path + '. Make sure the file exists and the path is correct.'));
+}
+
+// ─── RENDER ───────────────────────────────────────────────────────────────────
+function render(data) {
+  const { profile, games } = data;
+  allGames = games;
+
+  // Profile
+  document.getElementById('displayNameEl').textContent = profile.displayName || 'TROPHY CABINET';
+  document.getElementById('psnIdEl').textContent = profile.onlineId ? '◆ ' + profile.onlineId.toUpperCase() : '';
+  document.getElementById('levelText').textContent = 'LVL ' + (profile.trophyLevel || '—');
+  if (profile.avatarUrl) {
+    document.getElementById('avatarEl').innerHTML = `<img src="${profile.avatarUrl}" alt="avatar" />`;
+  }
+
+  // Stats
+  const t = profile.earnedTrophies || {};
+  const total = (t.platinum||0) + (t.gold||0) + (t.silver||0) + (t.bronze||0);
+  document.getElementById('totalCount').textContent  = total;
+  document.getElementById('platCount').textContent   = t.platinum || 0;
+  document.getElementById('goldCount').textContent   = t.gold || 0;
+  document.getElementById('silverCount').textContent = t.silver || 0;
+  document.getElementById('bronzeCount').textContent = t.bronze || 0;
+  document.getElementById('gamesCount').textContent  = games.length;
+
+  renderGames();
+}
+
+function renderGames() {
+  const search = document.getElementById('searchBox').value.toLowerCase();
+  let games = allGames.filter(g => {
+    if (search && !g.title.toLowerCase().includes(search)) return false;
+    if (currentFilter === 'platinum') return g.hasPlatinum;
+    if (currentFilter === 'complete') return g.completion === 100;
+    if (currentFilter === 'incomplete') return g.completion < 100;
+    return true;
+  });
+
+  const list = document.getElementById('gameList');
+
+  if (!games.length) {
+    list.innerHTML = '<div class="status-msg">No games match your filter.</div>';
+    return;
+  }
+
+  list.innerHTML = games.map(g => gameCardHTML(g)).join('');
+  // Animate rings
+  document.querySelectorAll('.completion-ring .fill').forEach(el => {
+    const pct = parseFloat(el.dataset.pct);
+    const c = 2 * Math.PI * 24;
+    el.style.strokeDasharray = c;
+    el.style.strokeDashoffset = c;
+    setTimeout(() => { el.style.strokeDashoffset = c - (pct / 100) * c; }, 50);
+  });
+}
+
+function gameCardHTML(g) {
+  const e = g.trophies.earned;
+  const t = g.trophies.total;
+  const pct = g.completion;
+  const ringColor = pct === 100 ? 'var(--gold)' : pct > 50 ? 'var(--accent)' : 'var(--muted)';
+  const c = 2 * Math.PI * 24;
+
+  const coverHTML = g.coverUrl
+    ? `<img src="${g.coverUrl}" alt="${g.title}" />`
+    : g.coverEmoji;
+
+  const trophyList = (g.trophyList || []).map(tr => {
+    const gradeColor = `grade-${tr.grade}`;
+    const rareCls = tr.rare ? 'rare-badge' : '';
+    const lockedCls = tr.earned ? '' : 'locked';
+    const iconHTML = tr.iconUrl ? `<img src="${tr.iconUrl}" alt="" />` : tr.iconEmoji || '🏆';
+    return `<div class="trophy-item ${rareCls} ${lockedCls}">
+      <div class="trophy-icon">${iconHTML}</div>
+      <div class="trophy-info">
+        <div class="trophy-name">${tr.name}</div>
+        <div class="trophy-desc">${tr.desc}</div>
+        <div class="trophy-grade ${gradeColor}">${tr.grade.toUpperCase()}${tr.earned ? ' · EARNED' : ' · LOCKED'}</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  return `<div class="game-card" id="${g.id}">
+    <div class="game-header" onclick="toggleCard('${g.id}')">
+      <div class="game-cover">${coverHTML}</div>
+      <div class="game-info">
+        <div class="game-title">${g.title}</div>
+        <div class="game-meta">
+          ${e.platinum ? `<span class="trophy-pip pip-platinum"><span class="dot"></span> ${e.platinum}P</span>` : ''}
+          <span class="trophy-pip pip-gold"><span class="dot"></span> ${e.gold}/${t.gold} G</span>
+          <span class="trophy-pip pip-silver"><span class="dot"></span> ${e.silver}/${t.silver} S</span>
+          <span class="trophy-pip pip-bronze"><span class="dot"></span> ${e.bronze}/${t.bronze} B</span>
+        </div>
+        <div class="progress-bar" style="margin-top:10px">
+          <div class="progress-fill" style="width:${pct}%; background:${ringColor}"></div>
+        </div>
+      </div>
+      <div class="game-right">
+        <div class="completion-ring">
+          <svg width="56" height="56" viewBox="0 0 56 56">
+            <circle class="track" cx="28" cy="28" r="24"/>
+            <circle class="fill" cx="28" cy="28" r="24"
+              stroke="${ringColor}"
+              style="stroke-dasharray:${c}; stroke-dashoffset:${c}"
+              data-pct="${pct}"/>
+          </svg>
+          <div class="completion-pct" style="color:${ringColor}">${pct}%</div>
+        </div>
+        <div class="chevron">▾</div>
+      </div>
+    </div>
+    <div class="trophy-list">${trophyList || '<div style="padding:12px;color:var(--muted)">No trophy details loaded.</div>'}</div>
+  </div>`;
+}
+
+function toggleCard(id) {
+  const card = document.getElementById(id);
+  card.classList.toggle('open');
+  // Trigger ring animation on open
+  if (card.classList.contains('open')) {
+    card.querySelectorAll('.fill').forEach(el => {
+      const pct = parseFloat(el.dataset.pct);
+      const c = 2 * Math.PI * 24;
+      el.style.strokeDasharray = c;
+      el.style.strokeDashoffset = c - (pct / 100) * c;
+    });
+  }
+}
+
+// ─── FILTER + SEARCH ──────────────────────────────────────────────────────────
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.dataset.filter;
+    renderGames();
+  });
+});
+
+document.getElementById('searchBox').addEventListener('input', renderGames);
+
+// ─── GO ───────────────────────────────────────────────────────────────────────
+init();
+</script>
+</body>
+</html>
