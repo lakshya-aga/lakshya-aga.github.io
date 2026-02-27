@@ -77,6 +77,21 @@
     .btn.primary { border-color: var(--accent); color: var(--accent); }
     .btn.primary:hover { background: var(--accent); color: var(--bg); }
     .hero-stats { margin-top: 3.5rem; display: flex; gap: 3rem; opacity: 0; animation: fadeUp 0.6s 0.9s forwards; }
+    .nav-panel { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-top: 2rem; }
+    .nav-panel-card { border: 1px solid var(--border); background: var(--surface); padding: 1.5rem; text-decoration: none; color: var(--text); position: relative; transition: border-color 0.2s, transform 0.2s; }
+    .nav-panel-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .nav-panel-heading { font-family: var(--serif); font-size: 1.1rem; color: #f0f2f5; margin-bottom: 0.5rem; text-transform: capitalize; }
+    .nav-panel-card p { color: var(--muted); font-size: 0.8rem; }
+    .nav-panel-sub { margin-top: 1rem; padding-top: 0.8rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; font-size: 0.72rem; color: var(--muted); }
+    .nav-panel-sub a { color: var(--accent2); text-decoration: none; font-size: 0.75rem; }
+    .projects-category { margin-top: 3rem; }
+    .category-header { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 1.5rem; }
+    .category-badge { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); }
+    .category-description { color: var(--muted); font-size: 0.82rem; max-width: 640px; }
+    .subcategory-card { border: 1px solid var(--border); background: var(--surface2); padding: 1.5rem; margin-bottom: 1.5rem; }
+    .subcategory-card h4 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent2); margin-bottom: 0.4rem; }
+    .subcategory-card p { color: var(--muted); font-size: 0.78rem; margin-bottom: 0.6rem; }
+    .subcategory-card .btn { font-size: 0.72rem; padding: 0.45rem 1rem; }
     .stat-num { font-family: var(--serif); font-size: 2rem; color: var(--accent); line-height: 1; }
     .stat-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.12em; margin-top: 0.3rem; }
     section { padding: 6rem 0; }
@@ -191,6 +206,42 @@
       <div><div class="stat-num">7+</div><div class="stat-label">Internships</div></div>
       <div><div class="stat-num">94%</div><div class="stat-label">Best Model Accuracy</div></div>
       <div><div class="stat-num">ISC&rsquo;23</div><div class="stat-label">Cluster Competition Winner</div></div>
+    </div>
+  </section>
+</div>
+
+<div class="wrapper">
+  <section id="navigator">
+    <div class="section-header reveal">
+      <span class="section-num">00</span>
+      <h2>Workspace Navigation</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="nav-panel">
+      <a class="nav-panel-card reveal" href="#research-infra">
+        <div class="nav-panel-heading">Research infrastructure</div>
+        <p>Foundational tooling for MCP servers, observability, and agent-ready data access.</p>
+      </a>
+      <a class="nav-panel-card reveal" href="#quant-experiments">
+        <div class="nav-panel-heading">Quant experiments</div>
+        <p>Strategy research, alpha pipelines, and agent-driven market exploration.</p>
+      </a>
+      <div class="nav-panel-card reveal">
+        <a class="nav-panel-heading" href="#gaming-misc">Gaming / Misc</a>
+        <p>Side quests, trackers, and playful builds that keep the dopamine balanced.</p>
+        <div class="nav-panel-sub">
+          <span>Subcategory</span>
+          <a href="trophies.html">PlayStation trophies &#x2197;</a>
+        </div>
+      </div>
+      <a class="nav-panel-card reveal" href="#development">
+        <div class="nav-panel-heading">Development</div>
+        <p>Full-stack utilities, blockchain experiments, and systems engineering projects.</p>
+      </a>
+      <a class="nav-panel-card reveal" href="#second-brain">
+        <div class="nav-panel-heading">Second brain</div>
+        <p>Obsidian-based knowledge base capturing research notes and operating procedures.</p>
+      </a>
     </div>
   </section>
 </div>
@@ -365,87 +416,124 @@
       <div class="section-line"></div>
     </div>
 
-    <div class="featured-label reveal">
-      <span style="font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(200,169,110,0.3);padding:0.25rem 0.7rem;background:rgba(200,169,110,0.05);">&#9733; Agentic AI &times; Quant Finance</span>
-    </div>
-
-    <div class="projects-grid" style="border-bottom:none;" id="featured-grid">
-      <a class="project-card featured-card reveal" href="https://github.com/lakshya-aga/finagent_v2" target="_blank">
-        <div class="project-type">&#129302; Agentic AI &middot; Quant Finance</div>
-        <div class="project-title">FinAgent v2</div>
-        <div class="project-desc">An autonomous financial agent that reasons over market data and executes multi-step quantitative strategies &mdash; bringing together LLM decision-making and quant finance in a single agentic loop.</div>
-        <div class="project-tags">
-          <span class="tag accent">Agentic AI</span><span class="tag">Python</span><span class="tag">LLM</span><span class="tag">Quant</span>
-        </div>
-      </a>
-      <a class="project-card featured-card reveal" href="https://github.com/lakshya-aga/fruit-thrower" target="_blank">
-        <div class="project-type">&#127795; MCP Server &middot; Code RAG</div>
-        <div class="project-title">fruit-thrower</div>
-        <div class="project-desc">MCP server that parses, vectorises, and exposes internal Python libraries to AI agents via AST extraction and semantic search over ChromaDB embeddings. Claude finds your existing code before writing new code &mdash; O(N&sup2;) knowledge growth.</div>
-        <div class="project-tags">
-          <span class="tag accent">MCP</span><span class="tag">RAG</span><span class="tag">ChromaDB</span><span class="tag">Python</span>
-        </div>
-      </a>
-    </div>
-
-    <div class="projects-divider"></div>
-
-    <div class="projects-grid" id="projects-grid" style="border-top:none;">
-      <a class="project-card reveal" href="https://github.com/lakshya-aga/ubiquitous-enigma" target="_blank">
-        <div class="project-type">&#128211; Knowledge Base</div>
-        <div class="project-title">ubiquitous-enigma</div>
-        <div class="project-desc">Personal Obsidian vault &mdash; research notes spanning quant finance, ML papers, systems topics, agent experiments, and trading ideas.</div>
-        <div class="project-tags"><span class="tag">Obsidian</span><span class="tag">Research</span><span class="tag">Notes</span></div>
-      </a>
-      <a class="project-card reveal" href="https://github.com/lakshya-aga" target="_blank">
-        <div class="project-type">&#9939; Blockchain</div>
-        <div class="project-title">Dutch Auction Smart Contract</div>
-        <div class="project-desc">Smart contract to distribute newly minted tokens via the Dutch auction mechanism on-chain.</div>
-        <div class="project-tags"><span class="tag">Solidity</span><span class="tag">Ethereum</span></div>
-      </a>
-      <a class="project-card reveal" href="https://github.com/lakshya-aga" target="_blank">
-        <div class="project-type">&#128736; Full-Stack App</div>
-        <div class="project-title">Fashion Sense</div>
-        <div class="project-desc">Wardrobe management web app with AI-driven outfit suggestions from prompts and images. React + FastAPI + Alembic migrations.</div>
-        <div class="project-tags"><span class="tag">React</span><span class="tag">FastAPI</span><span class="tag">Python</span></div>
-      </a>
-      <a class="project-card reveal" href="https://github.com/lakshya-aga" target="_blank">
-        <div class="project-type">&#128202; Quant Research</div>
-        <div class="project-title">Stock Portfolio Optimizer</div>
-        <div class="project-desc">ARIMA-based equity forecasting for a subsequent month with rank-based portfolio diversification.</div>
-        <div class="project-tags"><span class="tag">Python</span><span class="tag">ARIMA</span><span class="tag">Jupyter</span></div>
-      </a>
-      <a class="project-card reveal" href="https://github.com/lakshya-aga" target="_blank">
-        <div class="project-type">&#9881; Backend Tool</div>
-        <div class="project-title">GenieGo</div>
-        <div class="project-desc">Golang backend server for pricing Fixed Coupon Notes, with user authentication and computation APIs.</div>
-        <div class="project-tags"><span class="tag">Go</span><span class="tag">Derivatives</span><span class="tag">Pricing</span></div>
-      </a>
-      <a class="project-card reveal" href="https://github.com/lakshya-aga" target="_blank">
-        <div class="project-type">&#128452; Systems / C++</div>
-        <div class="project-title">Database B+ Tree</div>
-        <div class="project-desc">C++ implementation of B+ Tree indexes for efficient data manipulation and lookup, mirroring production database internals.</div>
-        <div class="project-tags"><span class="tag">C++</span><span class="tag">Databases</span></div>
-      </a>
-      <a class="project-card reveal" href="https://github.com/lakshya-aga" target="_blank">
-        <div class="project-type">&#128269; Dev Tool</div>
-        <div class="project-title">Query Visualization Program</div>
-        <div class="project-desc">React + Flask tool to visualize PostgreSQL query plans, with sub-query dissection and bottleneck identification.</div>
-        <div class="project-tags"><span class="tag">React</span><span class="tag">Flask</span><span class="tag">PostgreSQL</span></div>
-      </a>
-      <a class="project-card reveal" href="https://github.com/lakshya-aga" target="_blank">
-        <div class="project-type">&#129302; ML Research</div>
-        <div class="project-title">Construction Safety CV</div>
-        <div class="project-desc">YOLOv7-based system detecting safety pitfalls in construction sites. 94% accuracy. 300+ manually labelled images, 1000+ labels.</div>
-        <div class="project-tags"><span class="tag">YOLOv7</span><span class="tag">Computer Vision</span><span class="tag">Python</span></div>
-      </a>
-      <div class="project-card add-card reveal">
-        <div class="plus">+</div>
-        <span>More repositories<br>Add yours via README.md</span>
+    <div class="projects-category" id="research-infra">
+      <div class="category-header">
+        <span class="category-badge">Research infrastructure</span>
+        <p class="category-description">Scaffolding for agentic workflows: MCP servers, observability, and interfaces that let language models reason over existing code before writing new logic.</p>
+      </div>
+      <div class="projects-grid">
+        <a class="project-card featured-card reveal" href="https://github.com/lakshya-aga/fruit-thrower" target="_blank">
+          <div class="project-type">&#127795; MCP Server &middot; Code RAG</div>
+          <div class="project-title">fruit-thrower</div>
+          <div class="project-desc">MCP server that parses, vectorises, and exposes internal Python libraries to AI agents via AST extraction and semantic search over ChromaDB embeddings. Claude finds your existing code before writing new code &mdash; O(N&sup2;) knowledge growth.</div>
+          <div class="project-tags">
+            <span class="tag accent">MCP</span><span class="tag">RAG</span><span class="tag">ChromaDB</span><span class="tag">Python</span>
+          </div>
+        </a>
+        <a class="project-card reveal" href="https://github.com/lakshya-aga" target="_blank">
+          <div class="project-type">&#128269; Dev Tool</div>
+          <div class="project-title">Query Visualization Program</div>
+          <div class="project-desc">React + Flask tool to visualize PostgreSQL query plans, with sub-query dissection and bottleneck identification for faster diagnostics.</div>
+          <div class="project-tags"><span class="tag">React</span><span class="tag">Flask</span><span class="tag">PostgreSQL</span></div>
+        </a>
       </div>
     </div>
 
-    <div id="additional-repos" style="margin-top:3rem;"></div>
+    <div class="projects-category" id="quant-experiments">
+      <div class="category-header">
+        <span class="category-badge">Quant experiments</span>
+        <p class="category-description">Agent-backed research sandboxes for multi-step strategy design, alpha validation, and factor analysis.</p>
+      </div>
+      <div class="projects-grid">
+        <a class="project-card featured-card reveal" href="https://github.com/lakshya-aga/finagent_v2" target="_blank">
+          <div class="project-type">&#129302; Agentic AI &middot; Quant Finance</div>
+          <div class="project-title">FinAgent v2</div>
+          <div class="project-desc">An autonomous financial agent that reasons over market data and executes multi-step quantitative strategies &mdash; bringing together LLM decision-making and quant finance in a single agentic loop.</div>
+          <div class="project-tags">
+            <span class="tag accent">Agentic AI</span><span class="tag">Python</span><span class="tag">LLM</span><span class="tag">Quant</span>
+          </div>
+        </a>
+        <a class="project-card reveal" href="https://github.com/lakshya-aga" target="_blank">
+          <div class="project-type">&#128202; Quant Research</div>
+          <div class="project-title">Stock Portfolio Optimizer</div>
+          <div class="project-desc">ARIMA-based equity forecasting coupled with rank-based diversification to surface monthly long-short baskets.</div>
+          <div class="project-tags"><span class="tag">Python</span><span class="tag">ARIMA</span><span class="tag">Jupyter</span></div>
+        </a>
+      </div>
+    </div>
+
+    <div class="projects-category" id="gaming-misc">
+      <div class="category-header">
+        <span class="category-badge">Gaming / Misc</span>
+        <p class="category-description">Playground builds, trackers, and CV experiments that keep the creative loop refreshed.</p>
+      </div>
+      <div class="subcategory-card reveal">
+        <h4>PlayStation trophies</h4>
+        <p>Live trophy tracker with filtering, rarity lookup, and JSON-backed data pulled into the trophies hub.</p>
+        <a href="trophies.html" class="btn primary">View trophies &#x2197;</a>
+      </div>
+      <div class="projects-grid">
+        <a class="project-card reveal" href="https://github.com/lakshya-aga" target="_blank">
+          <div class="project-type">&#129302; ML Research</div>
+          <div class="project-title">Construction Safety CV</div>
+          <div class="project-desc">YOLOv7-based system detecting safety pitfalls in construction sites. 94% accuracy across 300+ annotated images.</div>
+          <div class="project-tags"><span class="tag">YOLOv7</span><span class="tag">Computer Vision</span><span class="tag">Python</span></div>
+        </a>
+      </div>
+    </div>
+
+    <div class="projects-category" id="development">
+      <div class="category-header">
+        <span class="category-badge">Development</span>
+        <p class="category-description">Full-stack utilities, smart contracts, and backend services built for production constraints.</p>
+      </div>
+      <div class="projects-grid">
+        <a class="project-card reveal" href="https://github.com/lakshya-aga" target="_blank">
+          <div class="project-type">&#9939; Blockchain</div>
+          <div class="project-title">Dutch Auction Smart Contract</div>
+          <div class="project-desc">Smart contract to distribute newly minted tokens via the Dutch auction mechanism on-chain.</div>
+          <div class="project-tags"><span class="tag">Solidity</span><span class="tag">Ethereum</span></div>
+        </a>
+        <a class="project-card reveal" href="https://github.com/lakshya-aga" target="_blank">
+          <div class="project-type">&#128736; Full-Stack App</div>
+          <div class="project-title">Fashion Sense</div>
+          <div class="project-desc">Wardrobe management web app with AI-driven outfit suggestions from prompts and images. React + FastAPI + Alembic migrations.</div>
+          <div class="project-tags"><span class="tag">React</span><span class="tag">FastAPI</span><span class="tag">Python</span></div>
+        </a>
+        <a class="project-card reveal" href="https://github.com/lakshya-aga" target="_blank">
+          <div class="project-type">&#9881; Backend Tool</div>
+          <div class="project-title">GenieGo</div>
+          <div class="project-desc">Golang backend server for pricing Fixed Coupon Notes, complete with auth and pricing endpoints for derivative desks.</div>
+          <div class="project-tags"><span class="tag">Go</span><span class="tag">Derivatives</span><span class="tag">Pricing</span></div>
+        </a>
+        <a class="project-card reveal" href="https://github.com/lakshya-aga" target="_blank">
+          <div class="project-type">&#128452; Systems / C++</div>
+          <div class="project-title">Database B+ Tree</div>
+          <div class="project-desc">C++ implementation of B+ Tree indexes for efficient data manipulation and lookup, mirroring production database internals.</div>
+          <div class="project-tags"><span class="tag">C++</span><span class="tag">Databases</span></div>
+        </a>
+      </div>
+    </div>
+
+    <div class="projects-category" id="second-brain">
+      <div class="category-header">
+        <span class="category-badge">Second brain</span>
+        <p class="category-description">Centralized research garden that feeds every experiment above.</p>
+      </div>
+      <div class="projects-grid">
+        <a class="project-card reveal" href="https://github.com/lakshya-aga/ubiquitous-enigma" target="_blank">
+          <div class="project-type">&#128211; Knowledge Base</div>
+          <div class="project-title">ubiquitous-enigma</div>
+          <div class="project-desc">Personal Obsidian vault &mdash; research notes spanning quant finance, ML papers, systems topics, agent experiments, and trading ideas.</div>
+          <div class="project-tags"><span class="tag">Obsidian</span><span class="tag">Research</span><span class="tag">Notes</span></div>
+        </a>
+      </div>
+    </div>
+
+    <div class="project-card add-card reveal" style="margin-top:3rem;">
+      <div class="plus">+</div>
+      <span>More repositories<br>Add yours via README.md</span>
+    </div>
   </section>
 </div>
 
