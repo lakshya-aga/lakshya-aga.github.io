@@ -23,7 +23,7 @@ import {
   getUserTrophiesEarnedForTitle,
   getTitleTrophies,
   getProfileFromUserName,
-  getUserTrophySummary,
+  getUserTrophyProfileSummary,
 } from "psn-api";
 import fs from "fs/promises";
 
@@ -63,7 +63,7 @@ async function main() {
 
   // Get trophy level + summary counts
   try {
-    const summary = await getUserTrophySummary(auth, "me");
+    const summary = await getUserTrophyProfileSummary(auth, "me");
     profile.trophyLevel     = summary.trophyLevel ?? 0;
     profile.progress        = summary.progress ?? 0;
     profile.earnedTrophies  = {
