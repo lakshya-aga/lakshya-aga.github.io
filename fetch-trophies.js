@@ -23,14 +23,14 @@ import {
   getUserTrophiesEarnedForTitle,
   getTitleTrophies,
   getProfileFromUserName,
-  makeUniversalSearch,
+  getUserTrophySummary,
 } from "psn-api";
 import fs from "fs/promises";
 
 // ── CONFIGURE THESE ──────────────────────────────────────────────────────────
-const NPSSO = "wuGPlJW7rq4NyBBfWkjmemsANrL8LiWCO7z7E4qgWeHi57RII3rfflu518FkdtwI";
-const PSN_ID = process.env.PSN_ID ?? "alakshya2648";
-const MAX_GAMES     = 200;                  // How many games to fetch (max 500)
+const NPSSO         = "PASTE_YOUR_64_CHARACTER_NPSSO_HERE";
+const PSN_ID        = "YourPSNID";         // Your PSN online ID
+const MAX_GAMES     = 50;                  // How many games to fetch (max 500)
 const RARE_THRESHOLD = 10;                 // Trophy earn rate % below which = "rare"
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -44,21 +44,37 @@ async function main() {
   console.log("✅ Auth successful");
   console.log("👤 Fetching profile for:", PSN_ID);
 
-  // Get profile
-  let profile = null;
+  // Get profile — avatar + display name
+  let profile = { onlineId: PSN_ID, displayName: PSN_ID, avatarUrl: null, trophyLevel: 0, progress: 0, earnedTrophies: { platinum: 0, gold: 0, silver: 0, bronze: 0 } };
   try {
-    const results = await makeUniversalSearch(auth, PSN_ID, "SocialAllAccounts");
-    const match = results?.domainResponses?.[0]?.results?.[0]?.socialMetadata;
-    profile = {
-      onlineId:      match?.onlineId ?? PSN_ID,
-      displayName:   match?.displayName ?? PSN_ID,
-      avatarUrl:     match?.avatarUrl ?? null,
-      trophyLevel:   0,
-      earnedTrophies: { platinum: 0, gold: 0, silver: 0, bronze: 0 }
-    };
+    const { profile: psn } = await getProfileFromUserName(auth, PSN_ID);
+    profile.onlineId    = psn.onlineId ?? PSN_ID;
+    profile.displayName = psn.personalDetail?.firstName
+      ? `${psn.personalDetail.firstName} ${psn.personalDetail.lastName ?? ''}`.trim()
+      : (psn.onlineId ?? PSN_ID);
+    // Avatar: pick the largest available image
+    const avatars = psn.avatars ?? [];
+    const big = avatars.find(a => a.size === "xl") ?? avatars.find(a => a.size === "l") ?? avatars[0];
+    profile.avatarUrl = big?.url ?? null;
+    console.log("✅ Profile fetched:", profile.onlineId, "| avatar:", profile.avatarUrl ? "✓" : "none");
   } catch (e) {
-    console.warn("⚠ Could not fetch profile details, using defaults.");
-    profile = { onlineId: PSN_ID, displayName: PSN_ID, avatarUrl: null, trophyLevel: 0, earnedTrophies: { platinum: 0, gold: 0, silver: 0, bronze: 0 } };
+    console.warn("⚠ Could not fetch profile:", e.message);
+  }
+
+  // Get trophy level + summary counts
+  try {
+    const summary = await getUserTrophySummary(auth, "me");
+    profile.trophyLevel     = summary.trophyLevel ?? 0;
+    profile.progress        = summary.progress ?? 0;
+    profile.earnedTrophies  = {
+      platinum: summary.earnedTrophies?.platinum ?? 0,
+      gold:     summary.earnedTrophies?.gold     ?? 0,
+      silver:   summary.earnedTrophies?.silver   ?? 0,
+      bronze:   summary.earnedTrophies?.bronze   ?? 0,
+    };
+    console.log(`✅ Trophy summary: Level ${profile.trophyLevel} | ${profile.progress}% to next`);
+  } catch (e) {
+    console.warn("⚠ Could not fetch trophy summary:", e.message);
   }
 
   // Get game titles
@@ -130,7 +146,10 @@ async function main() {
     });
   }
 
-  profile.earnedTrophies = { platinum: totalPlat, gold: totalGold, silver: totalSilver, bronze: totalBronze };
+  // Only fall back to counted totals if the summary call failed
+  if (!profile.trophyLevel && !profile.earnedTrophies.platinum) {
+    profile.earnedTrophies = { platinum: totalPlat, gold: totalGold, silver: totalSilver, bronze: totalBronze };
+  }
 
   const output = { profile, games };
   await fs.writeFile("trophies.json", JSON.stringify(output, null, 2));
