@@ -84,7 +84,8 @@
     .nav-panel-card p { color: var(--muted); font-size: 0.8rem; }
     .nav-panel-sub { margin-top: 1rem; padding-top: 0.8rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; font-size: 0.72rem; color: var(--muted); }
     .nav-panel-sub a { color: var(--accent2); text-decoration: none; font-size: 0.75rem; }
-    .projects-category { margin-top: 3rem; }
+    .projects-category { margin-top: 2rem; padding: 2.5rem 0; border-bottom: 1px solid var(--border); }
+    #projects .projects-category:last-of-type { border-bottom: none; padding-bottom: 0; }
     .category-header { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 1.5rem; }
     .category-badge { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); }
     .category-description { color: var(--muted); font-size: 0.82rem; max-width: 640px; }
@@ -94,7 +95,7 @@
     .subcategory-card .btn { font-size: 0.72rem; padding: 0.45rem 1rem; }
     .stat-num { font-family: var(--serif); font-size: 2rem; color: var(--accent); line-height: 1; }
     .stat-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.12em; margin-top: 0.3rem; }
-    section { padding: 6rem 0; }
+    section { padding: 4.5rem 0; }
     .section-header { display: flex; align-items: baseline; gap: 1.2rem; margin-bottom: 3rem; }
     .section-num { font-size: 0.7rem; color: var(--accent2); letter-spacing: 0.15em; }
     h2 { font-family: var(--serif); font-size: 1.8rem; font-weight: 500; color: #f0f2f5; }
@@ -117,9 +118,9 @@
     .exp-desc li { list-style: none; padding-left: 1rem; position: relative; margin-bottom: 0.3rem; }
     .exp-desc li::before { content: '›'; position: absolute; left: 0; color: var(--accent); }
     .featured-label { margin-bottom: 1rem; }
-    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
-    .project-card { background: var(--surface); padding: 1.8rem; transition: background 0.2s; cursor: pointer; text-decoration: none; display: block; }
-    .project-card:hover { background: var(--surface2); }
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+    .project-card { background: var(--surface); padding: 1.8rem; transition: background 0.2s, transform 0.2s; cursor: pointer; text-decoration: none; display: block; border: 1px solid var(--border); }
+    .project-card:hover { background: var(--surface2); transform: translateY(-4px); }
     .project-card.featured-card { border-left: 2px solid var(--accent); }
     .project-type { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--accent2); margin-bottom: 0.8rem; }
     .project-card.featured-card .project-type { color: var(--accent); }
@@ -238,9 +239,9 @@
         <div class="nav-panel-heading">Development</div>
         <p>Full-stack utilities, blockchain experiments, and systems engineering projects.</p>
       </a>
-      <a class="nav-panel-card reveal" href="#second-brain">
+      <a class="nav-panel-card reveal" href="https://lakshya-aga.github.io/quartz/" target="_blank">
         <div class="nav-panel-heading">Second brain</div>
-        <p>Obsidian-based knowledge base capturing research notes and operating procedures.</p>
+        <p>Quartz-powered digital garden (via GitHub Pages) capturing research notes and operating procedures.</p>
       </a>
     </div>
   </section>
@@ -521,11 +522,11 @@
         <p class="category-description">Centralized research garden that feeds every experiment above.</p>
       </div>
       <div class="projects-grid">
-        <a class="project-card reveal" href="https://github.com/lakshya-aga/ubiquitous-enigma" target="_blank">
+        <a class="project-card reveal" href="https://lakshya-aga.github.io/quartz/" target="_blank">
           <div class="project-type">&#128211; Knowledge Base</div>
-          <div class="project-title">ubiquitous-enigma</div>
-          <div class="project-desc">Personal Obsidian vault &mdash; research notes spanning quant finance, ML papers, systems topics, agent experiments, and trading ideas.</div>
-          <div class="project-tags"><span class="tag">Obsidian</span><span class="tag">Research</span><span class="tag">Notes</span></div>
+          <div class="project-title">Quartz digital garden</div>
+          <div class="project-desc">GitHub Pages deployment of my Obsidian vault (ubiquitous-enigma) using Quartz &mdash; searchable research notes spanning quant finance, ML papers, and agent experiments.</div>
+          <div class="project-tags"><span class="tag">Quartz</span><span class="tag">Obsidian</span><span class="tag">Research</span></div>
         </a>
       </div>
     </div>
