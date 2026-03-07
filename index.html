@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Lakshya Agarwal</title>
+  <link rel="icon" type="image/svg+xml" href="assets/profile-icon.svg" />
+  <link rel="apple-touch-icon" href="assets/profile.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet"/>
   <style>
@@ -56,7 +58,8 @@
       background: rgba(10,12,14,0.85);
       backdrop-filter: blur(12px);
     }
-    .nav-logo { font-family: var(--serif); font-size: 1.15rem; color: var(--accent); letter-spacing: 0.02em; }
+    .nav-logo { display:flex; align-items:center; gap:0.7rem; font-family: var(--serif); font-size: 1.15rem; color: var(--accent); letter-spacing: 0.02em; }
+    .nav-avatar { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(200,169,110,0.5); box-shadow: 0 0 0 2px rgba(200,169,110,0.12); }
     .nav-links { display: flex; gap: 2.5rem; list-style: none; }
     .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.2s; }
     .nav-links a:hover { color: var(--accent); }
@@ -173,7 +176,7 @@
 <div class="grid-bg"></div>
 
 <nav>
-  <div class="nav-logo">LA</div>
+  <div class="nav-logo"><img class="nav-avatar" src="assets/profile.jpg" alt="Lakshya profile"/>LA</div>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#experience">Experience</a></li>
@@ -256,7 +259,7 @@
     </div>
     <div class="about-grid">
       <div class="about-text reveal">
-        <p>I&rsquo;m a <strong>Computer Science graduate</strong> from Nanyang Technological University (Honours, Distinction), building at the frontier of <strong>agentic AI and quantitative finance</strong> &mdash; systems where LLM-powered agents reason over market data, execute multi-step strategies, and compound knowledge autonomously.</p>
+        <p>I&rsquo;m an <strong>engineer</strong> from Nanyang Technological University, building at the frontier of <strong>agentic AI and quantitative finance</strong> &mdash; systems where LLM-powered agents reason over market data, execute multi-step strategies, and compound knowledge autonomously.</p>
         <p>My work spans <strong>AI agent architecture</strong>, MCP tooling, quantitative strategy research, derivative pricing, and high-performance data pipelines. I care about performance at every layer: from agent tool-use design to compile-time flags on HPC clusters.</p>
         <p>Pursuing an <strong>MSc in Financial Engineering</strong> at WorldQuant University. I maintain a public <strong>research knowledge base</strong> in Obsidian, documenting findings from papers, agent experiments, and trading ideas.</p>
       </div>
