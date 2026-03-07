@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Lakshya Agarwal</title>
-  <link rel="icon" type="image/svg+xml" href="assets/profile-icon.svg" />
+  <link rel="icon" type="image/jpeg" href="assets/profile.jpg" />
+  <link rel="shortcut icon" href="assets/profile.jpg" />
   <link rel="apple-touch-icon" href="assets/profile.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet"/>
@@ -58,9 +59,8 @@
       background: rgba(10,12,14,0.85);
       backdrop-filter: blur(12px);
     }
-    .nav-logo { font-family: var(--serif); font-size: 1.15rem; color: var(--accent); letter-spacing: 0.02em; }
-    .hero-top { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
-    .hero-avatar { width: 74px; height: 74px; border-radius: 50%; object-fit: cover; object-position: 50% 24%; border: 1px solid rgba(200,169,110,0.6); box-shadow: 0 0 0 3px rgba(200,169,110,0.12); }
+    .nav-logo { display:flex; align-items:center; gap:0.7rem; font-family: var(--serif); font-size: 1.15rem; color: var(--accent); letter-spacing: 0.02em; }
+    .nav-avatar { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; object-position: 50% 24%; border: 1px solid rgba(200,169,110,0.5); box-shadow: 0 0 0 2px rgba(200,169,110,0.12); }
     .nav-links { display: flex; gap: 2.5rem; list-style: none; }
     .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.2s; }
     .nav-links a:hover { color: var(--accent); }
@@ -177,7 +177,7 @@
 <div class="grid-bg"></div>
 
 <nav>
-  <div class="nav-logo">LA</div>
+  <div class="nav-logo"><img class="nav-avatar" src="assets/profile.jpg" alt="Lakshya profile"/>LA</div>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#experience">Experience</a></li>
@@ -189,9 +189,6 @@
 
 <div class="wrapper">
   <section id="hero">
-    <div class="hero-top">
-      <img class="hero-avatar" src="assets/profile.jpg" alt="Lakshya profile"/>
-    </div>
     <p class="hero-tag">// Agentic AI &nbsp;&middot;&nbsp; Quantitative Finance &nbsp;&middot;&nbsp; High-Performance Systems</p>
     <h1>Lakshya<br><span>Agarwal</span></h1>
     <p class="hero-sub">
