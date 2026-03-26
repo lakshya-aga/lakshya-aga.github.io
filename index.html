@@ -59,11 +59,27 @@
       background: rgba(10,12,14,0.85);
       backdrop-filter: blur(12px);
     }
+    .nav-toggle {
+      display: none;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      padding: 0.5rem 0.8rem;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
     .nav-logo { display:flex; align-items:center; gap:0.7rem; font-family: var(--serif); font-size: 1.15rem; color: var(--accent); letter-spacing: 0.02em; }
     .nav-avatar { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; object-position: 50% 24%; border: 1px solid rgba(200,169,110,0.5); box-shadow: 0 0 0 2px rgba(200,169,110,0.12); }
     .nav-links { display: flex; gap: 2.5rem; list-style: none; }
     .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.2s; }
     .nav-links a:hover { color: var(--accent); }
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--accent2);
+      outline-offset: 3px;
+    }
     .wrapper { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 0 2.5rem; }
     #hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding-top: 80px; }
     .hero-tag { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent2); margin-bottom: 1.2rem; opacity: 0; animation: fadeUp 0.6s 0.2s forwards; }
@@ -158,8 +174,10 @@
     ::-webkit-scrollbar-track { background: var(--bg); }
     ::-webkit-scrollbar-thumb { background: var(--border); }
     @media (max-width: 768px) {
-      nav { padding: 1rem 1.5rem; }
-      .nav-links { display: none; }
+      nav { padding: 1rem 1.5rem; flex-wrap: wrap; gap: 0.8rem; }
+      .nav-toggle { display: inline-flex; align-items: center; }
+      .nav-links { display: none; width: 100%; flex-direction: column; gap: 0.9rem; padding-top: 0.5rem; }
+      .nav-links.open { display: flex; }
       .wrapper { padding: 0 1.5rem; }
       .about-grid { grid-template-columns: 1fr; }
       .exp-item { grid-template-columns: 1fr; }
@@ -169,6 +187,15 @@
       .contact-inner { flex-direction: column; }
       h1 { font-size: 2.5rem; }
       .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+      .focus-banner { width: 100%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+      .reveal { opacity: 1; transform: none; }
     }
   </style>
 </head>
@@ -178,10 +205,12 @@
 
 <nav>
   <div class="nav-logo"><img class="nav-avatar" src="assets/profile.jpg" alt="Lakshya profile"/>LA</div>
-  <ul class="nav-links">
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+  <ul class="nav-links" id="site-nav">
     <li><a href="#about">About</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#projects">Projects</a></li>
+    <li><a href="#notes">Notes</a></li>
     <li><a href="#education">Education</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
@@ -189,28 +218,26 @@
 
 <div class="wrapper">
   <section id="hero">
-    <p class="hero-tag">// Agentic AI &nbsp;&middot;&nbsp; Quantitative Finance &nbsp;&middot;&nbsp; High-Performance Systems</p>
+    <p class="hero-tag">// Agentic AI &nbsp;&middot;&nbsp; Quantitative Research &nbsp;&middot;&nbsp; Systems Engineering</p>
     <h1>Lakshya<br><span>Agarwal</span></h1>
     <p class="hero-sub">
-      Building at the intersection of <strong>agentic AI</strong> and <strong>quantitative finance</strong> &mdash;
-      autonomous systems that reason, act, and trade. MSc Financial Engineering at WorldQuant University.
-      Previously at Astignes Capital, Banach Technologies, Rolls-Royce.
+      I build <strong>agentic systems</strong>, <strong>research tooling</strong>, and <strong>data infrastructure</strong> for quantitative workflows &mdash;
+      from MCP servers and internal code retrieval to market-data pipelines and autonomous analysis loops. MSc Financial Engineering at WorldQuant University.
     </p>
     <div class="focus-banner">
       <div class="dot"></div>
-      <span>Current focus: LLM agents + MCP tooling for quantitative research workflows</span>
+      <span>Current focus: LLM agents + MCP tooling + reusable data layers for quant research</span>
     </div>
     <div class="hero-links">
-      <a href="https://github.com/lakshya-aga" target="_blank" class="btn primary">&#8599; GitHub</a>
-      <a href="https://www.linkedin.com/in/lakshya-agarwal-7567ba1b3/" target="_blank" class="btn">&#8599; LinkedIn</a>
+      <a href="https://github.com/lakshya-aga" target="_blank" rel="noopener noreferrer" class="btn primary">&#8599; GitHub</a>
+      <a href="https://www.linkedin.com/in/lakshya-agarwal-7567ba1b3/" target="_blank" rel="noopener noreferrer" class="btn">&#8599; LinkedIn</a>
       <a href="mailto:lakshya001@e.ntu.edu.sg" class="btn">&#9993; Email</a>
-      <a href="https://github.com/lakshya-aga/ubiquitous-enigma" target="_blank" class="btn">&#128211; Obsidian Vault</a>
+      <a href="https://lakshya-aga.github.io/quartz/" target="_blank" rel="noopener noreferrer" class="btn">&#128211; Research Notes</a>
     </div>
     <div class="hero-stats">
-      <!-- <div><div class="stat-num">4.4</div><div class="stat-label">CGPA / 5.0</div></div> -->
-      <div><div class="stat-num">7+</div><div class="stat-label">Internships</div></div>
-      <div><div class="stat-num">94%</div><div class="stat-label">Best Model Accuracy</div></div>
-      <div><div class="stat-num">ISC&rsquo;23</div><div class="stat-label">Cluster Competition Winner</div></div>
+      <div><div class="stat-num">16%</div><div class="stat-label">Sharpe improvement in FX basket research</div></div>
+      <div><div class="stat-num">95%</div><div class="stat-label">BERT classification accuracy</div></div>
+      <div><div class="stat-num">ISC&rsquo;23</div><div class="stat-label">Student Cluster Competition winner</div></div>
     </div>
   </section>
 </div>
@@ -223,29 +250,25 @@
       <div class="section-line"></div>
     </div>
     <div class="nav-panel">
+      <a class="nav-panel-card reveal" href="#featured-projects">
+        <div class="nav-panel-heading">Featured builds</div>
+        <p>The strongest agentic AI, quant tooling, and production-oriented systems work.</p>
+      </a>
       <a class="nav-panel-card reveal" href="#research-infra">
         <div class="nav-panel-heading">Research infrastructure</div>
-        <p>Foundational tooling for MCP servers, observability, and agent-ready data access.</p>
+        <p>MCP servers, reusable data layers, and internal tooling for faster model-assisted research.</p>
       </a>
       <a class="nav-panel-card reveal" href="#quant-experiments">
         <div class="nav-panel-heading">Quant experiments</div>
-        <p>Strategy research, alpha pipelines, and agent-driven market exploration.</p>
+        <p>Strategy research, alpha exploration, and market-data workflows.</p>
       </a>
-      <div class="nav-panel-card reveal">
-        <a class="nav-panel-heading" href="#gaming-misc">Gaming / Misc</a>
-        <p>Side quests, trackers, and playful builds that keep the dopamine balanced.</p>
-        <div class="nav-panel-sub">
-          <span>Subcategory</span>
-          <a href="trophies.html">PlayStation trophies &#x2197;</a>
-        </div>
-      </div>
       <a class="nav-panel-card reveal" href="#development">
-        <div class="nav-panel-heading">Development</div>
-        <p>Full-stack utilities, blockchain experiments, and systems engineering projects.</p>
+        <div class="nav-panel-heading">Systems & apps</div>
+        <p>Backend services, databases, developer tools, and full-stack side projects.</p>
       </a>
-      <a class="nav-panel-card reveal" href="https://lakshya-aga.github.io/quartz/" target="_blank">
-        <div class="nav-panel-heading">Second brain</div>
-        <p>Quartz-powered digital garden (via GitHub Pages) capturing research notes and operating procedures.</p>
+      <a class="nav-panel-card reveal" href="#notes">
+        <div class="nav-panel-heading">Notes & research</div>
+        <p>Quartz-powered digital garden for quant ideas, papers, and agent experiments.</p>
       </a>
     </div>
   </section>
@@ -260,10 +283,10 @@
     </div>
     <div class="about-grid">
       <div class="about-text reveal">
-        <p>I&rsquo;m an <strong>engineer</strong> from Nanyang Technological University, building at the frontier of <strong>agentic AI and quantitative finance</strong> &mdash; systems where LLM-powered agents reason over market data, execute multi-step strategies, and compound knowledge autonomously.</p>
-        <p>My work spans <strong>AI agent architecture</strong>, MCP tooling, quantitative strategy research, derivative pricing, and high-performance data pipelines. I care about performance at every layer: from agent tool-use design to compile-time flags on HPC clusters.</p>
-        <p>Pursuing an <strong>MSc in Financial Engineering</strong> at WorldQuant University. I maintain a public <strong>research knowledge base</strong> in Obsidian, documenting findings from papers, agent experiments, and trading ideas.</p>
-        <p>For fun, I love to hike, play chess, and read fiction and human psychology.</p>
+        <p>I&rsquo;m an <strong>engineer</strong> from Nanyang Technological University focused on <strong>agentic AI</strong>, <strong>quantitative research infrastructure</strong>, and <strong>practical systems design</strong>.</p>
+        <p>I build tools that help models and humans work with code and data more effectively: MCP servers, internal retrieval systems, market-data wrappers, pricing services, and research pipelines that support multi-step quantitative workflows.</p>
+        <p>Alongside that, I work on <strong>quant strategy research</strong>, derivative pricing, and high-performance computing. I like systems that are measurable, debuggable, and actually useful &mdash; not just impressive in a demo.</p>
+        <p>I&rsquo;m currently pursuing an <strong>MSc in Financial Engineering</strong> at WorldQuant University and publishing selected notes through a public Quartz/Obsidian knowledge base.</p>
       </div>
       <div class="reveal">
         <div class="skills-grid">
@@ -436,25 +459,56 @@
       <div class="section-line"></div>
     </div>
 
-    <div class="projects-category" id="research-infra">
+    <div class="projects-category" id="featured-projects">
       <div class="category-header">
-        <span class="category-badge">Research infrastructure</span>
-        <p class="category-description">Scaffolding for agentic workflows: MCP servers, observability, and interfaces that let language models reason over existing code before writing new logic.</p>
+        <span class="category-badge">Featured projects</span>
+        <p class="category-description">A quick read on the projects that best represent my work across agentic AI, quantitative tooling, and production engineering.</p>
       </div>
       <div class="projects-grid">
-        <a class="project-card featured-card reveal" href="https://github.com/lakshya-aga/fruit-thrower" target="_blank">
-          <div class="project-type">&#127795; MCP Server &middot; Code RAG</div>
+        <a class="project-card featured-card reveal" href="https://github.com/lakshya-aga/fruit-thrower" target="_blank" rel="noopener noreferrer">
+          <div class="project-type">&#127795; MCP Server &middot; Code Retrieval</div>
           <div class="project-title">fruit-thrower</div>
-          <div class="project-desc">MCP server that parses, vectorises, and exposes internal Python libraries to AI agents via AST extraction and semantic search over ChromaDB embeddings. Claude finds your existing code before writing new code &mdash; O(N&sup2;) knowledge growth.</div>
+          <div class="project-desc">Indexes internal Python libraries with AST parsing and semantic retrieval so coding agents can find and reuse existing code before generating new implementations.</div>
           <div class="project-tags">
             <span class="tag accent">MCP</span><span class="tag">RAG</span><span class="tag">ChromaDB</span><span class="tag">Python</span>
           </div>
         </a>
-        <a class="project-card reveal" href="https://github.com/lakshya-aga" target="_blank">
+        <a class="project-card featured-card reveal" href="https://github.com/lakshya-aga/data-mcp" target="_blank" rel="noopener noreferrer">
+          <div class="project-type">&#128200; Data Layer &middot; MCP</div>
+          <div class="project-title">data-mcp</div>
+          <div class="project-desc">Unified financial data wrapper plus MCP server that returns typed function docs and ready-to-run examples, making market data access easier for code-writing agents.</div>
+          <div class="project-tags">
+            <span class="tag accent">MCP</span><span class="tag">Python</span><span class="tag">Finance</span><span class="tag">Tooling</span>
+          </div>
+        </a>
+        <a class="project-card reveal" href="https://github.com/lakshya-aga/finagent_v2" target="_blank" rel="noopener noreferrer">
+          <div class="project-type">&#129302; Agentic AI &middot; Quant Finance</div>
+          <div class="project-title">FinAgent v2</div>
+          <div class="project-desc">Autonomous research workflow for quantitative finance, combining planner/orchestrator agents with local tools for multi-step analysis and notebook automation.</div>
+          <div class="project-tags">
+            <span class="tag accent">Agentic AI</span><span class="tag">Python</span><span class="tag">LLM</span><span class="tag">Quant</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="projects-category" id="research-infra">
+      <div class="category-header">
+        <span class="category-badge">Research infrastructure</span>
+        <p class="category-description">Scaffolding for agentic workflows: MCP servers, reusable datasets, and interfaces that help models inspect existing code before writing new logic.</p>
+      </div>
+      <div class="projects-grid">
+        <a class="project-card reveal" href="https://github.com/lakshya-aga/SC3020_Project_2" target="_blank" rel="noopener noreferrer">
           <div class="project-type">&#128269; Dev Tool</div>
-          <div class="project-title">Query Visualization Program</div>
-          <div class="project-desc">React + Flask tool to visualize PostgreSQL query plans, with sub-query dissection and bottleneck identification for faster diagnostics.</div>
+          <div class="project-title">PostgreSQL Query Plan Visualizer</div>
+          <div class="project-desc">React + Flask application for visualizing PostgreSQL execution plans, memory usage, and subtree-level bottlenecks to make query debugging more interpretable.</div>
           <div class="project-tags"><span class="tag">React</span><span class="tag">Flask</span><span class="tag">PostgreSQL</span></div>
+        </a>
+        <a class="project-card reveal" href="https://github.com/lakshya-aga/fin-kit" target="_blank" rel="noopener noreferrer">
+          <div class="project-type">&#128295; Quant Toolkit</div>
+          <div class="project-title">fin-kit</div>
+          <div class="project-desc">Collection of reusable quantitative finance utilities built around factor research, mlfinlab workflows, and notebook-friendly experimentation.</div>
+          <div class="project-tags"><span class="tag">Python</span><span class="tag">Quant</span><span class="tag">Research</span></div>
         </a>
       </div>
     </div>
@@ -465,39 +519,37 @@
         <p class="category-description">Agent-backed research sandboxes for multi-step strategy design, alpha validation, and factor analysis.</p>
       </div>
       <div class="projects-grid">
-        <a class="project-card featured-card reveal" href="https://github.com/lakshya-aga/finagent_v2" target="_blank">
-          <div class="project-type">&#129302; Agentic AI &middot; Quant Finance</div>
-          <div class="project-title">FinAgent v2</div>
-          <div class="project-desc">An autonomous financial agent that reasons over market data and executes multi-step quantitative strategies &mdash; bringing together LLM decision-making and quant finance in a single agentic loop.</div>
-          <div class="project-tags">
-            <span class="tag accent">Agentic AI</span><span class="tag">Python</span><span class="tag">LLM</span><span class="tag">Quant</span>
-          </div>
-        </a>
-        <a class="project-card reveal" href="https://github.com/lakshya-aga" target="_blank">
+        <a class="project-card reveal" href="https://github.com/lakshya-aga/Stock-Portfolio-Optimiser" target="_blank" rel="noopener noreferrer">
           <div class="project-type">&#128202; Quant Research</div>
-          <div class="project-title">Stock Portfolio Optimizer</div>
-          <div class="project-desc">ARIMA-based equity forecasting coupled with rank-based diversification to surface monthly long-short baskets.</div>
+          <div class="project-title">Stock Portfolio Optimiser</div>
+          <div class="project-desc">Machine-learning-assisted stock selection and portfolio construction workflow focused on forecasting, ranking, and monthly long-short basket generation.</div>
           <div class="project-tags"><span class="tag">Python</span><span class="tag">ARIMA</span><span class="tag">Jupyter</span></div>
+        </a>
+        <a class="project-card reveal" href="https://github.com/lakshya-aga/trading-with-gdelt" target="_blank" rel="noopener noreferrer">
+          <div class="project-type">&#128201; Macro / FX Research</div>
+          <div class="project-title">Trading with GDELT</div>
+          <div class="project-desc">Research repo exploring whether event/news data can improve FX and macro trading signals when combined with forecast and positioning context.</div>
+          <div class="project-tags"><span class="tag">Python</span><span class="tag">GDELT</span><span class="tag">Research</span></div>
         </a>
       </div>
     </div>
 
     <div class="projects-category" id="gaming-misc">
       <div class="category-header">
-        <span class="category-badge">Gaming / Misc</span>
-        <p class="category-description">Playground builds, trackers, and CV experiments that keep the creative loop refreshed.</p>
+        <span class="category-badge">Selected side projects</span>
+        <p class="category-description">A smaller set of playful or exploratory builds that still show range.</p>
       </div>
       <div class="subcategory-card reveal">
         <h4>PlayStation trophies</h4>
-        <p>Live trophy tracker with filtering, rarity lookup, and JSON-backed data pulled into the trophies hub.</p>
+        <p>JSON-backed trophy tracker with filtering and rarity lookup. Fun, niche, and deliberately separated from the main professional work.</p>
         <a href="trophies.html" class="btn primary">View trophies &#x2197;</a>
       </div>
       <div class="projects-grid">
-        <a class="project-card reveal" href="https://github.com/lakshya-aga" target="_blank">
+        <a class="project-card reveal" href="https://github.com/lakshya-aga/techfest-scse-ntu" target="_blank" rel="noopener noreferrer">
           <div class="project-type">&#129302; ML Research</div>
-          <div class="project-title">Construction Safety CV</div>
-          <div class="project-desc">YOLOv7-based system detecting safety pitfalls in construction sites. 94% accuracy across 300+ annotated images.</div>
-          <div class="project-tags"><span class="tag">YOLOv7</span><span class="tag">Computer Vision</span><span class="tag">Python</span></div>
+          <div class="project-title">Attention & Engagement Tracker</div>
+          <div class="project-desc">Computer vision project for classroom attention tracking, built for Techfest and later awarded winner in the competition.</div>
+          <div class="project-tags"><span class="tag">Computer Vision</span><span class="tag">Python</span><span class="tag">Streamlit</span></div>
         </a>
       </div>
     </div>
@@ -508,44 +560,50 @@
         <p class="category-description">Full-stack utilities, smart contracts, and backend services built for production constraints.</p>
       </div>
       <div class="projects-grid">
-        <a class="project-card reveal" href="https://github.com/lakshya-aga" target="_blank">
-          <div class="project-type">&#9939; Blockchain</div>
-          <div class="project-title">Dutch Auction Smart Contract</div>
-          <div class="project-desc">Smart contract to distribute newly minted tokens via the Dutch auction mechanism on-chain.</div>
-          <div class="project-tags"><span class="tag">Solidity</span><span class="tag">Ethereum</span></div>
-        </a>
-        <a class="project-card reveal" href="https://github.com/lakshya-aga" target="_blank">
+        <a class="project-card reveal" href="https://github.com/lakshya-aga/shop-genie" target="_blank" rel="noopener noreferrer">
           <div class="project-type">&#128736; Full-Stack App</div>
-          <div class="project-title">Fashion Sense</div>
-          <div class="project-desc">Wardrobe management web app with AI-driven outfit suggestions from prompts and images. React + FastAPI + Alembic migrations.</div>
-          <div class="project-tags"><span class="tag">React</span><span class="tag">FastAPI</span><span class="tag">Python</span></div>
+          <div class="project-title">Shop Genie</div>
+          <div class="project-desc">Shopify-focused app for generating cleaner product media and SEO-oriented product copy, reducing the manual overhead of merchandising small catalogs.</div>
+          <div class="project-tags"><span class="tag">React Router</span><span class="tag">Shopify</span><span class="tag">Node</span></div>
         </a>
-        <a class="project-card reveal" href="https://github.com/lakshya-aga" target="_blank">
+        <a class="project-card reveal" href="https://github.com/lakshya-aga/spotted-zebra-copy" target="_blank" rel="noopener noreferrer">
           <div class="project-type">&#9881; Backend Tool</div>
-          <div class="project-title">GenieGo</div>
-          <div class="project-desc">Golang backend server for pricing Fixed Coupon Notes, complete with auth and pricing endpoints for derivative desks.</div>
+          <div class="project-title">Fixed Coupon Note Pricer</div>
+          <div class="project-desc">API server for pricing fixed coupon notes across selected equities, with configurable barriers, coupon structures, and maturity assumptions.</div>
           <div class="project-tags"><span class="tag">Go</span><span class="tag">Derivatives</span><span class="tag">Pricing</span></div>
         </a>
-        <a class="project-card reveal" href="https://github.com/lakshya-aga" target="_blank">
+        <a class="project-card reveal" href="https://github.com/lakshya-aga/SC3020-Database-Project-" target="_blank" rel="noopener noreferrer">
           <div class="project-type">&#128452; Systems / C++</div>
           <div class="project-title">Database B+ Tree</div>
-          <div class="project-desc">C++ implementation of B+ Tree indexes for efficient data manipulation and lookup, mirroring production database internals.</div>
+          <div class="project-desc">C++ implementation of a B+ Tree index structure, built to mirror core ideas behind production database storage and lookup internals.</div>
           <div class="project-tags"><span class="tag">C++</span><span class="tag">Databases</span></div>
+        </a>
+        <a class="project-card reveal" href="https://github.com/lakshya-aga/plan" target="_blank" rel="noopener noreferrer">
+          <div class="project-type">&#128187; Utility App</div>
+          <div class="project-title">plan*</div>
+          <div class="project-desc">Course planning application for NTU students that scrapes public module data and builds scheduling options automatically.</div>
+          <div class="project-tags"><span class="tag">PHP</span><span class="tag">Web Scraping</span><span class="tag">Scheduling</span></div>
         </a>
       </div>
     </div>
 
-    <div class="projects-category" id="second-brain">
+    <div class="projects-category" id="notes">
       <div class="category-header">
-        <span class="category-badge">Second brain</span>
-        <p class="category-description">Centralized research garden that feeds every experiment above.</p>
+        <span class="category-badge">Notes & research</span>
+        <p class="category-description">Public writing and knowledge capture that supports the work above.</p>
       </div>
       <div class="projects-grid">
-        <a class="project-card reveal" href="https://lakshya-aga.github.io/quartz/" target="_blank">
+        <a class="project-card reveal" href="https://lakshya-aga.github.io/quartz/" target="_blank" rel="noopener noreferrer">
           <div class="project-type">&#128211; Knowledge Base</div>
           <div class="project-title">Quartz digital garden</div>
-          <div class="project-desc">GitHub Pages deployment of my Obsidian vault (ubiquitous-enigma) using Quartz &mdash; searchable research notes spanning quant finance, ML papers, and agent experiments.</div>
+          <div class="project-desc">GitHub Pages deployment of my Obsidian vault (ubiquitous-enigma) using Quartz &mdash; a public research garden for quant finance, ML papers, engineering notes, and agent experiments.</div>
           <div class="project-tags"><span class="tag">Quartz</span><span class="tag">Obsidian</span><span class="tag">Research</span></div>
+        </a>
+        <a class="project-card reveal" href="https://github.com/lakshya-aga/ubiquitous-enigma" target="_blank" rel="noopener noreferrer">
+          <div class="project-type">&#128214; Source Repository</div>
+          <div class="project-title">ubiquitous-enigma</div>
+          <div class="project-desc">Source vault behind the published garden &mdash; notes on quantitative finance, ML, systems work, and research breadcrumbs worth keeping.</div>
+          <div class="project-tags"><span class="tag">Markdown</span><span class="tag">Obsidian</span><span class="tag">PKM</span></div>
         </a>
       </div>
     </div>
@@ -603,13 +661,13 @@
   <section id="contact">
     <div class="contact-inner">
       <div class="contact-cta reveal">
-        <h3>Let&rsquo;s build<br>agents that trade.</h3>
-        <p>Open to roles at the intersection of agentic AI and quantitative finance.</p>
+        <h3>Let&rsquo;s build<br>useful systems.</h3>
+        <p>Open to roles and collaborations in agentic AI, quantitative engineering, and research infrastructure.</p>
       </div>
       <div class="contact-links reveal">
         <a href="mailto:lakshya001@e.ntu.edu.sg" class="btn primary">&#9993; lakshya001@e.ntu.edu.sg</a>
-        <a href="https://github.com/lakshya-aga" target="_blank" class="btn">&#8599; GitHub</a>
-        <a href="https://www.linkedin.com/in/lakshya-agarwal-7567ba1b3/" target="_blank" class="btn">&#8599; LinkedIn</a>
+        <a href="https://github.com/lakshya-aga" target="_blank" rel="noopener noreferrer" class="btn">&#8599; GitHub</a>
+        <a href="https://www.linkedin.com/in/lakshya-agarwal-7567ba1b3/" target="_blank" rel="noopener noreferrer" class="btn">&#8599; LinkedIn</a>
       </div>
     </div>
     <div class="footer-bottom">
@@ -631,8 +689,23 @@
     card.style.transitionDelay = (i * 0.07) + 's';
   });
 
+  const navToggle = document.querySelector('.nav-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
   const tag = document.querySelector('.hero-tag');
-  if (tag) {
+  if (tag && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     const cursor = document.createElement('span');
     cursor.style.cssText = 'border-right:2px solid var(--accent2);animation:blink 1s step-end infinite;margin-left:4px;display:inline-block;width:6px;vertical-align:middle;';
     tag.appendChild(cursor);
