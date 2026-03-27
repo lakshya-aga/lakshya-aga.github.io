@@ -106,6 +106,34 @@
     .nav-panel-sub a { color: var(--accent2); text-decoration: none; font-size: 0.75rem; }
     .projects-category { margin-top: 2rem; padding: 2.5rem 0; border-bottom: 1px solid var(--border); }
     #projects .projects-category:last-of-type { border-bottom: none; padding-bottom: 0; }
+    .research-board {
+      margin-top: 1.5rem;
+      display: grid;
+      gap: 1.5rem;
+    }
+    .research-board-intro {
+      color: var(--muted);
+      font-size: 0.8rem;
+      line-height: 1.85;
+      max-width: 760px;
+    }
+    .research-placeholder {
+      border: 1px dashed var(--border);
+      background: rgba(17,20,23,0.45);
+      padding: 1.2rem 1.3rem;
+    }
+    .research-placeholder-title {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent2);
+      margin-bottom: 0.45rem;
+    }
+    .research-placeholder p {
+      color: var(--muted);
+      font-size: 0.78rem;
+      line-height: 1.75;
+    }
     .category-header { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 1.5rem; }
     .category-badge { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); }
     .category-description { color: var(--muted); font-size: 0.82rem; max-width: 640px; }
@@ -726,7 +754,16 @@
           <div class="project-tags"><span class="tag">Python</span><span class="tag">GDELT</span><span class="tag">Research</span></div>
         </a>
       </div>
-      <div class="project-card strategy-card reveal" style="margin-top:1.5rem; cursor:default;">
+    </div>
+
+    <div class="projects-category" id="quant-research-live">
+      <div class="category-header">
+        <span class="category-badge">Current / recent quant research</span>
+        <p class="category-description">A live shelf for strategy ideas I&rsquo;m actively testing, refining, or trying to falsify. This is where graph-based, factor, and market-structure experiments land before they become something more formal.</p>
+      </div>
+      <p class="research-board-intro reveal">Think of this as a research log in portfolio form: less polished than a finished product page, but more useful if you want to see what I&rsquo;m actually working on now. I&rsquo;ll keep adding new cards here as fresh experiments come online.</p>
+      <div class="research-board">
+        <div class="project-card strategy-card reveal" style="cursor:default;">
         <div class="project-type">&#129504; Strategy Card &middot; PMFG / Peripheral Trading</div>
         <div class="project-title">Peripheral Trading with Planar Maximally Filtered Graphs</div>
         <div class="project-desc strategy-lead">A graph-based cross-sectional equity strategy inspired by <strong>Pozzi, Di Matteo, and Aste (2013)</strong>, which uses a PMFG network to isolate the market&rsquo;s peripheral names, then holds an equal-weight basket one step forward. The underlying intuition is that stocks on the network edge can carry more idiosyncratic structure than densely connected core names, making them interesting candidates for short-horizon signal research.</div>
@@ -793,6 +830,10 @@
               Forward P&amp;L generated from the PMFG research repo using a simple execution rule: next-day close entry, next-signal close exit, equal-weight basket. The notebook does <em>not</em> define a canonical execution model, so this dashboard should be read as an explicit research wrapper, not a polished production backtest.
             </div>
           </aside>
+        </div>
+        <div class="research-placeholder reveal">
+          <div class="research-placeholder-title">More research cards coming</div>
+          <p>Add the next strategy here as soon as it has a clean hypothesis, a minimally defensible execution rule, and at least one honest result worth showing &mdash; even if that result is negative.</p>
         </div>
       </div>
     </div>
