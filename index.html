@@ -151,6 +151,197 @@
     .project-card.add-card { border: 1px dashed var(--border); background: transparent; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; min-height: 180px; color: var(--muted); }
     .project-card.add-card .plus { font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--border); }
     .project-card.add-card span { font-size: 0.72rem; letter-spacing: 0.1em; }
+    .strategy-card {
+      border: 1px solid rgba(200,169,110,0.28);
+      background: linear-gradient(180deg, rgba(200,169,110,0.06), rgba(17,20,23,0.96));
+      padding: 1.8rem;
+    }
+    .strategy-card .project-type { color: var(--accent); }
+    .strategy-lead {
+      font-size: 0.82rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-top: 1rem;
+      max-width: 920px;
+    }
+    .strategy-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.95fr);
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+      align-items: start;
+    }
+    .strategy-copy {
+      font-size: 0.79rem;
+      color: var(--muted);
+      line-height: 1.85;
+    }
+    .strategy-copy p + p { margin-top: 0.9rem; }
+    .strategy-points {
+      display: grid;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+    .strategy-point {
+      border: 1px solid var(--border);
+      background: rgba(10,12,14,0.4);
+      padding: 0.9rem 1rem;
+    }
+    .strategy-point strong {
+      display: block;
+      color: var(--text);
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      margin-bottom: 0.35rem;
+    }
+    .strategy-point span {
+      color: var(--muted);
+      font-size: 0.77rem;
+      line-height: 1.75;
+    }
+    .dashboard-card {
+      border: 1px solid var(--border);
+      background: rgba(10,12,14,0.55);
+      padding: 1.25rem;
+      position: sticky;
+      top: 100px;
+    }
+    .dashboard-heading {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent2);
+      margin-bottom: 1rem;
+    }
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+    .metric {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      padding: 0.85rem;
+      min-height: 88px;
+    }
+    .metric-value {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      line-height: 1.1;
+      color: #f0f2f5;
+    }
+    .metric-value.negative { color: #f87171; }
+    .metric-value.positive { color: #7dd3fc; }
+    .metric-label {
+      margin-top: 0.45rem;
+      font-size: 0.66rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+    .dashboard-note {
+      margin-top: 0.9rem;
+      padding-top: 0.9rem;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.72rem;
+      line-height: 1.75;
+    }
+    .chart-wrap {
+      margin-top: 1rem;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(24,28,33,0.95), rgba(10,12,14,0.98));
+      padding: 0.85rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .chart-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.65rem;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+    .chart-meta strong { color: var(--text); font-weight: 500; }
+    .chart-svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .chart-axis text,
+    .chart-label {
+      fill: #7b8495;
+      font-size: 11px;
+      font-family: var(--mono);
+    }
+    .chart-grid line {
+      stroke: rgba(255,255,255,0.08);
+      stroke-dasharray: 3 5;
+    }
+    .chart-zero {
+      stroke: rgba(200,169,110,0.45);
+      stroke-dasharray: 5 5;
+    }
+    .chart-area {
+      fill: rgba(78,168,222,0.14);
+    }
+    .chart-line {
+      fill: none;
+      stroke: #4ea8de;
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .chart-point {
+      fill: #0a0c0e;
+      stroke: #7dd3fc;
+      stroke-width: 1.5;
+      cursor: pointer;
+      transition: r 0.15s ease, fill 0.15s ease;
+    }
+    .chart-point:hover,
+    .chart-point:focus-visible {
+      fill: #7dd3fc;
+      r: 5.5;
+      outline: none;
+    }
+    .chart-tooltip {
+      position: absolute;
+      min-width: 160px;
+      pointer-events: none;
+      background: rgba(10,12,14,0.96);
+      border: 1px solid rgba(200,169,110,0.3);
+      padding: 0.7rem 0.8rem;
+      font-size: 0.72rem;
+      color: var(--text);
+      line-height: 1.6;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.32);
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.14s ease, transform 0.14s ease;
+      z-index: 4;
+    }
+    .chart-tooltip.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .chart-tooltip .muted { color: var(--muted); }
+    .paper-cite {
+      margin-top: 0.9rem;
+      color: var(--muted);
+      font-size: 0.74rem;
+      line-height: 1.8;
+    }
+    .paper-cite a {
+      color: var(--accent2);
+      text-decoration: none;
+    }
     .edu-list { display: flex; flex-direction: column; }
     .edu-item { display: grid; grid-template-columns: 200px 1fr; gap: 0 2rem; padding: 1.5rem 0; border-bottom: 1px solid var(--border); }
     .edu-deg { font-family: var(--serif); font-size: 1rem; color: #f0f2f5; margin-bottom: 0.3rem; }
@@ -188,6 +379,9 @@
       h1 { font-size: 2.5rem; }
       .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
       .focus-banner { width: 100%; }
+      .strategy-layout { grid-template-columns: 1fr; }
+      .dashboard-card { position: static; }
+      .dashboard-grid { grid-template-columns: 1fr 1fr; }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -532,6 +726,75 @@
           <div class="project-tags"><span class="tag">Python</span><span class="tag">GDELT</span><span class="tag">Research</span></div>
         </a>
       </div>
+      <div class="project-card strategy-card reveal" style="margin-top:1.5rem; cursor:default;">
+        <div class="project-type">&#129504; Strategy Card &middot; PMFG / Peripheral Trading</div>
+        <div class="project-title">Peripheral Trading with Planar Maximally Filtered Graphs</div>
+        <div class="project-desc strategy-lead">A graph-based cross-sectional equity strategy inspired by <strong>Pozzi, Di Matteo, and Aste (2013)</strong>, which uses a PMFG network to isolate the market&rsquo;s peripheral names, then holds an equal-weight basket one step forward. The underlying intuition is that stocks on the network edge can carry more idiosyncratic structure than densely connected core names, making them interesting candidates for short-horizon signal research.</div>
+        <div class="project-tags">
+          <span class="tag accent">Graph-based alpha</span><span class="tag">PMFG</span><span class="tag">Network filtering</span><span class="tag">Python</span><span class="tag">Backtest framing</span>
+        </div>
+        <div class="strategy-layout">
+          <div class="strategy-copy">
+            <p>This project sits in the &ldquo;quant experiment&rdquo; bucket rather than the &ldquo;production strategy&rdquo; bucket. The workflow takes the daily asset selection generated by the PMFG notebook, assumes execution at the <strong>next trading day close</strong>, exits on the <strong>next rebalance close</strong>, and marks the final open basket to the latest available close. That turns a selection process into a consistent forward P&amp;L series.</p>
+            <p>The attraction here is interpretability: instead of treating the cross-section as a flat ranking problem, the strategy uses <strong>network topology</strong> to decide what to own. Peripheral nodes are the names least embedded in the dense market core, so the portfolio is effectively leaning into a structural dispersion hypothesis.</p>
+            <div class="paper-cite">Source paper: Pozzi, F., Di Matteo, T., &amp; Aste, T. (2013). <em>Exponential smoothing weighted correlations and financial time series modeling</em>. The repo implementation labels this strategy as paper-faithful in its rank aggregation and PMFG-based peripheral selection logic.</div>
+            <div class="strategy-points">
+              <div class="strategy-point">
+                <strong>Signal construction</strong>
+                <span>Build a PMFG from the exponentially weighted correlation structure, rank names by the paper-style centrality aggregation, and take the peripheral basket as the tradeable portfolio.</span>
+              </div>
+              <div class="strategy-point">
+                <strong>Execution assumption</strong>
+                <span>Equal-weight across 10 selected names, entered on the next trading day after the signal and exited on the next signal&rsquo;s trading day. This keeps the backtest simple and reproducible.</span>
+              </div>
+              <div class="strategy-point">
+                <strong>Current read</strong>
+                <span>The first forward run is negative, which is actually useful: it means the framework is honest enough to invalidate itself early instead of hiding behind an in-sample story. Good research starts by surviving contact with out-of-sample marks.</span>
+              </div>
+            </div>
+          </div>
+          <aside class="dashboard-card" aria-label="PMFG strategy dashboard">
+            <div class="dashboard-heading">Mini dashboard</div>
+            <div class="dashboard-grid">
+              <div class="metric">
+                <div class="metric-value negative">-11.11%</div>
+                <div class="metric-label">Cumulative forward return</div>
+              </div>
+              <div class="metric">
+                <div class="metric-value">27</div>
+                <div class="metric-label">Trade periods</div>
+              </div>
+              <div class="metric">
+                <div class="metric-value positive">+1.96%</div>
+                <div class="metric-label">Best basket period</div>
+              </div>
+              <div class="metric">
+                <div class="metric-value negative">-3.84%</div>
+                <div class="metric-label">Worst basket period</div>
+              </div>
+              <div class="metric">
+                <div class="metric-value">10</div>
+                <div class="metric-label">Names per rebalance</div>
+              </div>
+              <div class="metric">
+                <div class="metric-value">2026-03-26</div>
+                <div class="metric-label">Latest marked close</div>
+              </div>
+            </div>
+            <div class="chart-wrap" id="pmfg-chart-wrap">
+              <div class="chart-meta">
+                <span>Interactive equity curve</span>
+                <span><strong>Hover points</strong> for date and cumulative return</span>
+              </div>
+              <div class="chart-tooltip" id="pmfg-chart-tooltip"></div>
+              <svg id="pmfg-chart" class="chart-svg" viewBox="0 0 420 220" role="img" aria-label="Interactive PMFG forward P and L chart"></svg>
+            </div>
+            <div class="dashboard-note">
+              Forward P&amp;L generated from the PMFG research repo using a simple execution rule: next-day close entry, next-signal close exit, equal-weight basket. The notebook does <em>not</em> define a canonical execution model, so this dashboard should be read as an explicit research wrapper, not a polished production backtest.
+            </div>
+          </aside>
+        </div>
+      </div>
     </div>
 
     <div class="projects-category" id="gaming-misc">
@@ -713,6 +976,105 @@
   const blinkStyle = document.createElement('style');
   blinkStyle.textContent = '@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}';
   document.head.appendChild(blinkStyle);
+
+  const pmfgCurve = [
+    { date: '2026-02-18', value: -0.1334 },
+    { date: '2026-02-19', value: 0.5064 },
+    { date: '2026-02-20', value: 0.4749 },
+    { date: '2026-02-23', value: -1.1034 },
+    { date: '2026-02-24', value: -0.2662 },
+    { date: '2026-02-25', value: -1.2209 },
+    { date: '2026-02-26', value: -1.5866 },
+    { date: '2026-02-27', value: -2.9223 },
+    { date: '2026-03-02', value: -3.3275 },
+    { date: '2026-03-03', value: -5.5932 },
+    { date: '2026-03-04', value: -5.8291 },
+    { date: '2026-03-05', value: -7.7349 },
+    { date: '2026-03-06', value: -10.2313 },
+    { date: '2026-03-09', value: -8.8862 },
+    { date: '2026-03-10', value: -9.1055 },
+    { date: '2026-03-11', value: -9.3159 },
+    { date: '2026-03-12', value: -12.7998 },
+    { date: '2026-03-13', value: -12.9415 },
+    { date: '2026-03-16', value: -12.2558 },
+    { date: '2026-03-17', value: -11.5264 },
+    { date: '2026-03-18', value: -11.6382 },
+    { date: '2026-03-19', value: -11.0651 },
+    { date: '2026-03-20', value: -12.0071 },
+    { date: '2026-03-23', value: -10.2784 },
+    { date: '2026-03-24', value: -9.0613 },
+    { date: '2026-03-25', value: -8.9931 },
+    { date: '2026-03-26', value: -11.1140 }
+  ];
+
+  function renderPmfgChart() {
+    const svg = document.getElementById('pmfg-chart');
+    const tooltip = document.getElementById('pmfg-chart-tooltip');
+    const wrap = document.getElementById('pmfg-chart-wrap');
+    if (!svg || !tooltip || !wrap || !pmfgCurve.length) return;
+
+    const width = 420;
+    const height = 220;
+    const margin = { top: 8, right: 12, bottom: 28, left: 42 };
+    const innerWidth = width - margin.left - margin.right;
+    const innerHeight = height - margin.top - margin.bottom;
+    const values = pmfgCurve.map(d => d.value);
+    const minValue = Math.min(...values, 0);
+    const maxValue = Math.max(...values, 0);
+    const pad = Math.max((maxValue - minValue) * 0.12, 0.8);
+    const yMin = minValue - pad;
+    const yMax = maxValue + pad;
+    const xStep = innerWidth / Math.max(pmfgCurve.length - 1, 1);
+    const xFor = (i) => margin.left + i * xStep;
+    const yFor = (v) => margin.top + ((yMax - v) / (yMax - yMin)) * innerHeight;
+    const zeroY = yFor(0);
+
+    const linePath = pmfgCurve.map((d, i) => `${i === 0 ? 'M' : 'L'} ${xFor(i).toFixed(2)} ${yFor(d.value).toFixed(2)}`).join(' ');
+    const areaPath = `${linePath} L ${xFor(pmfgCurve.length - 1).toFixed(2)} ${zeroY.toFixed(2)} L ${xFor(0).toFixed(2)} ${zeroY.toFixed(2)} Z`;
+    const yTicks = [yMin, (yMin + yMax) / 2, yMax];
+    const xTickIdx = [0, Math.floor((pmfgCurve.length - 1) / 2), pmfgCurve.length - 1];
+
+    svg.innerHTML = `
+      <g class="chart-grid">
+        ${yTicks.map(v => `<line x1="${margin.left}" y1="${yFor(v)}" x2="${width - margin.right}" y2="${yFor(v)}"></line>`).join('')}
+      </g>
+      <line class="chart-zero" x1="${margin.left}" y1="${zeroY}" x2="${width - margin.right}" y2="${zeroY}"></line>
+      <path class="chart-area" d="${areaPath}"></path>
+      <path class="chart-line" d="${linePath}"></path>
+      <g class="chart-axis">
+        ${yTicks.map(v => `<text x="${margin.left - 8}" y="${yFor(v) + 4}" text-anchor="end">${v.toFixed(1)}%</text>`).join('')}
+        ${xTickIdx.map(i => `<text x="${xFor(i)}" y="${height - 8}" text-anchor="middle">${pmfgCurve[i].date.slice(5)}</text>`).join('')}
+      </g>
+      <text class="chart-label" x="${margin.left}" y="${margin.top + 10}">Cumulative return</text>
+      <g>
+        ${pmfgCurve.map((d, i) => `<circle class="chart-point" data-date="${d.date}" data-value="${d.value.toFixed(4)}" cx="${xFor(i)}" cy="${yFor(d.value)}" r="3.5" tabindex="0"></circle>`).join('')}
+      </g>
+    `;
+
+    const showTooltip = (event, point) => {
+      const rect = wrap.getBoundingClientRect();
+      const pointRect = point.getBoundingClientRect();
+      tooltip.innerHTML = `<div><strong>${point.dataset.date}</strong></div><div class="muted">Cumulative return</div><div>${Number(point.dataset.value).toFixed(2)}%</div>`;
+      tooltip.classList.add('visible');
+      const left = pointRect.left - rect.left + 12;
+      const top = pointRect.top - rect.top - 12;
+      tooltip.style.left = `${Math.min(left, rect.width - 170)}px`;
+      tooltip.style.top = `${Math.max(top - 36, 8)}px`;
+    };
+
+    const hideTooltip = () => tooltip.classList.remove('visible');
+
+    svg.querySelectorAll('.chart-point').forEach(point => {
+      point.addEventListener('mouseenter', (event) => showTooltip(event, point));
+      point.addEventListener('mousemove', (event) => showTooltip(event, point));
+      point.addEventListener('focus', (event) => showTooltip(event, point));
+      point.addEventListener('mouseleave', hideTooltip);
+      point.addEventListener('blur', hideTooltip);
+    });
+  }
+
+  renderPmfgChart();
+  window.addEventListener('resize', renderPmfgChart);
 </script>
 </body>
 </html>
