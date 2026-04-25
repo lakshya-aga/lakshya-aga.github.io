@@ -3,454 +3,88 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Lakshya Agarwal</title>
+  <title>Lakshya Agarwal &mdash; Quantitative Engineer &amp; Agentic AI Builder</title>
+  <meta name="description" content="Lakshya Agarwal builds agentic AI systems, quantitative research infrastructure, and trading tools. Founder of Synapse Trading."/>
   <link rel="icon" type="image/jpeg" href="assets/profile.jpg" />
   <link rel="shortcut icon" href="assets/profile.jpg" />
   <link rel="apple-touch-icon" href="assets/profile.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet"/>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bg: #0a0c0e;
-      --surface: #111417;
-      --surface2: #181c21;
-      --border: #1e2530;
-      --accent: #c8a96e;
-      --accent2: #4ea8de;
-      --text: #d4d8df;
-      --muted: #5a6272;
-      --mono: 'IBM Plex Mono', monospace;
-      --serif: 'Playfair Display', serif;
-    }
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--mono);
-      font-size: 14px;
-      line-height: 1.7;
-      overflow-x: hidden;
-    }
-    body::before {
-      content: '';
-      position: fixed; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      background-size: 200px 200px;
-      pointer-events: none;
-      z-index: 9999;
-      opacity: 0.5;
-    }
-    .grid-bg {
-      position: fixed; inset: 0;
-      background-image:
-        linear-gradient(rgba(78,168,222,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(78,168,222,0.03) 1px, transparent 1px);
-      background-size: 40px 40px;
-      pointer-events: none;
-      z-index: 0;
-    }
-    nav {
-      position: fixed; top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 1.2rem 3rem;
-      border-bottom: 1px solid var(--border);
-      background: rgba(10,12,14,0.85);
-      backdrop-filter: blur(12px);
-    }
-    .nav-toggle {
-      display: none;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--text);
-      padding: 0.5rem 0.8rem;
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      cursor: pointer;
-    }
-    .nav-logo { display:flex; align-items:center; gap:0.7rem; font-family: var(--serif); font-size: 1.15rem; color: var(--accent); letter-spacing: 0.02em; }
-    .nav-avatar { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; object-position: 50% 24%; border: 1px solid rgba(200,169,110,0.5); box-shadow: 0 0 0 2px rgba(200,169,110,0.12); }
-    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--accent); }
-    a:focus-visible, button:focus-visible {
-      outline: 2px solid var(--accent2);
-      outline-offset: 3px;
-    }
-    .wrapper { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 0 2.5rem; }
-    #hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding-top: 80px; }
-    .hero-tag { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent2); margin-bottom: 1.2rem; opacity: 0; animation: fadeUp 0.6s 0.2s forwards; }
-    h1 { font-family: var(--serif); font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 700; line-height: 1.0; color: #f0f2f5; letter-spacing: -0.02em; opacity: 0; animation: fadeUp 0.6s 0.35s forwards; }
-    h1 span { color: var(--accent); }
-    .hero-sub { margin-top: 1.8rem; max-width: 560px; font-size: 0.88rem; color: var(--muted); line-height: 1.9; opacity: 0; animation: fadeUp 0.6s 0.5s forwards; }
-    .hero-sub strong { color: var(--text); }
-    .focus-banner { margin-top: 1.8rem; padding: 0.9rem 1.4rem; border: 1px solid rgba(200,169,110,0.25); background: rgba(200,169,110,0.04); display: inline-flex; align-items: center; gap: 0.9rem; opacity: 0; animation: fadeUp 0.6s 0.62s forwards; }
-    .focus-banner .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent); flex-shrink: 0; animation: pulse 2s infinite; }
-    .focus-banner span { font-size: 0.73rem; color: var(--accent); letter-spacing: 0.05em; }
-    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
-    .hero-links { margin-top: 2.2rem; display: flex; gap: 1.2rem; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.6s 0.75s forwards; }
-    .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.65rem 1.4rem; border: 1px solid var(--border); color: var(--text); text-decoration: none; font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.08em; transition: all 0.2s; background: var(--surface); }
-    .btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(200,169,110,0.05); }
-    .btn.primary { border-color: var(--accent); color: var(--accent); }
-    .btn.primary:hover { background: var(--accent); color: var(--bg); }
-    .nav-panel { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-top: 2rem; }
-    .nav-panel-card { border: 1px solid var(--border); background: var(--surface); padding: 1.5rem; text-decoration: none; color: var(--text); position: relative; transition: border-color 0.2s, transform 0.2s; }
-    .nav-panel-card:hover { border-color: var(--accent); transform: translateY(-4px); }
-    .nav-panel-heading { font-family: var(--serif); font-size: 1.1rem; color: #f0f2f5; margin-bottom: 0.5rem; text-transform: capitalize; }
-    .nav-panel-card p { color: var(--muted); font-size: 0.8rem; }
-    .nav-panel-sub { margin-top: 1rem; padding-top: 0.8rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; font-size: 0.72rem; color: var(--muted); }
-    .nav-panel-sub a { color: var(--accent2); text-decoration: none; font-size: 0.75rem; }
-    .projects-category { margin-top: 2rem; padding: 2.5rem 0; border-bottom: 1px solid var(--border); }
-    #projects .projects-category:last-of-type { border-bottom: none; padding-bottom: 0; }
-    .research-board {
-      margin-top: 1.5rem;
-      display: grid;
-      gap: 1.5rem;
-    }
-    .research-board-intro {
-      color: var(--muted);
-      font-size: 0.8rem;
-      line-height: 1.85;
-      max-width: 760px;
-    }
-    .research-placeholder {
-      border: 1px dashed var(--border);
-      background: rgba(17,20,23,0.45);
-      padding: 1.2rem 1.3rem;
-    }
-    .research-placeholder-title {
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--accent2);
-      margin-bottom: 0.45rem;
-    }
-    .research-placeholder p {
-      color: var(--muted);
-      font-size: 0.78rem;
-      line-height: 1.75;
-    }
-    .category-header { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 1.5rem; }
-    .category-badge { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); }
-    .category-description { color: var(--muted); font-size: 0.82rem; max-width: 640px; }
-    .subcategory-card { border: 1px solid var(--border); background: var(--surface2); padding: 1.5rem; margin-bottom: 1.5rem; }
-    .subcategory-card h4 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent2); margin-bottom: 0.4rem; }
-    .subcategory-card p { color: var(--muted); font-size: 0.78rem; margin-bottom: 0.6rem; }
-    .subcategory-card .btn { font-size: 0.72rem; padding: 0.45rem 1rem; }
-    section { padding: 4.5rem 0; }
-    .section-header { display: flex; align-items: baseline; gap: 1.2rem; margin-bottom: 3rem; }
-    .section-num { font-size: 0.7rem; color: var(--accent2); letter-spacing: 0.15em; }
-    h2 { font-family: var(--serif); font-size: 1.8rem; font-weight: 500; color: #f0f2f5; }
-    .section-line { flex: 1; height: 1px; background: var(--border); }
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
-    .about-text p { color: var(--muted); margin-bottom: 1rem; font-size: 0.85rem; line-height: 1.9; }
-    .about-text p strong { color: var(--text); }
-    .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-    .skill-group h4 { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--accent); margin-bottom: 0.6rem; }
-    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-    .tag { font-size: 0.7rem; padding: 0.2rem 0.55rem; border: 1px solid var(--border); color: var(--muted); background: var(--surface); }
-    .tag.accent { border-color: rgba(200,169,110,0.4); color: var(--accent); background: rgba(200,169,110,0.05); }
-    .exp-list { display: flex; flex-direction: column; }
-    .exp-item { display: grid; grid-template-columns: 200px 1fr; gap: 0 2rem; padding: 2rem 0; border-bottom: 1px solid var(--border); position: relative; }
-    .exp-item::before { content: ''; position: absolute; left: 194px; top: 0; bottom: 0; width: 1px; background: var(--border); }
-    .exp-date { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.08em; }
-    .exp-company { font-size: 0.8rem; color: var(--accent2); margin-top: 0.3rem; }
-    .exp-role { font-family: var(--serif); font-size: 1.05rem; color: #f0f2f5; margin-bottom: 0.8rem; }
-    .exp-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.8; }
-    .exp-desc li { list-style: none; padding-left: 1rem; position: relative; margin-bottom: 0.3rem; }
-    .exp-desc li::before { content: '›'; position: absolute; left: 0; color: var(--accent); }
-    .featured-label { margin-bottom: 1rem; }
-    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
-    .project-card { background: var(--surface); padding: 1.8rem; transition: background 0.2s, transform 0.2s; cursor: pointer; text-decoration: none; display: block; border: 1px solid var(--border); }
-    .project-card:hover { background: var(--surface2); transform: translateY(-4px); }
-    .project-card.featured-card { border-left: 2px solid var(--accent); }
-    .project-type { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--accent2); margin-bottom: 0.8rem; }
-    .project-card.featured-card .project-type { color: var(--accent); }
-    .project-title { font-family: var(--serif); font-size: 1.05rem; color: #f0f2f5; margin-bottom: 0.6rem; }
-    .project-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.7; }
-    .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
-    .projects-divider { height: 1px; background: var(--border); }
-    .project-card.add-card { border: 1px dashed var(--border); background: transparent; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; min-height: 180px; color: var(--muted); }
-    .project-card.add-card .plus { font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--border); }
-    .project-card.add-card span { font-size: 0.72rem; letter-spacing: 0.1em; }
-    .strategy-card {
-      border: 1px solid rgba(200,169,110,0.28);
-      background: linear-gradient(180deg, rgba(200,169,110,0.06), rgba(17,20,23,0.96));
-      padding: 1.8rem;
-    }
-    .strategy-card .project-type { color: var(--accent); }
-    .strategy-lead {
-      font-size: 0.82rem;
-      color: var(--text);
-      line-height: 1.85;
-      margin-top: 1rem;
-      max-width: 920px;
-    }
-    .strategy-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.95fr);
-      gap: 1.5rem;
-      margin-top: 1.5rem;
-      align-items: start;
-    }
-    .strategy-copy {
-      font-size: 0.79rem;
-      color: var(--muted);
-      line-height: 1.85;
-    }
-    .strategy-copy p + p { margin-top: 0.9rem; }
-    .strategy-points {
-      display: grid;
-      gap: 0.75rem;
-      margin-top: 1rem;
-    }
-    .strategy-point {
-      border: 1px solid var(--border);
-      background: rgba(10,12,14,0.4);
-      padding: 0.9rem 1rem;
-    }
-    .strategy-point strong {
-      display: block;
-      color: var(--text);
-      font-size: 0.74rem;
-      text-transform: uppercase;
-      letter-spacing: 0.09em;
-      margin-bottom: 0.35rem;
-    }
-    .strategy-point span {
-      color: var(--muted);
-      font-size: 0.77rem;
-      line-height: 1.75;
-    }
-    .dashboard-card {
-      border: 1px solid var(--border);
-      background: rgba(10,12,14,0.55);
-      padding: 1.25rem;
-      position: sticky;
-      top: 100px;
-    }
-    .dashboard-heading {
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--accent2);
-      margin-bottom: 1rem;
-    }
-    .dashboard-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.75rem;
-    }
-    .metric {
-      border: 1px solid var(--border);
-      background: var(--surface);
-      padding: 0.85rem;
-      min-height: 88px;
-    }
-    .metric-value {
-      font-family: var(--serif);
-      font-size: 1.35rem;
-      line-height: 1.1;
-      color: #f0f2f5;
-    }
-    .metric-value.negative { color: #f87171; }
-    .metric-value.positive { color: #7dd3fc; }
-    .metric-label {
-      margin-top: 0.45rem;
-      font-size: 0.66rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--muted);
-      line-height: 1.45;
-    }
-    .dashboard-note {
-      margin-top: 0.9rem;
-      padding-top: 0.9rem;
-      border-top: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 0.72rem;
-      line-height: 1.75;
-    }
-    .chart-wrap {
-      margin-top: 1rem;
-      border: 1px solid var(--border);
-      background: linear-gradient(180deg, rgba(24,28,33,0.95), rgba(10,12,14,0.98));
-      padding: 0.85rem;
-      position: relative;
-      overflow: hidden;
-    }
-    .chart-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 0.65rem;
-      font-size: 0.68rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--muted);
-    }
-    .chart-meta strong { color: var(--text); font-weight: 500; }
-    .chart-svg {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-    .chart-axis text,
-    .chart-label {
-      fill: #7b8495;
-      font-size: 11px;
-      font-family: var(--mono);
-    }
-    .chart-grid line {
-      stroke: rgba(255,255,255,0.08);
-      stroke-dasharray: 3 5;
-    }
-    .chart-zero {
-      stroke: rgba(200,169,110,0.45);
-      stroke-dasharray: 5 5;
-    }
-    .chart-area {
-      fill: rgba(78,168,222,0.14);
-    }
-    .chart-line {
-      fill: none;
-      stroke: #4ea8de;
-      stroke-width: 3;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-    .chart-point {
-      fill: #0a0c0e;
-      stroke: #7dd3fc;
-      stroke-width: 1.5;
-      cursor: pointer;
-      transition: r 0.15s ease, fill 0.15s ease;
-    }
-    .chart-point:hover,
-    .chart-point:focus-visible {
-      fill: #7dd3fc;
-      r: 5.5;
-      outline: none;
-    }
-    .chart-tooltip {
-      position: absolute;
-      min-width: 160px;
-      pointer-events: none;
-      background: rgba(10,12,14,0.96);
-      border: 1px solid rgba(200,169,110,0.3);
-      padding: 0.7rem 0.8rem;
-      font-size: 0.72rem;
-      color: var(--text);
-      line-height: 1.6;
-      box-shadow: 0 14px 30px rgba(0,0,0,0.32);
-      opacity: 0;
-      transform: translateY(6px);
-      transition: opacity 0.14s ease, transform 0.14s ease;
-      z-index: 4;
-    }
-    .chart-tooltip.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .chart-tooltip .muted { color: var(--muted); }
-    .paper-cite {
-      margin-top: 0.9rem;
-      color: var(--muted);
-      font-size: 0.74rem;
-      line-height: 1.8;
-    }
-    .paper-cite a {
-      color: var(--accent2);
-      text-decoration: none;
-    }
-    .edu-list { display: flex; flex-direction: column; }
-    .edu-item { display: grid; grid-template-columns: 200px 1fr; gap: 0 2rem; padding: 1.5rem 0; border-bottom: 1px solid var(--border); }
-    .edu-deg { font-family: var(--serif); font-size: 1rem; color: #f0f2f5; margin-bottom: 0.3rem; }
-    .edu-school { font-size: 0.8rem; color: var(--accent2); margin-bottom: 0.5rem; }
-    .edu-detail { font-size: 0.78rem; color: var(--muted); }
-    .honors-list { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-    .honor-item { padding: 1.2rem 1.5rem; border: 1px solid var(--border); background: var(--surface); }
-    .honor-year { font-size: 0.68rem; color: var(--accent); letter-spacing: 0.1em; }
-    .honor-title { font-size: 0.85rem; color: var(--text); margin-top: 0.3rem; }
-    #contact { border-top: 1px solid var(--border); padding: 4rem 0; }
-    .contact-inner { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 2rem; }
-    .contact-cta h3 { font-family: var(--serif); font-size: 2rem; color: #f0f2f5; margin-bottom: 0.5rem; }
-    .contact-cta p { font-size: 0.82rem; color: var(--muted); }
-    .contact-links { display: flex; gap: 1rem; flex-wrap: wrap; }
-    .footer-bottom { border-top: 1px solid var(--border); padding: 1.5rem 0; display: flex; justify-content: space-between; align-items: center; }
-    .footer-bottom p { font-size: 0.7rem; color: var(--muted); }
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s, transform 0.6s; }
-    .reveal.visible { opacity: 1; transform: none; }
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: var(--border); }
-    @media (max-width: 768px) {
-      nav { padding: 1rem 1.5rem; flex-wrap: wrap; gap: 0.8rem; }
-      .nav-toggle { display: inline-flex; align-items: center; }
-      .nav-links { display: none; width: 100%; flex-direction: column; gap: 0.9rem; padding-top: 0.5rem; }
-      .nav-links.open { display: flex; }
-      .wrapper { padding: 0 1.5rem; }
-      .about-grid { grid-template-columns: 1fr; }
-      .exp-item { grid-template-columns: 1fr; }
-      .exp-item::before { display: none; }
-      .edu-item { grid-template-columns: 1fr; }
-      .honors-list { grid-template-columns: 1fr; }
-      .contact-inner { flex-direction: column; }
-      h1 { font-size: 2.5rem; }
-      .focus-banner { width: 100%; }
-      .strategy-layout { grid-template-columns: 1fr; }
-      .dashboard-card { position: static; }
-      .dashboard-grid { grid-template-columns: 1fr 1fr; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      *, *::before, *::after {
-        animation: none !important;
-        transition: none !important;
-      }
-      .reveal { opacity: 1; transform: none; }
-    }
-  </style>
+  <link rel="stylesheet" href="assets/styles.css"/>
 </head>
 <body>
 
 <div class="grid-bg"></div>
 
 <nav>
-  <div class="nav-logo"><img class="nav-avatar" src="assets/profile.jpg" alt="Lakshya profile"/>LA</div>
+  <a href="index.html" class="nav-logo"><img class="nav-avatar" src="assets/profile.jpg" alt="Lakshya profile"/>LA</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
   <ul class="nav-links" id="site-nav">
-    <li><a href="#about">About</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#quant-research-live">Quant Research</a></li>
-    <li><a href="#notes">Notes</a></li>
-    <li><a href="#education">Education</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="index.html" data-page="index.html">Home</a></li>
+    <li><a href="experience.html" data-page="experience.html">Experience</a></li>
+    <li><a href="research.html" data-page="research.html">Research</a></li>
+    <li><a href="projects.html" data-page="projects.html">Projects</a></li>
+    <li><a href="books.html" data-page="books.html">Books</a></li>
+    <li><a href="trophies.html" data-page="trophies.html">Trophies</a></li>
   </ul>
 </nav>
 
 <div class="wrapper">
   <section id="hero">
     <p class="hero-tag">// Agentic AI &nbsp;&middot;&nbsp; Quantitative Research &nbsp;&middot;&nbsp; Systems Engineering</p>
-    <h1>Lakshya<br><span>Agarwal</span></h1>
+    <h1 class="hero-title">Lakshya<br><span>Agarwal</span></h1>
     <p class="hero-sub">
       I build <strong>agentic AI systems</strong>, <strong>quant research tooling</strong>, and <strong>data infrastructure</strong> &mdash; from MCP servers and code retrieval to market-data workflows and autonomous analysis tools.
     </p>
     <div class="focus-banner">
       <div class="dot"></div>
-      <span>Current focus: agentic AI + quant infrastructure + reusable research tooling</span>
+      <span>Current focus: agentic AI for finance research at Synapse Trading</span>
     </div>
     <div class="hero-links">
-      <a href="https://github.com/lakshya-aga" target="_blank" rel="noopener noreferrer" class="btn primary">&#8599; GitHub</a>
+      <a href="https://synapsetrading.net" target="_blank" rel="noopener noreferrer" class="btn primary">&#8599; Synapse Trading</a>
+      <a href="https://github.com/lakshya-aga" target="_blank" rel="noopener noreferrer" class="btn">&#8599; GitHub</a>
       <a href="https://www.linkedin.com/in/lakshya-agarwal-7567ba1b3/" target="_blank" rel="noopener noreferrer" class="btn">&#8599; LinkedIn</a>
       <a href="mailto:lakshya001@e.ntu.edu.sg" class="btn">&#9993; Email</a>
-      <a href="https://lakshya-aga.github.io/quartz/" target="_blank" rel="noopener noreferrer" class="btn">&#128211; Research Notes</a>
+    </div>
+  </section>
+</div>
+
+<div class="wrapper">
+  <section id="venture">
+    <div class="section-header reveal">
+      <span class="section-num">00</span>
+      <h2>Venture</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="venture-card reveal">
+      <div>
+        <div class="venture-tag">Startup &middot; Agentic AI for Finance Research</div>
+        <h3>Synapse Trading</h3>
+        <p>
+          Synapse Trading is the venture I&rsquo;m building around <strong>agentic AI for quantitative finance research</strong> &mdash; turning planner/orchestrator agents, MCP-backed data layers, and code retrieval into a workbench that compresses the research loop from idea to evaluated strategy.
+        </p>
+        <p>
+          The bet: research teams should spend their time on <strong>hypotheses and execution</strong>, not on glue code, dataset wrangling, or rebuilding the same backtest scaffolding. Synapse focuses on the substrate that makes agentic research reliable enough to trust with real workflows.
+        </p>
+        <div class="venture-cta">
+          <a href="https://synapsetrading.net" target="_blank" rel="noopener noreferrer" class="btn primary">&#8599; synapsetrading.net</a>
+          <a href="research.html" class="btn">Research stack &rarr;</a>
+        </div>
+      </div>
+      <aside class="venture-side">
+        <div>
+          <strong>Stack</strong>
+          MCP servers, retrieval over internal libraries, financial data wrappers, planner-orchestrator agents, notebook automation.
+        </div>
+        <div>
+          <strong>Problems</strong>
+          Discoverable research code, reproducible data, multi-step analysis, honest evaluation against live marks.
+        </div>
+        <div>
+          <strong>Status</strong>
+          Building &amp; iterating with research workflows. Open to conversations with quant teams and researchers.
+        </div>
+      </aside>
     </div>
   </section>
 </div>
@@ -458,34 +92,46 @@
 <div class="wrapper">
   <section id="navigator">
     <div class="section-header reveal">
-      <span class="section-num">00</span>
-      <h2>Workspace Navigation</h2>
+      <span class="section-num">01</span>
+      <h2>Sections</h2>
       <div class="section-line"></div>
     </div>
     <div class="nav-panel">
-      <a class="nav-panel-card reveal" href="#research-infra">
-        <div class="nav-panel-heading">Quant research tools</div>
-        <p>The tooling stack behind my research workflow: MCP servers, autonomous research agents, and reusable data layers.</p>
+      <a class="nav-panel-card reveal" href="experience.html">
+        <div class="panel-num">/ 02</div>
+        <div class="nav-panel-heading">Experience &amp; Education</div>
+        <p>Career timeline across quant developer, ML, and systems roles. Education at NTU and WorldQuant University, plus honors and awards.</p>
+        <div class="nav-panel-sub"><span>Career &middot; NTU &middot; WQU</span><span class="arrow">&rarr;</span></div>
       </a>
-      <a class="nav-panel-card reveal" href="#featured-projects">
-        <div class="nav-panel-heading">Selected builds</div>
-        <p>Additional projects that show range across systems, quant, and engineering work.</p>
+      <a class="nav-panel-card reveal" href="research.html">
+        <div class="panel-num">/ 03</div>
+        <div class="nav-panel-heading">Quant Research</div>
+        <p>The research stack behind Synapse Trading: agentic infrastructure, financial data layers, and live strategy cards including the PMFG peripheral-trading study.</p>
+        <div class="nav-panel-sub"><span>Agentic AI &middot; Strategies</span><span class="arrow">&rarr;</span></div>
       </a>
-      <a class="nav-panel-card reveal" href="#quant-experiments">
-        <div class="nav-panel-heading">Quant experiments</div>
-        <p>Strategy research, alpha exploration, and market-data workflows.</p>
+      <a class="nav-panel-card reveal" href="projects.html">
+        <div class="panel-num">/ 04</div>
+        <div class="nav-panel-heading">Projects &amp; Repositories</div>
+        <p>Selected builds across full-stack apps, backend services, derivatives pricing, databases, and ML research projects.</p>
+        <div class="nav-panel-sub"><span>Code &middot; Systems</span><span class="arrow">&rarr;</span></div>
       </a>
-      <a class="nav-panel-card reveal" href="#quant-research-live">
-        <div class="nav-panel-heading">Current quant research</div>
-        <p>Live strategy cards for the ideas I&rsquo;m actively implementing, stress-testing, and refining.</p>
+      <a class="nav-panel-card reveal" href="books.html">
+        <div class="panel-num">/ 05</div>
+        <div class="nav-panel-heading">Book Reviews</div>
+        <p>Reading notes auto-published from my Obsidian vault. Anything tagged <code>#book</code> in the source repo flows here.</p>
+        <div class="nav-panel-sub"><span>Auto-synced from vault</span><span class="arrow">&rarr;</span></div>
       </a>
-      <a class="nav-panel-card reveal" href="#development">
-        <div class="nav-panel-heading">Systems & apps</div>
-        <p>Backend services, databases, developer tools, and full-stack side projects.</p>
+      <a class="nav-panel-card reveal" href="https://lakshya-aga.github.io/quartz/" target="_blank" rel="noopener noreferrer">
+        <div class="panel-num">/ 06</div>
+        <div class="nav-panel-heading">Research Notes</div>
+        <p>Quartz-powered digital garden for quant ideas, papers, and agent experiments. The full Obsidian vault, published.</p>
+        <div class="nav-panel-sub"><span>Digital garden</span><span class="arrow">&#8599;</span></div>
       </a>
-      <a class="nav-panel-card reveal" href="#notes">
-        <div class="nav-panel-heading">Notes & research</div>
-        <p>Quartz-powered digital garden for quant ideas, papers, and agent experiments.</p>
+      <a class="nav-panel-card reveal" href="trophies.html">
+        <div class="panel-num">/ 07</div>
+        <div class="nav-panel-heading">Trophies</div>
+        <p>PSN trophy tracker built as a fun side project, with daily auto-updates via GitHub Actions.</p>
+        <div class="nav-panel-sub"><span>Side project</span><span class="arrow">&rarr;</span></div>
       </a>
     </div>
   </section>
@@ -494,7 +140,7 @@
 <div class="wrapper">
   <section id="about">
     <div class="section-header reveal">
-      <span class="section-num">01</span>
+      <span class="section-num">02</span>
       <h2>About</h2>
       <div class="section-line"></div>
     </div>
@@ -502,8 +148,8 @@
       <div class="about-text reveal">
         <p>I&rsquo;m an <strong>engineer</strong> from Nanyang Technological University focused on <strong>agentic AI</strong>, <strong>quant research infrastructure</strong>, and <strong>practical systems design</strong>.</p>
         <p>I build MCP servers, retrieval systems, market-data wrappers, pricing services, and research pipelines that help humans and models work with code and data more effectively.</p>
-        <p>I also work on <strong>quant strategy research</strong>, derivatives, and high-performance systems. I care about tools that are measurable, debuggable, and useful beyond a demo.</p>
-        <p>Professionally, I want to keep pushing deeper into <strong>machine learning</strong> and <strong>quant research</strong>. For fun, I like <strong>chess</strong> and <strong>climbing</strong>.</p>
+        <p>Through <strong>Synapse Trading</strong>, I&rsquo;m turning that work into a coherent product for quantitative research teams &mdash; tools that are measurable, debuggable, and useful beyond a demo.</p>
+        <p>For fun, I like <strong>chess</strong> and <strong>climbing</strong>, and I keep a public <a href="books.html" style="color:var(--accent2);text-decoration:none;">reading log</a>.</p>
       </div>
       <div class="reveal">
         <div class="skills-grid">
@@ -544,425 +190,6 @@
 </div>
 
 <div class="wrapper">
-  <section id="experience">
-    <div class="section-header reveal">
-      <span class="section-num">02</span>
-      <h2>Experience</h2>
-      <div class="section-line"></div>
-    </div>
-    <div class="exp-list">
-
-      <div class="exp-item reveal">
-        <div>
-          <div class="exp-date">Jan 2026 &ndash; Present</div>
-          <div class="exp-company">Cableman PTE. LTD.</div>
-        </div>
-        <div>
-          <div class="exp-role">Backend Engineer</div>
-          <ul class="exp-desc">
-            <li>Developing microservices in Golang for Changi and Seletar airport management systems.</li>
-            <li>Deployed full-stack applications with AWS CloudFormation, configuring subnets, VPCs, relational databases, ECR, and Fargate-based load-balanced services.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="exp-item reveal">
-        <div>
-          <div class="exp-date">Sep &ndash; Nov 2024</div>
-          <div class="exp-company">Astignes Capital Asia</div>
-        </div>
-        <div>
-          <div class="exp-role">Quantitative Developer Intern</div>
-          <ul class="exp-desc">
-            <li>Researched FX risk-neutral trade strategies using GDELT, forecast data, and bank positioning.</li>
-            <li>Applied Kelly&rsquo;s Criterion and regression for optimal weight allocation in a long-short basket strategy, improving Sharpe ratio by 16%.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="exp-item reveal">
-        <div>
-          <div class="exp-date">May &ndash; Jul 2024</div>
-          <div class="exp-company">Astignes Capital Asia</div>
-        </div>
-        <div>
-          <div class="exp-role">Technology Intern</div>
-          <ul class="exp-desc">
-            <li>Built FastAPI endpoints for data transformation using Polars after rigorous performance benchmarking against Pandas.</li>
-            <li>Developed a WinForms task scheduler in C#/.NET, reducing maintenance overhead by 99%.</li>
-            <li>Priced binary options in C++ via Monte Carlo methods in QuantLib; tested with Erlang NIFs.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="exp-item reveal">
-        <div>
-          <div class="exp-date">May 2023 &ndash; Present</div>
-          <div class="exp-company">WorldQuant BRAIN</div>
-        </div>
-        <div>
-          <div class="exp-role">Research Consultant</div>
-          <ul class="exp-desc">
-            <li>Research and backtest alphas for quantitative trading using statistical arbitrage from academic papers and personal hypotheses.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="exp-item reveal">
-        <div>
-          <div class="exp-date">May &ndash; Jul 2023</div>
-          <div class="exp-company">Banach Technologies</div>
-        </div>
-        <div>
-          <div class="exp-role">Machine Learning Intern</div>
-          <ul class="exp-desc">
-            <li>Calibrated stochastic and local volatility models from option data; used correlation matrices for structured product pricing.</li>
-            <li>Built a Golang backend with authentication for pricing, backtesting, and derivative pricing workflows.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="exp-item reveal">
-        <div>
-          <div class="exp-date">Aug 2022 &ndash; Dec 2023</div>
-          <div class="exp-company">NTU HPC Club</div>
-        </div>
-        <div>
-          <div class="exp-role">System Administrator</div>
-          <ul class="exp-desc">
-            <li>Ran benchmarks for Student Cluster Competition, identifying bottlenecks through profiling to optimally distribute workload across nodes and GPUs.</li>
-            <li>Optimised compile-time flags; maintained software dependencies of NTU&rsquo;s HPC cluster.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="exp-item reveal">
-        <div>
-          <div class="exp-date">Aug &ndash; Nov 2022</div>
-          <div class="exp-company">MSD / ITRMS</div>
-        </div>
-        <div>
-          <div class="exp-role">ML Consultant (NTU EDGE)</div>
-          <ul class="exp-desc">
-            <li>Fine-tuned BERT on a Qualys dataset to classify cybersecurity articles &mdash; 95% accuracy vs 73% from Google AutoAI.</li>
-            <li>Deployed via AWS Lambda as a POSTMAN-accessible API; presented findings to industry professionals.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="exp-item reveal">
-        <div>
-          <div class="exp-date">May &ndash; Jul 2022</div>
-          <div class="exp-company">Rolls-Royce @ NTU</div>
-        </div>
-        <div>
-          <div class="exp-role">Research Intern</div>
-          <ul class="exp-desc">
-            <li>Analysed battery cycle-life data under extreme conditions for the EPSILON project, identifying anomalies across 1000+ data points.</li>
-            <li>Designed experiments to simulate operational conditions for energy management systems.</li>
-          </ul>
-        </div>
-      </div>
-
-    </div>
-  </section>
-</div>
-
-<div class="wrapper">
-  <section id="projects">
-    <div class="section-header reveal">
-      <span class="section-num">03</span>
-      <h2>Projects &amp; Repositories</h2>
-      <div class="section-line"></div>
-    </div>
-
-    <div class="projects-category" id="research-infra">
-      <div class="category-header">
-        <span class="category-badge">Quant research tools</span>
-        <p class="category-description">The tooling stack behind my research workflow: agentic infrastructure for finding internal code, pulling structured financial data, and orchestrating multi-step quantitative analysis.</p>
-      </div>
-      <div class="projects-grid">
-        <a class="project-card reveal" href="https://github.com/lakshya-aga/fruit-thrower" target="_blank" rel="noopener noreferrer">
-          <div class="project-type">&#127795; Internal code MCP</div>
-          <div class="project-title">fruit-thrower</div>
-          <div class="project-desc">Indexes internal Python libraries, exposes them through MCP, and now generates new functions with coding agents so research code becomes discoverable, reusable, and extensible.</div>
-          <div class="project-tags"><span class="tag">Python</span><span class="tag">MCP</span><span class="tag">Code retrieval</span><span class="tag">Agentic tooling</span></div>
-        </a>
-        <a class="project-card reveal" href="https://github.com/lakshya-aga/data-mcp" target="_blank" rel="noopener noreferrer">
-          <div class="project-type">&#128200; Financial data MCP</div>
-          <div class="project-title">data-mcp</div>
-          <div class="project-desc">Documentation-first financial data layer for agents, with typed wrapper docs, runnable examples, and an agentic flow for adding new market and macro data sources.</div>
-          <div class="project-tags"><span class="tag">Python</span><span class="tag">MCP</span><span class="tag">Data infrastructure</span><span class="tag">Finance</span></div>
-        </a>
-        <a class="project-card reveal" href="https://github.com/lakshya-aga/finagent_v2" target="_blank" rel="noopener noreferrer">
-          <div class="project-type">&#129302; Research orchestrator</div>
-          <div class="project-title">FinAgent v2</div>
-          <div class="project-desc">Planner/orchestrator-based quant research agent that ties tools together for multi-step analysis, notebook automation, and faster iteration across research hypotheses.</div>
-          <div class="project-tags"><span class="tag">Python</span><span class="tag">Agentic AI</span><span class="tag">Quant</span><span class="tag">Automation</span></div>
-        </a>
-        <a class="project-card reveal" href="https://github.com/lakshya-aga/fin-kit" target="_blank" rel="noopener noreferrer">
-          <div class="project-type">&#128295; Quant toolkit</div>
-          <div class="project-title">fin-kit</div>
-          <div class="project-desc">Collection of reusable quantitative finance utilities built around factor research, mlfinlab workflows, and notebook-friendly experimentation.</div>
-          <div class="project-tags"><span class="tag">Python</span><span class="tag">Quant</span><span class="tag">Research</span></div>
-        </a>
-      </div>
-    </div>
-
-    <div class="projects-category" id="featured-projects">
-      <div class="category-header">
-        <span class="category-badge">Selected builds</span>
-        <p class="category-description">Additional projects that show range across quantitative research, systems work, and practical engineering.</p>
-      </div>
-      <div class="projects-grid">
-        <a class="project-card reveal" href="https://github.com/lakshya-aga/trading-with-gdelt" target="_blank" rel="noopener noreferrer">
-          <div class="project-type">&#128201; Macro / FX Research</div>
-          <div class="project-title">Trading with GDELT</div>
-          <div class="project-desc">Research repo testing whether event/news data can improve FX and macro signals when combined with forecasts and positioning context.</div>
-          <div class="project-tags"><span class="tag">Python</span><span class="tag">GDELT</span><span class="tag">Research</span></div>
-        </a>
-        <a class="project-card reveal" href="https://github.com/lakshya-aga/SC3020_Project_2" target="_blank" rel="noopener noreferrer">
-          <div class="project-type">&#128269; Dev Tool</div>
-          <div class="project-title">PostgreSQL Query Plan Visualizer</div>
-          <div class="project-desc">React + Flask application for visualizing PostgreSQL execution plans, memory usage, and subtree-level bottlenecks to make query debugging more interpretable.</div>
-          <div class="project-tags"><span class="tag">React</span><span class="tag">Flask</span><span class="tag">PostgreSQL</span></div>
-        </a>
-        <a class="project-card reveal" href="https://github.com/lakshya-aga/shop-genie" target="_blank" rel="noopener noreferrer">
-          <div class="project-type">&#128736; Full-Stack App</div>
-          <div class="project-title">Shop Genie</div>
-          <div class="project-desc">Shopify-focused app for generating cleaner product media and SEO copy, reducing manual merchandising work for small catalogs.</div>
-          <div class="project-tags"><span class="tag">React Router</span><span class="tag">Shopify</span><span class="tag">Node</span></div>
-        </a>
-      </div>
-    </div>
-
-    <div class="projects-category" id="quant-experiments">
-      <div class="category-header">
-        <span class="category-badge">Quant experiments</span>
-        <p class="category-description">Agent-backed research sandboxes for multi-step strategy design, alpha validation, and factor analysis.</p>
-      </div>
-      <div class="projects-grid">
-        <a class="project-card reveal" href="https://github.com/lakshya-aga/Stock-Portfolio-Optimiser" target="_blank" rel="noopener noreferrer">
-          <div class="project-type">&#128202; Quant Research</div>
-          <div class="project-title">Stock Portfolio Optimiser</div>
-          <div class="project-desc">Machine-learning-assisted stock selection and portfolio construction workflow for forecasting, ranking, and monthly long-short basket generation.</div>
-          <div class="project-tags"><span class="tag">Python</span><span class="tag">ARIMA</span><span class="tag">Jupyter</span></div>
-        </a>
-        <a class="project-card reveal" href="https://github.com/lakshya-aga/trading-with-gdelt" target="_blank" rel="noopener noreferrer">
-          <div class="project-type">&#128201; Macro / FX Research</div>
-          <div class="project-title">Trading with GDELT</div>
-          <div class="project-desc">Research repo testing whether event/news data can improve FX and macro signals when combined with forecasts and positioning context.</div>
-          <div class="project-tags"><span class="tag">Python</span><span class="tag">GDELT</span><span class="tag">Research</span></div>
-        </a>
-      </div>
-    </div>
-
-    <div class="projects-category" id="quant-research-live">
-      <div class="category-header">
-        <span class="category-badge">Current / recent quant research</span>
-        <p class="category-description">A live shelf for strategy ideas I&rsquo;m actively testing, refining, or trying to falsify. This is where graph-based, factor, and market-structure experiments land before they become something more formal.</p>
-      </div>
-      <p class="research-board-intro reveal">A live shelf for the strategies and ideas I&rsquo;m actively testing. I&rsquo;ll keep adding new cards here as fresh experiments come online.</p>
-      <div class="research-board">
-        <div class="project-card strategy-card reveal" style="cursor:default;">
-        <div class="project-type">&#129504; Strategy Card &middot; PMFG / Peripheral Trading</div>
-        <div class="project-title">Peripheral Trading with Planar Maximally Filtered Graphs</div>
-        <div class="project-desc strategy-lead">One of my favorite recent quant builds: a graph-based equity strategy inspired by <strong>Pozzi, Di Matteo, and Aste (2013)</strong> that uses a PMFG network to hunt for peripheral names and turn them into a tradeable basket. It lets me express a view about market topology, not just factor exposure.</div>
-        <div class="project-tags">
-          <span class="tag accent">Graph-based alpha</span><span class="tag">PMFG</span><span class="tag">Network filtering</span><span class="tag">Python</span><span class="tag">Backtest framing</span>
-        </div>
-        <div class="strategy-layout">
-          <div class="strategy-copy">
-            <p>I built this to turn a paper idea into something tradeable and measurable. The workflow takes the daily PMFG selection, enters at the <strong>next trading day close</strong>, exits at the <strong>next rebalance close</strong>, and marks the final basket to the latest available close.</p>
-            <p>What I like most is the interpretability. Instead of running another flat ranking model, I can use <strong>network topology</strong> as the signal itself and directly test whether peripheral names behave differently from the dense market core.</p>
-            <div class="paper-cite">Inspired by Pozzi, F., Di Matteo, T., &amp; Aste, T. (2013), <em>Exponential smoothing weighted correlations and financial time series modeling</em>.</div>
-            <div class="strategy-points">
-              <div class="strategy-point">
-                <strong>Signal construction</strong>
-                <span>Build a PMFG from the exponentially weighted correlation structure, rank names by the paper-style centrality aggregation, and take the peripheral basket as the tradeable portfolio.</span>
-              </div>
-              <div class="strategy-point">
-                <strong>Execution assumption</strong>
-                <span>Equal-weight across 10 selected names, entered on the next trading day after the signal and exited on the next signal&rsquo;s trading day. This keeps the backtest simple and reproducible.</span>
-              </div>
-              <div class="strategy-point">
-                <strong>Why I like it</strong>
-                <span>The first forward run is negative, which makes the project more real. It forces the framework to earn its keep against live marks instead of surviving on a neat in-sample story.</span>
-              </div>
-            </div>
-          </div>
-          <aside class="dashboard-card" aria-label="PMFG strategy dashboard">
-            <div class="dashboard-heading">Mini dashboard</div>
-            <div class="dashboard-grid">
-              <div class="metric">
-                <div class="metric-value negative">-11.11%</div>
-                <div class="metric-label">Cumulative forward return</div>
-              </div>
-              <div class="metric">
-                <div class="metric-value">27</div>
-                <div class="metric-label">Trade periods</div>
-              </div>
-              <div class="metric">
-                <div class="metric-value positive">+1.96%</div>
-                <div class="metric-label">Best basket period</div>
-              </div>
-              <div class="metric">
-                <div class="metric-value negative">-3.84%</div>
-                <div class="metric-label">Worst basket period</div>
-              </div>
-              <div class="metric">
-                <div class="metric-value">10</div>
-                <div class="metric-label">Names per rebalance</div>
-              </div>
-              <div class="metric">
-                <div class="metric-value">2026-03-26</div>
-                <div class="metric-label">Latest marked close</div>
-              </div>
-            </div>
-            <div class="chart-wrap" id="pmfg-chart-wrap">
-              <div class="chart-meta">
-                <span>Interactive equity curve</span>
-                <span><strong>Hover points</strong> for date and cumulative return</span>
-              </div>
-              <div class="chart-tooltip" id="pmfg-chart-tooltip"></div>
-              <svg id="pmfg-chart" class="chart-svg" viewBox="0 0 420 220" role="img" aria-label="Interactive PMFG forward P and L chart"></svg>
-            </div>
-            <div class="dashboard-note">
-              Forward P&amp;L generated from the PMFG research repo using a simple execution rule: next-day close entry, next-signal close exit, equal-weight basket. The notebook does <em>not</em> define a canonical execution model, so this dashboard should be read as an explicit research wrapper, not a polished production backtest.
-            </div>
-          </aside>
-        </div>
-        <div class="research-placeholder reveal">
-          <div class="research-placeholder-title">More research cards coming</div>
-          <p>Add the next strategy here as soon as it has a clean hypothesis, a minimally defensible execution rule, and at least one honest result worth showing &mdash; even if that result is negative.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="projects-category" id="gaming-misc">
-      <div class="category-header">
-        <span class="category-badge">Selected side projects</span>
-        <p class="category-description">A smaller set of playful or exploratory builds that still show range.</p>
-      </div>
-      <div class="subcategory-card reveal">
-        <h4>PlayStation trophies</h4>
-        <p>JSON-backed trophy tracker with filtering and rarity lookup. Fun, niche, and deliberately separated from the main professional work.</p>
-        <a href="trophies.html" class="btn primary">View trophies &#x2197;</a>
-      </div>
-      <div class="projects-grid">
-        <a class="project-card reveal" href="https://github.com/lakshya-aga/techfest-scse-ntu" target="_blank" rel="noopener noreferrer">
-          <div class="project-type">&#129302; ML Research</div>
-          <div class="project-title">Attention & Engagement Tracker</div>
-          <div class="project-desc">Computer vision project for classroom attention tracking, built for Techfest and later awarded winner in the competition.</div>
-          <div class="project-tags"><span class="tag">Computer Vision</span><span class="tag">Python</span><span class="tag">Streamlit</span></div>
-        </a>
-      </div>
-    </div>
-
-    <div class="projects-category" id="development">
-      <div class="category-header">
-        <span class="category-badge">Development</span>
-        <p class="category-description">Full-stack utilities, smart contracts, and backend services built for production constraints.</p>
-      </div>
-      <div class="projects-grid">
-        <a class="project-card reveal" href="https://github.com/lakshya-aga/shop-genie" target="_blank" rel="noopener noreferrer">
-          <div class="project-type">&#128736; Full-Stack App</div>
-          <div class="project-title">Shop Genie</div>
-          <div class="project-desc">Shopify-focused app for generating cleaner product media and SEO copy, reducing manual merchandising work for small catalogs.</div>
-          <div class="project-tags"><span class="tag">React Router</span><span class="tag">Shopify</span><span class="tag">Node</span></div>
-        </a>
-        <a class="project-card reveal" href="https://github.com/lakshya-aga/spotted-zebra-copy" target="_blank" rel="noopener noreferrer">
-          <div class="project-type">&#9881; Backend Tool</div>
-          <div class="project-title">Fixed Coupon Note Pricer</div>
-          <div class="project-desc">API server for pricing fixed coupon notes across selected equities, with configurable barriers, coupon structures, and maturity assumptions.</div>
-          <div class="project-tags"><span class="tag">Go</span><span class="tag">Derivatives</span><span class="tag">Pricing</span></div>
-        </a>
-        <a class="project-card reveal" href="https://github.com/lakshya-aga/SC3020-Database-Project-" target="_blank" rel="noopener noreferrer">
-          <div class="project-type">&#128452; Systems / C++</div>
-          <div class="project-title">Database B+ Tree</div>
-          <div class="project-desc">C++ implementation of a B+ Tree index structure, built to mirror core ideas behind production database storage and lookup internals.</div>
-          <div class="project-tags"><span class="tag">C++</span><span class="tag">Databases</span></div>
-        </a>
-        <a class="project-card reveal" href="https://github.com/lakshya-aga/plan" target="_blank" rel="noopener noreferrer">
-          <div class="project-type">&#128187; Utility App</div>
-          <div class="project-title">plan*</div>
-          <div class="project-desc">Course planning application for NTU students that scrapes public module data and builds scheduling options automatically.</div>
-          <div class="project-tags"><span class="tag">PHP</span><span class="tag">Web Scraping</span><span class="tag">Scheduling</span></div>
-        </a>
-      </div>
-    </div>
-
-    <div class="projects-category" id="notes">
-      <div class="category-header">
-        <span class="category-badge">Notes & research</span>
-        <p class="category-description">Public writing and knowledge capture that supports the work above.</p>
-      </div>
-      <div class="projects-grid">
-        <a class="project-card reveal" href="https://lakshya-aga.github.io/quartz/" target="_blank" rel="noopener noreferrer">
-          <div class="project-type">&#128211; Knowledge Base</div>
-          <div class="project-title">Quartz digital garden</div>
-          <div class="project-desc">GitHub Pages deployment of my Obsidian vault (ubiquitous-enigma) using Quartz &mdash; a public research garden for quant finance, ML papers, engineering notes, and agent experiments.</div>
-          <div class="project-tags"><span class="tag">Quartz</span><span class="tag">Obsidian</span><span class="tag">Research</span></div>
-        </a>
-        <a class="project-card reveal" href="https://github.com/lakshya-aga/ubiquitous-enigma" target="_blank" rel="noopener noreferrer">
-          <div class="project-type">&#128214; Source Repository</div>
-          <div class="project-title">ubiquitous-enigma</div>
-          <div class="project-desc">Source vault behind the published garden &mdash; notes on quantitative finance, ML, systems work, and research breadcrumbs worth keeping.</div>
-          <div class="project-tags"><span class="tag">Markdown</span><span class="tag">Obsidian</span><span class="tag">PKM</span></div>
-        </a>
-      </div>
-    </div>
-
-    <div class="project-card add-card reveal" style="margin-top:3rem;">
-      <div class="plus">+</div>
-      <span>More repositories<br>Add yours via README.md</span>
-    </div>
-  </section>
-</div>
-
-<div class="wrapper">
-  <section id="education">
-    <div class="section-header reveal">
-      <span class="section-num">04</span>
-      <h2>Education &amp; Honors</h2>
-      <div class="section-line"></div>
-    </div>
-    <div class="edu-list">
-      <div class="edu-item reveal">
-        <div>
-          <div class="exp-date">Apr 2025 &ndash; Present</div>
-          <div class="exp-company">WorldQuant University &middot; Online</div>
-        </div>
-        <div>
-          <div class="edu-deg">Master of Science in Financial Engineering</div>
-          <div class="edu-detail">Advanced coursework in financial mathematics, derivatives, and quantitative methods.</div>
-        </div>
-      </div>
-      <div class="edu-item reveal">
-        <div>
-          <div class="exp-date">Aug 2021 &ndash; Jan 2025</div>
-          <div class="exp-company">Nanyang Technological University &middot; Singapore</div>
-        </div>
-        <div>
-          <div class="edu-deg">BEng Computer Science &mdash; Honours (Distinction)</div>
-          <div class="edu-school">Second Major in Business &middot; Minor in Mathematics &middot; CGPA 4.4 / 5.0</div>
-          <div class="edu-detail">Financial Mathematics, Neural Networks &amp; Deep Learning, Operating Systems, Database Systems, Probability &amp; Statistics, Linear Algebra, Software Engineering.</div>
-        </div>
-      </div>
-    </div>
-    <div style="margin-top:3rem;">
-      <h3 style="font-family:var(--serif);font-size:1.1rem;color:var(--muted);margin-bottom:1.5rem;font-weight:400;">Honors &amp; Awards</h3>
-      <div class="honors-list">
-        <div class="honor-item reveal"><div class="honor-year">2023</div><div class="honor-title">ISC23 Student Cluster Competition &mdash; Winner</div></div>
-        <div class="honor-item reveal"><div class="honor-year">2023</div><div class="honor-title">NTU President Research Scholar</div></div>
-        <div class="honor-item reveal"><div class="honor-year">2022</div><div class="honor-title">Techfest &mdash; Winner (Attention Management System, CNN)</div></div>
-        <div class="honor-item reveal"><div class="honor-year">2020</div><div class="honor-title">State CISCE Chess U17 &mdash; Runner-Up &amp; Team Leader</div></div>
-      </div>
-    </div>
-  </section>
-</div>
-
-<div class="wrapper">
   <section id="contact">
     <div class="contact-inner">
       <div class="contact-cta reveal">
@@ -973,150 +200,16 @@
         <a href="mailto:lakshya001@e.ntu.edu.sg" class="btn primary">&#9993; lakshya001@e.ntu.edu.sg</a>
         <a href="https://github.com/lakshya-aga" target="_blank" rel="noopener noreferrer" class="btn">&#8599; GitHub</a>
         <a href="https://www.linkedin.com/in/lakshya-agarwal-7567ba1b3/" target="_blank" rel="noopener noreferrer" class="btn">&#8599; LinkedIn</a>
+        <a href="https://synapsetrading.net" target="_blank" rel="noopener noreferrer" class="btn">&#8599; Synapse Trading</a>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2025 Lakshya Agarwal</p>
-      <p>Let's build.</p>
+      <p>&copy; 2026 Lakshya Agarwal</p>
+      <p>Let&rsquo;s build.</p>
     </div>
   </section>
 </div>
 
-<script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('visible'); }
-    });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-  document.querySelectorAll('.project-card').forEach((card, i) => {
-    card.style.transitionDelay = (i * 0.07) + 's';
-  });
-
-  const navToggle = document.querySelector('.nav-toggle');
-  const navLinks = document.querySelector('.nav-links');
-  if (navToggle && navLinks) {
-    navToggle.addEventListener('click', () => {
-      const isOpen = navLinks.classList.toggle('open');
-      navToggle.setAttribute('aria-expanded', String(isOpen));
-    });
-    navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        navLinks.classList.remove('open');
-        navToggle.setAttribute('aria-expanded', 'false');
-      });
-    });
-  }
-
-  const tag = document.querySelector('.hero-tag');
-  if (tag && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const cursor = document.createElement('span');
-    cursor.style.cssText = 'border-right:2px solid var(--accent2);animation:blink 1s step-end infinite;margin-left:4px;display:inline-block;width:6px;vertical-align:middle;';
-    tag.appendChild(cursor);
-  }
-  const blinkStyle = document.createElement('style');
-  blinkStyle.textContent = '@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}';
-  document.head.appendChild(blinkStyle);
-
-  const pmfgCurve = [
-    { date: '2026-02-18', value: -0.1334 },
-    { date: '2026-02-19', value: 0.5064 },
-    { date: '2026-02-20', value: 0.4749 },
-    { date: '2026-02-23', value: -1.1034 },
-    { date: '2026-02-24', value: -0.2662 },
-    { date: '2026-02-25', value: -1.2209 },
-    { date: '2026-02-26', value: -1.5866 },
-    { date: '2026-02-27', value: -2.9223 },
-    { date: '2026-03-02', value: -3.3275 },
-    { date: '2026-03-03', value: -5.5932 },
-    { date: '2026-03-04', value: -5.8291 },
-    { date: '2026-03-05', value: -7.7349 },
-    { date: '2026-03-06', value: -10.2313 },
-    { date: '2026-03-09', value: -8.8862 },
-    { date: '2026-03-10', value: -9.1055 },
-    { date: '2026-03-11', value: -9.3159 },
-    { date: '2026-03-12', value: -12.7998 },
-    { date: '2026-03-13', value: -12.9415 },
-    { date: '2026-03-16', value: -12.2558 },
-    { date: '2026-03-17', value: -11.5264 },
-    { date: '2026-03-18', value: -11.6382 },
-    { date: '2026-03-19', value: -11.0651 },
-    { date: '2026-03-20', value: -12.0071 },
-    { date: '2026-03-23', value: -10.2784 },
-    { date: '2026-03-24', value: -9.0613 },
-    { date: '2026-03-25', value: -8.9931 },
-    { date: '2026-03-26', value: -11.1140 }
-  ];
-
-  function renderPmfgChart() {
-    const svg = document.getElementById('pmfg-chart');
-    const tooltip = document.getElementById('pmfg-chart-tooltip');
-    const wrap = document.getElementById('pmfg-chart-wrap');
-    if (!svg || !tooltip || !wrap || !pmfgCurve.length) return;
-
-    const width = 420;
-    const height = 220;
-    const margin = { top: 8, right: 12, bottom: 28, left: 42 };
-    const innerWidth = width - margin.left - margin.right;
-    const innerHeight = height - margin.top - margin.bottom;
-    const values = pmfgCurve.map(d => d.value);
-    const minValue = Math.min(...values, 0);
-    const maxValue = Math.max(...values, 0);
-    const pad = Math.max((maxValue - minValue) * 0.12, 0.8);
-    const yMin = minValue - pad;
-    const yMax = maxValue + pad;
-    const xStep = innerWidth / Math.max(pmfgCurve.length - 1, 1);
-    const xFor = (i) => margin.left + i * xStep;
-    const yFor = (v) => margin.top + ((yMax - v) / (yMax - yMin)) * innerHeight;
-    const zeroY = yFor(0);
-
-    const linePath = pmfgCurve.map((d, i) => `${i === 0 ? 'M' : 'L'} ${xFor(i).toFixed(2)} ${yFor(d.value).toFixed(2)}`).join(' ');
-    const areaPath = `${linePath} L ${xFor(pmfgCurve.length - 1).toFixed(2)} ${zeroY.toFixed(2)} L ${xFor(0).toFixed(2)} ${zeroY.toFixed(2)} Z`;
-    const yTicks = [yMin, (yMin + yMax) / 2, yMax];
-    const xTickIdx = [0, Math.floor((pmfgCurve.length - 1) / 2), pmfgCurve.length - 1];
-
-    svg.innerHTML = `
-      <g class="chart-grid">
-        ${yTicks.map(v => `<line x1="${margin.left}" y1="${yFor(v)}" x2="${width - margin.right}" y2="${yFor(v)}"></line>`).join('')}
-      </g>
-      <line class="chart-zero" x1="${margin.left}" y1="${zeroY}" x2="${width - margin.right}" y2="${zeroY}"></line>
-      <path class="chart-area" d="${areaPath}"></path>
-      <path class="chart-line" d="${linePath}"></path>
-      <g class="chart-axis">
-        ${yTicks.map(v => `<text x="${margin.left - 8}" y="${yFor(v) + 4}" text-anchor="end">${v.toFixed(1)}%</text>`).join('')}
-        ${xTickIdx.map(i => `<text x="${xFor(i)}" y="${height - 8}" text-anchor="middle">${pmfgCurve[i].date.slice(5)}</text>`).join('')}
-      </g>
-      <text class="chart-label" x="${margin.left}" y="${margin.top + 10}">Cumulative return</text>
-      <g>
-        ${pmfgCurve.map((d, i) => `<circle class="chart-point" data-date="${d.date}" data-value="${d.value.toFixed(4)}" cx="${xFor(i)}" cy="${yFor(d.value)}" r="3.5" tabindex="0"></circle>`).join('')}
-      </g>
-    `;
-
-    const showTooltip = (event, point) => {
-      const rect = wrap.getBoundingClientRect();
-      const pointRect = point.getBoundingClientRect();
-      tooltip.innerHTML = `<div><strong>${point.dataset.date}</strong></div><div class="muted">Cumulative return</div><div>${Number(point.dataset.value).toFixed(2)}%</div>`;
-      tooltip.classList.add('visible');
-      const left = pointRect.left - rect.left + 12;
-      const top = pointRect.top - rect.top - 12;
-      tooltip.style.left = `${Math.min(left, rect.width - 170)}px`;
-      tooltip.style.top = `${Math.max(top - 36, 8)}px`;
-    };
-
-    const hideTooltip = () => tooltip.classList.remove('visible');
-
-    svg.querySelectorAll('.chart-point').forEach(point => {
-      point.addEventListener('mouseenter', (event) => showTooltip(event, point));
-      point.addEventListener('mousemove', (event) => showTooltip(event, point));
-      point.addEventListener('focus', (event) => showTooltip(event, point));
-      point.addEventListener('mouseleave', hideTooltip);
-      point.addEventListener('blur', hideTooltip);
-    });
-  }
-
-  renderPmfgChart();
-  window.addEventListener('resize', renderPmfgChart);
-</script>
+<script src="assets/site.js"></script>
 </body>
 </html>
