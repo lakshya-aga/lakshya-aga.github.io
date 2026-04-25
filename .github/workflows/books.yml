@@ -18,7 +18,7 @@ jobs:
       - name: Checkout Obsidian vault (ubiquitous-enigma/sources)
         uses: actions/checkout@v4
         with:
-          repository: ubiquitous-enigma/sources
+          repository: lakshya-aga/ubiquitous-enigma/MolecularNotes-master/Sources/
           path: _vault
           fetch-depth: 1
 
