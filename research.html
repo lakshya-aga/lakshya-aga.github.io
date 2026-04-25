@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quant Research &mdash; Lakshya Agarwal</title>
+  <meta name="description" content="Quant research stack and live strategy cards. Agentic AI for finance research at Synapse Trading."/>
+  <link rel="icon" type="image/jpeg" href="assets/profile.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="assets/styles.css"/>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo"><img class="nav-avatar" src="assets/profile.jpg" alt="Lakshya profile"/>LA</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+  <ul class="nav-links" id="site-nav">
+    <li><a href="index.html" data-page="index.html">Home</a></li>
+    <li><a href="experience.html" data-page="experience.html">Experience</a></li>
+    <li><a href="research.html" data-page="research.html">Research</a></li>
+    <li><a href="projects.html" data-page="projects.html">Projects</a></li>
+    <li><a href="books.html" data-page="books.html">Books</a></li>
+    <li><a href="trophies.html" data-page="trophies.html">Trophies</a></li>
+  </ul>
+</nav>
+
+<div class="wrapper">
+  <header class="page-header">
+    <div class="crumb">03 &nbsp;/ &nbsp;Quant Research</div>
+    <h1>Research stack &amp; live strategies</h1>
+    <p>Quant research has two halves &mdash; the <strong>infrastructure</strong> that makes it tractable, and the <strong>strategies</strong> that actually get tested. This page covers both, and links to the <a href="https://synapsetrading.net" target="_blank" rel="noopener noreferrer" style="color:var(--accent2);text-decoration:none;">Synapse Trading</a> venture where the infrastructure side is being productised.</p>
+  </header>
+</div>
+
+<div class="wrapper">
+  <section id="venture">
+    <div class="section-header reveal">
+      <span class="section-num">03.0</span>
+      <h2>The venture</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="venture-card reveal">
+      <div>
+        <div class="venture-tag">Synapse Trading &middot; Agentic AI for finance research</div>
+        <h3>Productising the research stack</h3>
+        <p>
+          <strong>Synapse Trading</strong> is the startup I&rsquo;m building around agentic AI for quantitative finance research. The thesis: most quant research time is spent on glue work &mdash; finding internal code, wrangling datasets, and rebuilding the same backtest scaffolding. Agentic systems can compress that loop if the substrate underneath is reliable.
+        </p>
+        <p>
+          The infrastructure cards below are the open-source building blocks that feed into that work.
+        </p>
+        <div class="venture-cta">
+          <a href="https://synapsetrading.net" target="_blank" rel="noopener noreferrer" class="btn primary">&#8599; synapsetrading.net</a>
+          <a href="mailto:lakshya001@e.ntu.edu.sg" class="btn">&#9993; Get in touch</a>
+        </div>
+      </div>
+      <aside class="venture-side">
+        <div>
+          <strong>Focus areas</strong>
+          MCP-based code retrieval, financial data layers, planner-orchestrator agents, notebook automation.
+        </div>
+        <div>
+          <strong>Why now</strong>
+          Tool-using LLMs are finally good enough to be useful inside a research workflow &mdash; if the tools and data underneath are well-shaped.
+        </div>
+      </aside>
+    </div>
+  </section>
+</div>
+
+<div class="wrapper">
+  <section id="research-infra">
+    <div class="section-header reveal">
+      <span class="section-num">03.1</span>
+      <h2>Research infrastructure</h2>
+      <div class="section-line"></div>
+    </div>
+    <p class="research-board-intro reveal">The tooling stack behind my research workflow: agentic infrastructure for finding internal code, pulling structured financial data, and orchestrating multi-step quantitative analysis.</p>
+    <div class="projects-grid" style="margin-top:1.5rem;">
+      <a class="project-card featured-card reveal" href="https://github.com/lakshya-aga/fruit-thrower" target="_blank" rel="noopener noreferrer">
+        <div class="project-type">&#127795; Internal code MCP</div>
+        <div class="project-title">fruit-thrower</div>
+        <div class="project-desc">Indexes internal Python libraries, exposes them through MCP, and now generates new functions with coding agents so research code becomes discoverable, reusable, and extensible.</div>
+        <div class="project-tags"><span class="tag accent">Featured</span><span class="tag">Python</span><span class="tag">MCP</span><span class="tag">Code retrieval</span></div>
+      </a>
+      <a class="project-card featured-card reveal" href="https://github.com/lakshya-aga/data-mcp" target="_blank" rel="noopener noreferrer">
+        <div class="project-type">&#128200; Financial data MCP</div>
+        <div class="project-title">data-mcp</div>
+        <div class="project-desc">Documentation-first financial data layer for agents, with typed wrapper docs, runnable examples, and an agentic flow for adding new market and macro data sources.</div>
+        <div class="project-tags"><span class="tag accent">Featured</span><span class="tag">Python</span><span class="tag">MCP</span><span class="tag">Finance</span></div>
+      </a>
+      <a class="project-card featured-card reveal" href="https://github.com/lakshya-aga/finagent_v2" target="_blank" rel="noopener noreferrer">
+        <div class="project-type">&#129302; Research orchestrator</div>
+        <div class="project-title">FinAgent v2</div>
+        <div class="project-desc">Planner/orchestrator-based quant research agent that ties tools together for multi-step analysis, notebook automation, and faster iteration across research hypotheses.</div>
+        <div class="project-tags"><span class="tag accent">Featured</span><span class="tag">Python</span><span class="tag">Agentic AI</span><span class="tag">Quant</span></div>
+      </a>
+      <a class="project-card reveal" href="https://github.com/lakshya-aga/fin-kit" target="_blank" rel="noopener noreferrer">
+        <div class="project-type">&#128295; Quant toolkit</div>
+        <div class="project-title">fin-kit</div>
+        <div class="project-desc">Collection of reusable quantitative finance utilities built around factor research, mlfinlab workflows, and notebook-friendly experimentation.</div>
+        <div class="project-tags"><span class="tag">Python</span><span class="tag">Quant</span><span class="tag">Research</span></div>
+      </a>
+    </div>
+  </section>
+</div>
+
+<div class="wrapper">
+  <section id="strategies">
+    <div class="section-header reveal">
+      <span class="section-num">03.2</span>
+      <h2>Live strategy cards</h2>
+      <div class="section-line"></div>
+    </div>
+    <p class="research-board-intro reveal">A live shelf for the strategies and ideas I&rsquo;m actively testing, refining, or trying to falsify. New cards land here as soon as they have a clean hypothesis, a defensible execution rule, and at least one honest result &mdash; even if that result is negative.</p>
+
+    <div class="research-board">
+      <div class="project-card strategy-card reveal" style="cursor:default;">
+        <div class="project-type">&#129504; Strategy Card &middot; PMFG / Peripheral Trading</div>
+        <div class="project-title">Peripheral Trading with Planar Maximally Filtered Graphs</div>
+        <div class="project-desc strategy-lead">A graph-based equity strategy inspired by <strong>Pozzi, Di Matteo, and Aste (2013)</strong> that uses a PMFG network to hunt for peripheral names and turn them into a tradeable basket. It expresses a view about market topology, not just factor exposure.</div>
+        <div class="project-tags">
+          <span class="tag accent">Graph-based alpha</span><span class="tag">PMFG</span><span class="tag">Network filtering</span><span class="tag">Python</span><span class="tag">Backtest framing</span>
+        </div>
+        <div class="strategy-layout">
+          <div class="strategy-copy">
+            <p>Built to turn a paper idea into something tradeable and measurable. The workflow takes the daily PMFG selection, enters at the <strong>next trading day close</strong>, exits at the <strong>next rebalance close</strong>, and marks the final basket to the latest available close.</p>
+            <p>What I like about it is the interpretability. Instead of running another flat ranking model, I can use <strong>network topology</strong> as the signal itself and directly test whether peripheral names behave differently from the dense market core.</p>
+            <div class="paper-cite">Inspired by Pozzi, F., Di Matteo, T., &amp; Aste, T. (2013), <em>Exponential smoothing weighted correlations and financial time series modeling</em>.</div>
+            <div class="strategy-points">
+              <div class="strategy-point">
+                <strong>Signal construction</strong>
+                <span>Build a PMFG from the exponentially weighted correlation structure, rank names by the paper-style centrality aggregation, and take the peripheral basket as the tradeable portfolio.</span>
+              </div>
+              <div class="strategy-point">
+                <strong>Execution assumption</strong>
+                <span>Equal-weight across 10 selected names, entered on the next trading day after the signal and exited on the next signal&rsquo;s trading day. Keeps the backtest simple and reproducible.</span>
+              </div>
+              <div class="strategy-point">
+                <strong>Why I like it</strong>
+                <span>The first forward run is negative, which makes the project more real. It forces the framework to earn its keep against live marks instead of surviving on a neat in-sample story.</span>
+              </div>
+            </div>
+          </div>
+          <aside class="dashboard-card" aria-label="PMFG strategy dashboard">
+            <div class="dashboard-heading">Mini dashboard</div>
+            <div class="dashboard-grid">
+              <div class="metric"><div class="metric-value negative">-11.11%</div><div class="metric-label">Cumulative forward return</div></div>
+              <div class="metric"><div class="metric-value">27</div><div class="metric-label">Trade periods</div></div>
+              <div class="metric"><div class="metric-value positive">+1.96%</div><div class="metric-label">Best basket period</div></div>
+              <div class="metric"><div class="metric-value negative">-3.84%</div><div class="metric-label">Worst basket period</div></div>
+              <div class="metric"><div class="metric-value">10</div><div class="metric-label">Names per rebalance</div></div>
+              <div class="metric"><div class="metric-value">2026-03-26</div><div class="metric-label">Latest marked close</div></div>
+            </div>
+            <div class="chart-wrap" id="pmfg-chart-wrap">
+              <div class="chart-meta">
+                <span>Interactive equity curve</span>
+                <span><strong>Hover points</strong> for date and cumulative return</span>
+              </div>
+              <div class="chart-tooltip" id="pmfg-chart-tooltip"></div>
+              <svg id="pmfg-chart" class="chart-svg" viewBox="0 0 420 220" role="img" aria-label="Interactive PMFG forward P and L chart"></svg>
+            </div>
+            <div class="dashboard-note">
+              Forward P&amp;L generated from the PMFG research repo using a simple execution rule: next-day close entry, next-signal close exit, equal-weight basket. The notebook does <em>not</em> define a canonical execution model, so this dashboard should be read as an explicit research wrapper, not a polished production backtest.
+            </div>
+          </aside>
+        </div>
+      </div>
+
+      <div class="research-placeholder reveal">
+        <div class="research-placeholder-title">More strategy cards coming</div>
+        <p>Each new card needs a clean hypothesis, a minimally defensible execution rule, and at least one honest result worth showing. If a strategy can&rsquo;t hit those bars, it stays in the notebook.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="wrapper">
+  <section id="reading">
+    <div class="section-header reveal">
+      <span class="section-num">03.3</span>
+      <h2>Reading &amp; notes</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="nav-panel">
+      <a class="nav-panel-card reveal" href="https://lakshya-aga.github.io/quartz/" target="_blank" rel="noopener noreferrer">
+        <div class="panel-num">/ Notes</div>
+        <div class="nav-panel-heading">Quartz digital garden</div>
+        <p>The full Obsidian vault, published. Quant finance, ML papers, agentic AI experiments, engineering notes.</p>
+        <div class="nav-panel-sub"><span>External &middot; lakshya-aga.github.io/quartz</span><span class="arrow">&#8599;</span></div>
+      </a>
+      <a class="nav-panel-card reveal" href="books.html">
+        <div class="panel-num">/ Books</div>
+        <div class="nav-panel-heading">Book reviews</div>
+        <p>Reading log auto-published from the vault &mdash; anything tagged <code>#book</code> flows into a dedicated index.</p>
+        <div class="nav-panel-sub"><span>Auto-synced</span><span class="arrow">&rarr;</span></div>
+      </a>
+    </div>
+  </section>
+</div>
+
+<div class="wrapper">
+  <section id="contact">
+    <div class="contact-inner">
+      <div class="contact-cta reveal">
+        <h3>Working on something similar?</h3>
+        <p>Happy to talk about agentic research workflows, MCP servers, or specific strategy ideas. Synapse Trading is actively iterating with research teams.</p>
+      </div>
+      <div class="contact-links reveal">
+        <a href="https://synapsetrading.net" target="_blank" rel="noopener noreferrer" class="btn primary">&#8599; Synapse Trading</a>
+        <a href="mailto:lakshya001@e.ntu.edu.sg" class="btn">&#9993; Email</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Lakshya Agarwal</p>
+      <p><a href="index.html" style="color:var(--muted);text-decoration:none;">&larr; Home</a></p>
+    </div>
+  </section>
+</div>
+
+<script src="assets/site.js"></script>
+<script>
+  const pmfgCurve = [
+    { date: '2026-02-18', value: -0.1334 },
+    { date: '2026-02-19', value: 0.5064 },
+    { date: '2026-02-20', value: 0.4749 },
+    { date: '2026-02-23', value: -1.1034 },
+    { date: '2026-02-24', value: -0.2662 },
+    { date: '2026-02-25', value: -1.2209 },
+    { date: '2026-02-26', value: -1.5866 },
+    { date: '2026-02-27', value: -2.9223 },
+    { date: '2026-03-02', value: -3.3275 },
+    { date: '2026-03-03', value: -5.5932 },
+    { date: '2026-03-04', value: -5.8291 },
+    { date: '2026-03-05', value: -7.7349 },
+    { date: '2026-03-06', value: -10.2313 },
+    { date: '2026-03-09', value: -8.8862 },
+    { date: '2026-03-10', value: -9.1055 },
+    { date: '2026-03-11', value: -9.3159 },
+    { date: '2026-03-12', value: -12.7998 },
+    { date: '2026-03-13', value: -12.9415 },
+    { date: '2026-03-16', value: -12.2558 },
+    { date: '2026-03-17', value: -11.5264 },
+    { date: '2026-03-18', value: -11.6382 },
+    { date: '2026-03-19', value: -11.0651 },
+    { date: '2026-03-20', value: -12.0071 },
+    { date: '2026-03-23', value: -10.2784 },
+    { date: '2026-03-24', value: -9.0613 },
+    { date: '2026-03-25', value: -8.9931 },
+    { date: '2026-03-26', value: -11.1140 }
+  ];
+
+  function renderPmfgChart() {
+    const svg = document.getElementById('pmfg-chart');
+    const tooltip = document.getElementById('pmfg-chart-tooltip');
+    const wrap = document.getElementById('pmfg-chart-wrap');
+    if (!svg || !tooltip || !wrap || !pmfgCurve.length) return;
+
+    const width = 420;
+    const height = 220;
+    const margin = { top: 8, right: 12, bottom: 28, left: 42 };
+    const innerWidth = width - margin.left - margin.right;
+    const innerHeight = height - margin.top - margin.bottom;
+    const values = pmfgCurve.map(d => d.value);
+    const minValue = Math.min(...values, 0);
+    const maxValue = Math.max(...values, 0);
+    const pad = Math.max((maxValue - minValue) * 0.12, 0.8);
+    const yMin = minValue - pad;
+    const yMax = maxValue + pad;
+    const xStep = innerWidth / Math.max(pmfgCurve.length - 1, 1);
+    const xFor = (i) => margin.left + i * xStep;
+    const yFor = (v) => margin.top + ((yMax - v) / (yMax - yMin)) * innerHeight;
+    const zeroY = yFor(0);
+
+    const linePath = pmfgCurve.map((d, i) => `${i === 0 ? 'M' : 'L'} ${xFor(i).toFixed(2)} ${yFor(d.value).toFixed(2)}`).join(' ');
+    const areaPath = `${linePath} L ${xFor(pmfgCurve.length - 1).toFixed(2)} ${zeroY.toFixed(2)} L ${xFor(0).toFixed(2)} ${zeroY.toFixed(2)} Z`;
+    const yTicks = [yMin, (yMin + yMax) / 2, yMax];
+    const xTickIdx = [0, Math.floor((pmfgCurve.length - 1) / 2), pmfgCurve.length - 1];
+
+    svg.innerHTML = `
+      <g class="chart-grid">
+        ${yTicks.map(v => `<line x1="${margin.left}" y1="${yFor(v)}" x2="${width - margin.right}" y2="${yFor(v)}"></line>`).join('')}
+      </g>
+      <line class="chart-zero" x1="${margin.left}" y1="${zeroY}" x2="${width - margin.right}" y2="${zeroY}"></line>
+      <path class="chart-area" d="${areaPath}"></path>
+      <path class="chart-line" d="${linePath}"></path>
+      <g class="chart-axis">
+        ${yTicks.map(v => `<text x="${margin.left - 8}" y="${yFor(v) + 4}" text-anchor="end">${v.toFixed(1)}%</text>`).join('')}
+        ${xTickIdx.map(i => `<text x="${xFor(i)}" y="${height - 8}" text-anchor="middle">${pmfgCurve[i].date.slice(5)}</text>`).join('')}
+      </g>
+      <text class="chart-label" x="${margin.left}" y="${margin.top + 10}">Cumulative return</text>
+      <g>
+        ${pmfgCurve.map((d, i) => `<circle class="chart-point" data-date="${d.date}" data-value="${d.value.toFixed(4)}" cx="${xFor(i)}" cy="${yFor(d.value)}" r="3.5" tabindex="0"></circle>`).join('')}
+      </g>
+    `;
+
+    const showTooltip = (event, point) => {
+      const rect = wrap.getBoundingClientRect();
+      const pointRect = point.getBoundingClientRect();
+      tooltip.innerHTML = `<div><strong>${point.dataset.date}</strong></div><div class="muted">Cumulative return</div><div>${Number(point.dataset.value).toFixed(2)}%</div>`;
+      tooltip.classList.add('visible');
+      const left = pointRect.left - rect.left + 12;
+      const top = pointRect.top - rect.top - 12;
+      tooltip.style.left = `${Math.min(left, rect.width - 170)}px`;
+      tooltip.style.top = `${Math.max(top - 36, 8)}px`;
+    };
+
+    const hideTooltip = () => tooltip.classList.remove('visible');
+
+    svg.querySelectorAll('.chart-point').forEach(point => {
+      point.addEventListener('mouseenter', (event) => showTooltip(event, point));
+      point.addEventListener('mousemove', (event) => showTooltip(event, point));
+      point.addEventListener('focus', (event) => showTooltip(event, point));
+      point.addEventListener('mouseleave', hideTooltip);
+      point.addEventListener('blur', hideTooltip);
+    });
+  }
+
+  renderPmfgChart();
+  window.addEventListener('resize', renderPmfgChart);
+</script>
+</body>
+</html>
