@@ -10,7 +10,7 @@
   const reduceMotion = window.matchMedia &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  fetch('assets/fourier-lakshya.json', { cache: 'force-cache' })
+  fetch('assets/fourier-agarwal.json')
     .then((r) => r.json())
     .then((data) => init(data))
     .catch(() => {
