@@ -60,7 +60,7 @@
     const TRAIL_MAX = 4000;
 
     // Animation timing — one full sweep over CYCLE seconds.
-    const CYCLE = 14;
+    const CYCLE = 3;
     let startTs = null;
     let lastTs = null;
     let pauseAfterCycles = 1;
