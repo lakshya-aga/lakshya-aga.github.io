@@ -60,7 +60,7 @@
     const TRAIL_MAX = 4000;
 
     // Animation timing — one full sweep over CYCLE seconds.
-    const CYCLE = 3;
+    const CYCLE = 10;
     let startTs = null;
     let lastTs = null;
     let pauseAfterCycles = 1;
@@ -189,7 +189,23 @@
     }
 
     function frame(now) {
-      if (startTs === null) startTs = now;
+      if (startTs === null) {
+        if (firstFrame) {
+          // Start halfway through the first cycle so the trail looks
+          // already underway on initial paint. Pre-populate the trail
+          // with samples covering t=0..π so the first half of the word
+          // is visible immediately.
+          startTs = now - (CYCLE * 1000) / 2;
+          const HALF = 800;
+          for (let i = 0; i < HALF; i++) {
+            const tt = (i / (HALF * 2)) * Math.PI * 2;
+            trail.push(penAt(tt));
+          }
+          firstFrame = false;
+        } else {
+          startTs = now;
+        }
+      }
       lastTs = now;
       const elapsed = (now - startTs) / 1000;
 
@@ -275,6 +291,7 @@
 
     let frozenAt = 0;
     let raf = null;
+    let firstFrame = true;
 
     if (reduceMotion) {
       // Static render: draw the full reconstruction once and stop.
