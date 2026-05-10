@@ -126,7 +126,7 @@
       ctx.lineJoin = 'round';
 
       // Faint connecting arms
-      ctx.strokeStyle = 'rgba(78,168,222,0.30)'; // accent2
+      ctx.strokeStyle = 'rgba(44,107,179,0.40)'; // accent2
       ctx.lineWidth = 1;
       ctx.beginPath();
       const first = dataToScreen(joints[0]);
@@ -138,7 +138,7 @@
       ctx.stroke();
 
       // Faint circles for each epicycle (only for the ~20 biggest, to reduce noise)
-      ctx.strokeStyle = 'rgba(200,169,110,0.18)'; // accent
+      ctx.strokeStyle = 'rgba(156,112,41,0.30)'; // accent
       ctx.lineWidth = 0.7;
       const N = Math.min(joints.length - 1, 28);
       for (let i = 0; i < N; i++) {
@@ -153,11 +153,11 @@
 
       // Pen tip
       const tip = dataToScreen(joints[joints.length - 1]);
-      ctx.fillStyle = '#c8a96e';
+      ctx.fillStyle = '#9c7029';
       ctx.beginPath();
       ctx.arc(tip[0], tip[1], 2.6, 0, Math.PI * 2);
       ctx.fill();
-      ctx.shadowColor = 'rgba(200,169,110,0.55)';
+      ctx.shadowColor = 'rgba(156,112,41,0.45)';
       ctx.shadowBlur = 8;
       ctx.beginPath();
       ctx.arc(tip[0], tip[1], 1.8, 0, Math.PI * 2);
@@ -171,11 +171,11 @@
       if (trail.length < 2) return;
       ctx.save();
       ctx.scale(dpr, dpr);
-      ctx.strokeStyle = '#c8a96e';
+      ctx.strokeStyle = '#9c7029';
       ctx.lineWidth = 2.2;
       ctx.lineCap = 'round';
       ctx.lineJoin = 'round';
-      ctx.shadowColor = 'rgba(200,169,110,0.45)';
+      ctx.shadowColor = 'rgba(156,112,41,0.35)';
       ctx.shadowBlur = 6;
       ctx.beginPath();
       const p0 = dataToScreen(trail[0]);
@@ -271,11 +271,11 @@
       }
       ctx.save();
       ctx.scale(dpr, dpr);
-      ctx.strokeStyle = '#c8a96e';
+      ctx.strokeStyle = '#9c7029';
       ctx.lineWidth = 2.2;
       ctx.lineCap = 'round';
       ctx.lineJoin = 'round';
-      ctx.shadowColor = 'rgba(200,169,110,0.5)';
+      ctx.shadowColor = 'rgba(156,112,41,0.4)';
       ctx.shadowBlur = 8;
       ctx.beginPath();
       const p0 = dataToScreen(fullPathCache[0]);
