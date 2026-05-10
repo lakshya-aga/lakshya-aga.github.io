@@ -5,14 +5,14 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg: #0a0c0e;
-  --surface: #111417;
-  --surface2: #181c21;
-  --border: #1e2530;
-  --accent: #c8a96e;
-  --accent2: #4ea8de;
-  --text: #d4d8df;
-  --muted: #5a6272;
+  --bg: #faf6ec;
+  --surface: #ffffff;
+  --surface2: #f1ecdf;
+  --border: #ddd5c2;
+  --accent: #9c7029;
+  --accent2: #2c6bb3;
+  --text: #1a1d22;
+  --muted: #6a6f78;
   --mono: 'IBM Plex Mono', monospace;
   --serif: 'Playfair Display', serif;
 }
@@ -55,7 +55,7 @@ nav {
   display: flex; align-items: center; justify-content: space-between;
   padding: 1.2rem 3rem;
   border-bottom: 1px solid var(--border);
-  background: rgba(10,12,14,0.85);
+  background: rgba(250,246,236,0.85);
   backdrop-filter: blur(12px);
 }
 .nav-logo {
@@ -106,7 +106,7 @@ section { padding: 4.5rem 0; }
 
 .section-header { display: flex; align-items: baseline; gap: 1.2rem; margin-bottom: 3rem; }
 .section-num { font-size: 0.7rem; color: var(--accent2); letter-spacing: 0.15em; }
-h2 { font-family: var(--serif); font-size: 1.8rem; font-weight: 500; color: #f0f2f5; }
+h2 { font-family: var(--serif); font-size: 1.8rem; font-weight: 500; color: var(--text); }
 .section-line { flex: 1; height: 1px; background: var(--border); }
 
 /* ---------- PAGE HEADER ---------- */
@@ -127,7 +127,7 @@ h2 { font-family: var(--serif); font-size: 1.8rem; font-weight: 500; color: #f0f
   font-size: clamp(2rem, 4.5vw, 3.2rem);
   font-weight: 600;
   line-height: 1.05;
-  color: #f0f2f5;
+  color: var(--text);
   letter-spacing: -0.01em;
   margin-bottom: 1rem;
 }
@@ -154,7 +154,7 @@ h1.hero-title {
   font-size: clamp(2rem, 4.6vw, 3.6rem);
   font-weight: 700;
   line-height: 1.0;
-  color: #f0f2f5;
+  color: var(--text);
   letter-spacing: -0.02em;
   opacity: 0;
   margin: 0;
@@ -180,7 +180,7 @@ h1.hero-title .hero-firstname { display: block; color: var(--accent); }
   border-radius: 50%;
   object-fit: cover;
   border: 1px solid rgba(200,169,110,0.35);
-  box-shadow: 0 6px 24px rgba(0,0,0,0.45);
+  box-shadow: 0 6px 24px rgba(120,90,40,0.18);
   opacity: 0;
   animation: fadeUp 0.6s 0.45s forwards;
 }
@@ -203,7 +203,7 @@ h1.hero-title .hero-firstname { display: block; color: var(--accent); }
 }
 .fourier-hero .fourier-fallback {
   font-family: inherit;
-  color: #f0f2f5;
+  color: var(--text);
   position: absolute;
   inset: 0;
   display: flex;
@@ -303,7 +303,7 @@ h1.hero-title .hero-firstname { display: block; color: var(--accent); }
 .nav-panel-heading {
   font-family: var(--serif);
   font-size: 1.15rem;
-  color: #f0f2f5;
+  color: var(--text);
   margin-bottom: 0.5rem;
 }
 .nav-panel-card p { color: var(--muted); font-size: 0.8rem; line-height: 1.75; flex: 1; }
@@ -365,7 +365,7 @@ h1.hero-title .hero-firstname { display: block; color: var(--accent); }
 }
 .exp-date { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.08em; }
 .exp-company { font-size: 0.8rem; color: var(--accent2); margin-top: 0.3rem; }
-.exp-role { font-family: var(--serif); font-size: 1.05rem; color: #f0f2f5; margin-bottom: 0.8rem; }
+.exp-role { font-family: var(--serif); font-size: 1.05rem; color: var(--text); margin-bottom: 0.8rem; }
 .exp-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.8; }
 .exp-desc li { list-style: none; padding-left: 1rem; position: relative; margin-bottom: 0.3rem; }
 .exp-desc li::before { content: '›'; position: absolute; left: 0; color: var(--accent); }
@@ -378,7 +378,7 @@ h1.hero-title .hero-firstname { display: block; color: var(--accent); }
   padding: 1.5rem 0;
   border-bottom: 1px solid var(--border);
 }
-.edu-deg { font-family: var(--serif); font-size: 1rem; color: #f0f2f5; margin-bottom: 0.3rem; }
+.edu-deg { font-family: var(--serif); font-size: 1rem; color: var(--text); margin-bottom: 0.3rem; }
 .edu-school { font-size: 0.8rem; color: var(--accent2); margin-bottom: 0.5rem; }
 .edu-detail { font-size: 0.78rem; color: var(--muted); }
 
@@ -408,7 +408,7 @@ h1.hero-title .hero-firstname { display: block; color: var(--accent); }
 .project-card.featured-card { border-left: 2px solid var(--accent); }
 .project-type { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--accent2); margin-bottom: 0.8rem; }
 .project-card.featured-card .project-type { color: var(--accent); }
-.project-title { font-family: var(--serif); font-size: 1.05rem; color: #f0f2f5; margin-bottom: 0.6rem; }
+.project-title { font-family: var(--serif); font-size: 1.05rem; color: var(--text); margin-bottom: 0.6rem; }
 .project-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.7; }
 .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
 .project-card.add-card {
@@ -457,7 +457,7 @@ h1.hero-title .hero-firstname { display: block; color: var(--accent); }
 .venture-card h3 {
   font-family: var(--serif);
   font-size: 1.6rem;
-  color: #f0f2f5;
+  color: var(--text);
   margin-bottom: 0.7rem;
   line-height: 1.2;
 }
@@ -490,7 +490,7 @@ h1.hero-title .hero-firstname { display: block; color: var(--accent); }
 /* ---------- STRATEGY (RESEARCH) CARD ---------- */
 .research-board { margin-top: 1.5rem; display: grid; gap: 1.5rem; }
 .research-board-intro { color: var(--muted); font-size: 0.8rem; line-height: 1.85; max-width: 760px; }
-.research-placeholder { border: 1px dashed var(--border); background: rgba(17,20,23,0.45); padding: 1.2rem 1.3rem; }
+.research-placeholder { border: 1px dashed var(--border); background: rgba(0,0,0,0.03); padding: 1.2rem 1.3rem; }
 .research-placeholder-title {
   font-size: 0.72rem;
   text-transform: uppercase;
@@ -502,7 +502,7 @@ h1.hero-title .hero-firstname { display: block; color: var(--accent); }
 
 .strategy-card {
   border: 1px solid rgba(200,169,110,0.28);
-  background: linear-gradient(180deg, rgba(200,169,110,0.06), rgba(17,20,23,0.96));
+  background: linear-gradient(180deg, rgba(200,169,110,0.10), var(--surface));
   padding: 1.8rem;
 }
 .strategy-card .project-type { color: var(--accent); }
@@ -520,7 +520,7 @@ h1.hero-title .hero-firstname { display: block; color: var(--accent); }
 .strategy-points { display: grid; gap: 0.75rem; margin-top: 1rem; }
 .strategy-point {
   border: 1px solid var(--border);
-  background: rgba(10,12,14,0.4);
+  background: rgba(255,255,255,0.65);
   padding: 0.9rem 1rem;
 }
 .strategy-point strong {
@@ -535,7 +535,7 @@ h1.hero-title .hero-firstname { display: block; color: var(--accent); }
 
 .dashboard-card {
   border: 1px solid var(--border);
-  background: rgba(10,12,14,0.55);
+  background: rgba(255,255,255,0.7);
   padding: 1.25rem;
   position: sticky;
   top: 100px;
@@ -549,9 +549,9 @@ h1.hero-title .hero-firstname { display: block; color: var(--accent); }
 }
 .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
 .metric { border: 1px solid var(--border); background: var(--surface); padding: 0.85rem; min-height: 88px; }
-.metric-value { font-family: var(--serif); font-size: 1.35rem; line-height: 1.1; color: #f0f2f5; }
-.metric-value.negative { color: #f87171; }
-.metric-value.positive { color: #7dd3fc; }
+.metric-value { font-family: var(--serif); font-size: 1.35rem; line-height: 1.1; color: var(--text); }
+.metric-value.negative { color: #b03434; }
+.metric-value.positive { color: #1f7a4d; }
 .metric-label {
   margin-top: 0.45rem;
   font-size: 0.66rem;
@@ -572,7 +572,7 @@ h1.hero-title .hero-firstname { display: block; color: var(--accent); }
 .chart-wrap {
   margin-top: 1rem;
   border: 1px solid var(--border);
-  background: linear-gradient(180deg, rgba(24,28,33,0.95), rgba(10,12,14,0.98));
+  background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(241,236,223,0.96));
   padding: 0.85rem;
   position: relative;
   overflow: hidden;
@@ -585,24 +585,24 @@ h1.hero-title .hero-firstname { display: block; color: var(--accent); }
 }
 .chart-meta strong { color: var(--text); font-weight: 500; }
 .chart-svg { width: 100%; height: auto; display: block; }
-.chart-axis text, .chart-label { fill: #7b8495; font-size: 11px; font-family: var(--mono); }
-.chart-grid line { stroke: rgba(255,255,255,0.08); stroke-dasharray: 3 5; }
-.chart-zero { stroke: rgba(200,169,110,0.45); stroke-dasharray: 5 5; }
-.chart-area { fill: rgba(78,168,222,0.14); }
-.chart-line { fill: none; stroke: #4ea8de; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
-.chart-point { fill: #0a0c0e; stroke: #7dd3fc; stroke-width: 1.5; cursor: pointer; transition: r 0.15s ease, fill 0.15s ease; }
-.chart-point:hover, .chart-point:focus-visible { fill: #7dd3fc; r: 5.5; outline: none; }
+.chart-axis text, .chart-label { fill: #6f7682; font-size: 11px; font-family: var(--mono); }
+.chart-grid line { stroke: rgba(0,0,0,0.07); stroke-dasharray: 3 5; }
+.chart-zero { stroke: rgba(156,112,41,0.55); stroke-dasharray: 5 5; }
+.chart-area { fill: rgba(44,107,179,0.10); }
+.chart-line { fill: none; stroke: #2c6bb3; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.chart-point { fill: #ffffff; stroke: #1f568f; stroke-width: 1.5; cursor: pointer; transition: r 0.15s ease, fill 0.15s ease; }
+.chart-point:hover, .chart-point:focus-visible { fill: #1f568f; r: 5.5; outline: none; }
 .chart-tooltip {
   position: absolute;
   min-width: 160px;
   pointer-events: none;
-  background: rgba(10,12,14,0.96);
-  border: 1px solid rgba(200,169,110,0.3);
+  background: rgba(255,255,255,0.97);
+  border: 1px solid rgba(156,112,41,0.35);
   padding: 0.7rem 0.8rem;
   font-size: 0.72rem;
   color: var(--text);
   line-height: 1.6;
-  box-shadow: 0 14px 30px rgba(0,0,0,0.32);
+  box-shadow: 0 14px 30px rgba(60,40,10,0.12);
   opacity: 0;
   transform: translateY(6px);
   transition: opacity 0.14s ease, transform 0.14s ease;
@@ -682,13 +682,13 @@ h1.hero-title .hero-firstname { display: block; color: var(--accent); }
   color: var(--accent2);
   margin-bottom: 0.7rem;
 }
-.book-card .book-status.finished { color: #7dd3fc; }
+.book-card .book-status.finished { color: #1f7a4d; }
 .book-card .book-status.reading { color: var(--accent); }
-.book-card .book-status.dropped { color: #f87171; }
+.book-card .book-status.dropped { color: #b03434; }
 .book-card .book-title {
   font-family: var(--serif);
   font-size: 1.1rem;
-  color: #f0f2f5;
+  color: var(--text);
   margin-bottom: 0.35rem;
   line-height: 1.25;
 }
@@ -753,7 +753,7 @@ h1.hero-title .hero-firstname { display: block; color: var(--accent); }
 .contact-cta h3 {
   font-family: var(--serif);
   font-size: 2rem;
-  color: #f0f2f5;
+  color: var(--text);
   margin-bottom: 0.5rem;
 }
 .contact-cta p { font-size: 0.82rem; color: var(--muted); }
