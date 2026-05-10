@@ -151,22 +151,45 @@ h2 { font-family: var(--serif); font-size: 1.8rem; font-weight: 500; color: #f0f
 }
 h1.hero-title {
   font-family: var(--serif);
-  font-size: clamp(3rem, 7vw, 5.5rem);
+  font-size: clamp(2rem, 4.6vw, 3.6rem);
   font-weight: 700;
   line-height: 1.0;
   color: #f0f2f5;
   letter-spacing: -0.02em;
   opacity: 0;
+  margin: 0;
   animation: fadeUp 0.6s 0.35s forwards;
 }
 h1.hero-title span { color: var(--accent); }
 h1.hero-title .hero-firstname { display: block; color: var(--accent); }
 
+.hero-head {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  flex-wrap: wrap;
+}
+.hero-head .hero-title {
+  flex: 1 1 380px;
+  min-width: 0;
+}
+.hero-photo {
+  flex: 0 0 auto;
+  width: clamp(140px, 16vw, 200px);
+  height: clamp(140px, 16vw, 200px);
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid rgba(200,169,110,0.35);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.45);
+  opacity: 0;
+  animation: fadeUp 0.6s 0.45s forwards;
+}
+
 .fourier-hero {
   display: block;
   width: 100%;
-  max-width: 780px;
-  height: clamp(140px, 22vw, 240px);
+  max-width: 100%;
+  height: clamp(90px, 13vw, 140px);
   position: relative;
   margin-bottom: 0.2em;
   color: inherit;
@@ -194,7 +217,7 @@ h1.hero-title .hero-firstname { display: block; color: var(--accent); }
 .fourier-hero.fallback canvas { display: none; }
 .fourier-hero.fallback .fourier-fallback { opacity: 1; }
 @media (prefers-reduced-motion: reduce) {
-  .fourier-hero { height: clamp(110px, 18vw, 200px); }
+  .fourier-hero { height: clamp(80px, 12vw, 130px); }
 }
 .hero-sub {
   margin-top: 1.8rem;
