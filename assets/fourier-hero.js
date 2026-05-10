@@ -23,6 +23,17 @@
     const dataW = bb.maxX - bb.minX;
     const dataH = bb.maxY - bb.minY;
 
+    const colors = {};
+    function refreshColors() {
+      const cs = getComputedStyle(document.documentElement);
+      colors.trail = cs.getPropertyValue('--fourier-trail').trim() || '#c8a96e';
+      colors.arm = cs.getPropertyValue('--fourier-arm').trim() || 'rgba(78,168,222,0.30)';
+      colors.circle = cs.getPropertyValue('--fourier-circle').trim() || 'rgba(200,169,110,0.18)';
+      colors.glow = cs.getPropertyValue('--fourier-glow').trim() || 'rgba(200,169,110,0.55)';
+    }
+    refreshColors();
+    document.addEventListener('themechange', refreshColors);
+
     const canvas = document.createElement('canvas');
     canvas.setAttribute('aria-label', 'Fourier series animation tracing the name Lakshya');
     canvas.setAttribute('role', 'img');
@@ -126,7 +137,7 @@
       ctx.lineJoin = 'round';
 
       // Faint connecting arms
-      ctx.strokeStyle = 'rgba(44,107,179,0.40)'; // accent2
+      ctx.strokeStyle = colors.arm;
       ctx.lineWidth = 1;
       ctx.beginPath();
       const first = dataToScreen(joints[0]);
@@ -138,7 +149,7 @@
       ctx.stroke();
 
       // Faint circles for each epicycle (only for the ~20 biggest, to reduce noise)
-      ctx.strokeStyle = 'rgba(156,112,41,0.30)'; // accent
+      ctx.strokeStyle = colors.circle;
       ctx.lineWidth = 0.7;
       const N = Math.min(joints.length - 1, 28);
       for (let i = 0; i < N; i++) {
@@ -153,11 +164,11 @@
 
       // Pen tip
       const tip = dataToScreen(joints[joints.length - 1]);
-      ctx.fillStyle = '#9c7029';
+      ctx.fillStyle = colors.trail;
       ctx.beginPath();
       ctx.arc(tip[0], tip[1], 2.6, 0, Math.PI * 2);
       ctx.fill();
-      ctx.shadowColor = 'rgba(156,112,41,0.45)';
+      ctx.shadowColor = colors.glow;
       ctx.shadowBlur = 8;
       ctx.beginPath();
       ctx.arc(tip[0], tip[1], 1.8, 0, Math.PI * 2);
@@ -171,11 +182,11 @@
       if (trail.length < 2) return;
       ctx.save();
       ctx.scale(dpr, dpr);
-      ctx.strokeStyle = '#9c7029';
+      ctx.strokeStyle = colors.trail;
       ctx.lineWidth = 2.2;
       ctx.lineCap = 'round';
       ctx.lineJoin = 'round';
-      ctx.shadowColor = 'rgba(156,112,41,0.35)';
+      ctx.shadowColor = colors.glow;
       ctx.shadowBlur = 6;
       ctx.beginPath();
       const p0 = dataToScreen(trail[0]);
@@ -271,11 +282,11 @@
       }
       ctx.save();
       ctx.scale(dpr, dpr);
-      ctx.strokeStyle = '#9c7029';
+      ctx.strokeStyle = colors.trail;
       ctx.lineWidth = 2.2;
       ctx.lineCap = 'round';
       ctx.lineJoin = 'round';
-      ctx.shadowColor = 'rgba(156,112,41,0.4)';
+      ctx.shadowColor = colors.glow;
       ctx.shadowBlur = 8;
       ctx.beginPath();
       const p0 = dataToScreen(fullPathCache[0]);

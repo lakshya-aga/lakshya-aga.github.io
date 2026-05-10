@@ -1,5 +1,21 @@
-/* Shared site interactions: nav toggle, scroll reveal, active nav link */
+/* Shared site interactions: nav toggle, scroll reveal, active nav link, theme toggle */
 (function () {
+  // Theme toggle. Persists to localStorage; an inline script in <head>
+  // applies the saved choice before first paint to avoid theme flash.
+  const root = document.documentElement;
+  function applyTheme(t) {
+    if (t === 'light') root.classList.add('light');
+    else root.classList.remove('light');
+    document.dispatchEvent(new CustomEvent('themechange', { detail: { theme: t } }));
+  }
+  document.querySelectorAll('.theme-toggle').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const next = root.classList.contains('light') ? 'dark' : 'light';
+      try { localStorage.setItem('theme', next); } catch (e) {}
+      applyTheme(next);
+    });
+  });
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) e.target.classList.add('visible');
