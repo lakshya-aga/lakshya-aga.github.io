@@ -468,6 +468,29 @@ h1.hero-title .hero-firstname { display: block; color: var(--accent); }
 .edu-school { font-size: 0.8rem; color: var(--accent2); margin-bottom: 0.5rem; }
 .edu-detail { font-size: 0.78rem; color: var(--muted); }
 
+/* Compact section spacing for very small blocks like Test Scores. */
+section.section-tight { padding: 2rem 0; }
+section.section-tight .section-header { margin-bottom: 1.4rem; }
+
+.score-row { display: flex; flex-wrap: wrap; gap: 0.7rem; }
+.score-pill {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 0.55rem 0.95rem;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+.score-pill strong {
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-right: 0.45rem;
+  font-size: 0.7rem;
+}
+
 .honors-list { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 .honor-item { padding: 1.2rem 1.5rem; border: 1px solid var(--border); background: var(--surface); }
 .honor-year { font-size: 0.68rem; color: var(--accent); letter-spacing: 0.1em; }
