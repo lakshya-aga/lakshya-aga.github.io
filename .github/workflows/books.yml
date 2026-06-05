@@ -15,10 +15,10 @@ jobs:
       - name: Checkout site
         uses: actions/checkout@v4
 
-      - name: Checkout Obsidian vault (ubiquitous-enigma/sources)
+      - name: Checkout Obsidian vault (ubiquitous-enigma)
         uses: actions/checkout@v4
         with:
-          repository: lakshya-aga/ubiquitous-enigma/MolecularNotes-master/Sources/
+          repository: lakshya-aga/ubiquitous-enigma
           path: _vault
           fetch-depth: 1
 
@@ -29,7 +29,7 @@ jobs:
 
       - name: Build books.json
         env:
-          VAULT_DIR: ./_vault
+          VAULT_DIR: ./_vault/MolecularNotes-master/Sources
           QUARTZ_BASE: https://lakshya-aga.github.io/quartz
         run: node scripts/fetch-books.js
 
