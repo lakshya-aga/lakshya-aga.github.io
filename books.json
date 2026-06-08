@@ -1,8 +1,23 @@
 {
-  "generated_at": "2026-06-07T08:23:01.134Z",
+  "generated_at": "2026-06-08T09:22:02.065Z",
   "source": "github.com/lakshya-aga/ubiquitous-enigma/MolecularNotes-master/Sources",
   "count": 8,
   "books": [
+    {
+      "title": "A Tour of CPP",
+      "author": "",
+      "status": "",
+      "rating": "",
+      "finished": "",
+      "started": "",
+      "tags": [
+        "source"
+      ],
+      "summary": "Author: Bjarne Stroustoup Type: source book Link: https://www.amazon.sg/Tour-C-Bjarne-Stroustrup-dp-0136816487/dp/0136816487/ref=dpobimagebk Topics: C++, Programming",
+      "slug": "A Tour of CPP",
+      "url": "https://lakshya-aga.github.io/quartz/A%20Tour%20of%20CPP",
+      "updated": "2026-06-08T09:21:57.661Z"
+    },
     {
       "title": "Advances in Financial Machine Learning",
       "author": "",
@@ -16,7 +31,7 @@
       "summary": "Author: Lopez de Prado Type: source book Link: Topics: MolecularNotes-master/Topics/Finance, Trading",
       "slug": "Advances in Financial Machine Learning",
       "url": "https://lakshya-aga.github.io/quartz/Advances%20in%20Financial%20Machine%20Learning",
-      "updated": "2026-06-07T08:22:56.157Z"
+      "updated": "2026-06-08T09:21:57.661Z"
     },
     {
       "title": "Brief History of Time",
@@ -31,7 +46,7 @@
       "summary": "Author: Dr. Stephen Hawking Type: source book Link: Topics: Physics",
       "slug": "Brief History of Time",
       "url": "https://lakshya-aga.github.io/quartz/Brief%20History%20of%20Time",
-      "updated": "2026-06-07T08:22:56.157Z"
+      "updated": "2026-06-08T09:21:57.661Z"
     },
     {
       "title": "Designing Data Intensive Applications",
@@ -46,7 +61,7 @@
       "summary": "Author: Martin Kleppmann Type: source book Link: Topics: System Design",
       "slug": "Designing Data Intensive Applications",
       "url": "https://lakshya-aga.github.io/quartz/Designing%20Data%20Intensive%20Applications",
-      "updated": "2026-06-07T08:22:56.157Z"
+      "updated": "2026-06-08T09:21:57.661Z"
     },
     {
       "title": "Topics Covered",
@@ -61,7 +76,7 @@
       "summary": "Author: Dr. Dan Stefanica Type: source book Link: Topics: Calculus, Bonds, Options, Finance, Math",
       "slug": "Math Primer for Financial Engineering",
       "url": "https://lakshya-aga.github.io/quartz/Math%20Primer%20for%20Financial%20Engineering",
-      "updated": "2026-06-07T08:22:56.157Z"
+      "updated": "2026-06-08T09:21:57.661Z"
     },
     {
       "title": "Principles",
@@ -76,7 +91,7 @@
       "summary": "Author: Ray Dalio Type: source book Link: Topics: Finance",
       "slug": "Principles",
       "url": "https://lakshya-aga.github.io/quartz/Principles",
-      "updated": "2026-06-07T08:22:56.157Z"
+      "updated": "2026-06-08T09:21:57.661Z"
     },
     {
       "title": "Psychology of Intelligence Analysis",
@@ -91,7 +106,7 @@
       "summary": "Author: Richard Heur Type: source book Link: Topics: Psychology",
       "slug": "Psychology of Intelligence Analysis",
       "url": "https://lakshya-aga.github.io/quartz/Psychology%20of%20Intelligence%20Analysis",
-      "updated": "2026-06-07T08:22:56.157Z"
+      "updated": "2026-06-08T09:21:57.661Z"
     },
     {
       "title": "Reith Lectures on Black Holes",
@@ -106,22 +121,7 @@
       "summary": "Author: Dr. Stephen Hawking Type: source book Link: Topics: Physics",
       "slug": "Reith Lectures on Black Holes",
       "url": "https://lakshya-aga.github.io/quartz/Reith%20Lectures%20on%20Black%20Holes",
-      "updated": "2026-06-07T08:22:56.157Z"
-    },
-    {
-      "title": "A Tour of CPP",
-      "author": "",
-      "status": "",
-      "rating": "",
-      "finished": "",
-      "started": "",
-      "tags": [
-        "source"
-      ],
-      "summary": "Author: Bjarne Stroustoup Type: source book Link: https://www.amazon.sg/Tour-C-Bjarne-Stroustrup-dp-0136816487/dp/0136816487/ref=dpobimagebk Topics: C++, Programming",
-      "slug": "A Tour of CPP",
-      "url": "https://lakshya-aga.github.io/quartz/A%20Tour%20of%20CPP",
-      "updated": "2026-06-07T08:22:56.156Z"
+      "updated": "2026-06-08T09:21:57.661Z"
     }
   ]
 }
