@@ -114,7 +114,7 @@ function hasBookTag(tags) {
 function stripMarkdown(s) {
   return s
     .replace(/!\[[^\]]*\]\([^)]*\)/g, '')
-    .replace(/\[\[([^\]|#]+)(?:#[^\]|]+)?(?:\|([^\]]+))?\]\]/g, (_, p1, p2) => p2 || p1)
+    .replace(/\[\[([^\]|#]+)(?:#[^\]|]+)?(?:\|([^\]]+))?\]\]/g, (_, p1, p2) => p2 || p1.split('/').pop())
     .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
     .replace(/[*_`~>#]/g, '')
     .replace(/\s+/g, ' ')
@@ -124,7 +124,7 @@ function stripMarkdown(s) {
 function cleanField(s) {
   if (!s) return '';
   return String(s)
-    .replace(/\[\[([^\]|#]+)(?:#[^\]|]+)?(?:\|([^\]]+))?\]\]/g, (_, p1, p2) => p2 || p1)
+    .replace(/\[\[([^\]|#]+)(?:#[^\]|]+)?(?:\|([^\]]+))?\]\]/g, (_, p1, p2) => p2 || p1.split('/').pop())
     .replace(/(?:^|\s)#[A-Za-z][\w/\-]*/g, '')
     .replace(/\s+/g, ' ')
     .trim();
