@@ -121,6 +121,46 @@ function stripMarkdown(s) {
     .trim();
 }
 
+function cleanField(s) {
+  if (!s) return '';
+  return String(s)
+    .replace(/\[\[([^\]|#]+)(?:#[^\]|]+)?(?:\|([^\]]+))?\]\]/g, (_, p1, p2) => p2 || p1)
+    .replace(/(?:^|\s)#[A-Za-z][\w/\-]*/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+// Parse the Obsidian inline-meta head: leading `Key: value` lines terminated by
+// `---` or a blank line followed by non key:value content. Returns the parsed
+// fields and the remaining body (review content).
+function parseInlineMeta(body) {
+  const meta = {};
+  const lines = body.split(/\r?\n/);
+  let i = 0;
+  let sawAny = false;
+  for (; i < lines.length; i++) {
+    const line = lines[i];
+    const trimmed = line.trim();
+    if (trimmed === '---') { i++; break; }
+    if (!trimmed) {
+      if (sawAny) { i++; break; }
+      continue;
+    }
+    const m = trimmed.match(/^([A-Za-z][A-Za-z0-9_ \-]*?)\s*:\s*(.*)$/);
+    if (!m) break;
+    meta[m[1].trim().toLowerCase()] = m[2].trim();
+    sawAny = true;
+  }
+  // Skip any trailing blank lines or `---` separator that follow the meta head.
+  while (i < lines.length) {
+    const t = lines[i].trim();
+    if (t === '' || t === '---') { i++; continue; }
+    break;
+  }
+  const rest = lines.slice(i).join('\n');
+  return { meta: sawAny ? meta : {}, rest: sawAny ? rest : body };
+}
+
 function firstParagraph(body) {
   const cleaned = body
     .split(/\r?\n/)
@@ -132,9 +172,26 @@ function firstParagraph(body) {
   return stripMarkdown(match).slice(0, 360);
 }
 
-function firstHeading(body) {
-  const m = body.match(/^#\s+(.+)$/m);
-  return m ? stripMarkdown(m[1]) : '';
+function splitTopicList(s) {
+  if (!s) return [];
+  // Split on commas not inside `[[...]]` brackets.
+  const out = [];
+  let depth = 0;
+  let buf = '';
+  for (const ch of String(s)) {
+    if (ch === '[') depth++;
+    else if (ch === ']') depth = Math.max(0, depth - 1);
+    if (ch === ',' && depth === 0) {
+      const v = cleanField(buf);
+      if (v) out.push(v);
+      buf = '';
+    } else {
+      buf += ch;
+    }
+  }
+  const tail = cleanField(buf);
+  if (tail) out.push(tail);
+  return out;
 }
 
 function deriveSlug(filePath, vaultDir) {
@@ -187,27 +244,37 @@ function main() {
     }
 
     const { fm, body } = parseFrontmatter(raw);
+    const { meta: inline, rest: reviewBody } = parseInlineMeta(body);
     const tags = collectTags(fm, body);
-    if (!hasBookTag(tags)) continue;
+    // Inline `Type: #source #book` may not have been picked up if collectTags
+    // missed the leading-line case — re-scan inline meta values for #tags.
+    if (inline.type) {
+      String(inline.type).split(/\s+/).forEach(tok => {
+        if (tok.startsWith('#')) tags.push(tok.slice(1));
+      });
+    }
+    splitTopicList(inline.topics).forEach(t => { if (t) tags.push(t); });
+    const dedupedTags = Array.from(new Set(tags.map(t => t.trim()).filter(Boolean)));
+    if (!hasBookTag(dedupedTags)) continue;
 
     const fileBase = path.basename(file, path.extname(file));
-    const title = fm.title || fm.book || firstHeading(body) || fileBase;
+    const title = fm.title || fm.book || fileBase;
     const slug = deriveSlug(file, VAULT_DIR);
     const stat = fs.statSync(file);
 
-    const summary = fm.summary || fm.description || fm.review || firstParagraph(body);
+    const summary = fm.summary || fm.description || fm.review || firstParagraph(reviewBody);
 
     books.push({
       title: String(title).trim(),
-      author: fm.author || fm.authors || '',
-      status: fm.status || '',
-      rating: fm.rating || fm.score || '',
-      finished: fm.finished || fm.read || fm.completed || fm.date || '',
-      started: fm.started || '',
-      tags: tags.filter(t => t.toLowerCase() !== 'book' && !t.toLowerCase().startsWith('book/')),
+      author: cleanField(fm.author || fm.authors || inline.author || ''),
+      status: fm.status || inline.status || '',
+      rating: fm.rating || fm.score || inline.rating || '',
+      finished: fm.finished || fm.read || fm.completed || fm.date || inline.finished || '',
+      started: fm.started || inline.started || '',
+      tags: dedupedTags.filter(t => t.toLowerCase() !== 'book' && !t.toLowerCase().startsWith('book/')),
       summary: String(summary || '').trim(),
       slug,
-      url: fm.url || quartzUrl(slug),
+      url: fm.url || inline.link || quartzUrl(slug),
       updated: stat.mtime.toISOString()
     });
   }
