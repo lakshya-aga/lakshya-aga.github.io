@@ -1,127 +1,137 @@
 {
-  "generated_at": "2026-06-09T08:30:08.309Z",
+  "generated_at": "2026-06-09T16:05:34.576Z",
   "source": "github.com/lakshya-aga/ubiquitous-enigma/MolecularNotes-master/Sources",
   "count": 8,
   "books": [
     {
       "title": "Advances in Financial Machine Learning",
-      "author": "",
+      "author": "Lopez de Prado",
       "status": "",
       "rating": "",
       "finished": "",
       "started": "",
       "tags": [
-        "source"
+        "source",
+        "MolecularNotes-master/Topics/Finance",
+        "Trading"
       ],
-      "summary": "Author: Lopez de Prado Type: source book Link: Topics: MolecularNotes-master/Topics/Finance, Trading",
+      "summary": "I like the width and cases of how some of these techniques are useful. Code snippets really get rid of any ambiguity. The book needs better semantic explanations. It relies on code to actually get the algorithms across and barely touches on the why and when. Too much focus on the \"how\" which can be found fairly easily on demand.",
       "slug": "Advances in Financial Machine Learning",
       "url": "https://lakshya-aga.github.io/quartz/Advances%20in%20Financial%20Machine%20Learning",
-      "updated": "2026-06-09T08:30:04.107Z"
+      "updated": "2026-06-09T16:03:25.883Z"
     },
     {
       "title": "Brief History of Time",
-      "author": "",
+      "author": "Dr. Stephen Hawking",
       "status": "",
       "rating": "",
       "finished": "",
       "started": "",
       "tags": [
-        "source"
+        "source",
+        "Physics"
       ],
-      "summary": "Author: Dr. Stephen Hawking Type: source book Link: Topics: Physics",
+      "summary": "The book is absolutely fantastic to get a glimpse of how our understanding of the universe evolved. It starts off with some theories primarily based in supernatural powers stating the geocentric theory. This was later replaced by the helio centric theory.",
       "slug": "Brief History of Time",
       "url": "https://lakshya-aga.github.io/quartz/Brief%20History%20of%20Time",
-      "updated": "2026-06-09T08:30:04.107Z"
+      "updated": "2026-06-09T16:03:25.883Z"
     },
     {
       "title": "Designing Data Intensive Applications",
-      "author": "",
+      "author": "Martin Kleppmann",
       "status": "",
       "rating": "",
       "finished": "",
       "started": "",
       "tags": [
-        "source"
+        "source",
+        "System Design"
       ],
-      "summary": "Author: Martin Kleppmann Type: source book Link: Topics: System Design",
+      "summary": "- There is a tradeoff between read and write for these models - Normalised RDBMS have the quality of returning data through joins which means if an object property such as profile picture of a user changes, all references do not need to be updated - However, the joins can sometimes(less often than you would think) prove to be expensive. Instead systems like",
       "slug": "Designing Data Intensive Applications",
       "url": "https://lakshya-aga.github.io/quartz/Designing%20Data%20Intensive%20Applications",
-      "updated": "2026-06-09T08:30:04.107Z"
+      "updated": "2026-06-09T16:03:25.883Z"
     },
     {
-      "title": "Topics Covered",
-      "author": "",
+      "title": "Math Primer for Financial Engineering",
+      "author": "Dr. Dan Stefanica",
       "status": "",
       "rating": "",
       "finished": "",
       "started": "",
       "tags": [
-        "source"
+        "source",
+        "Calculus, Bonds, Options, Finance, Math"
       ],
-      "summary": "Author: Dr. Dan Stefanica Type: source book Link: Topics: Calculus, Bonds, Options, Finance, Math",
+      "summary": "Very frequently recommended book. Calculus ideas are very friendly. Builds intuition all the way from first principles.",
       "slug": "Math Primer for Financial Engineering",
       "url": "https://lakshya-aga.github.io/quartz/Math%20Primer%20for%20Financial%20Engineering",
-      "updated": "2026-06-09T08:30:04.107Z"
+      "updated": "2026-06-09T16:03:25.883Z"
     },
     {
       "title": "Principles",
-      "author": "",
+      "author": "Ray Dalio",
       "status": "",
       "rating": "",
       "finished": "",
       "started": "",
       "tags": [
-        "source"
+        "source",
+        "Finance"
       ],
-      "summary": "Author: Ray Dalio Type: source book Link: Topics: Finance",
+      "summary": "Primarily a story book. Kind of motivational. Provides some examples of how unconventional thinking is Helpful. Example McDonald's Chicken nuggets were possible because of hay futures! Because price of chicken was volatile primarily due to chicken feed",
       "slug": "Principles",
       "url": "https://lakshya-aga.github.io/quartz/Principles",
-      "updated": "2026-06-09T08:30:04.107Z"
+      "updated": "2026-06-09T16:03:25.883Z"
     },
     {
       "title": "Psychology of Intelligence Analysis",
-      "author": "",
+      "author": "Richard Heur",
       "status": "",
       "rating": "",
       "finished": "",
       "started": "",
       "tags": [
-        "source"
+        "source",
+        "Psychology"
       ],
-      "summary": "Author: Richard Heur Type: source book Link: Topics: Psychology",
+      "summary": "General introduction. Perception is active not passive. Perception is reconstruction of reality, not merely recording it. Perception is influenced by - Past experience - Cultural values - education and 2 other factors I cannot recollect --- Demonstrates how trajectory of information matters A more ambiguous start leads to less favourable outcomes as more inf",
       "slug": "Psychology of Intelligence Analysis",
       "url": "https://lakshya-aga.github.io/quartz/Psychology%20of%20Intelligence%20Analysis",
-      "updated": "2026-06-09T08:30:04.107Z"
+      "updated": "2026-06-09T16:03:25.883Z"
     },
     {
       "title": "Reith Lectures on Black Holes",
-      "author": "",
+      "author": "Dr. Stephen Hawking",
       "status": "",
       "rating": "",
       "finished": "",
       "started": "",
       "tags": [
-        "source"
+        "source",
+        "Physics"
       ],
-      "summary": "Author: Dr. Stephen Hawking Type: source book Link: Topics: Physics",
+      "summary": "Very short and simple compilation of basic ideas of Black holes. Some funny history is also there such as French going against the name Black Hole - trou noire because of it being obscene. Interesting theories are presented. What can be inferred from a black hole - spin, charge and mass. Does black hole retain information? As much as catching ash when a book",
       "slug": "Reith Lectures on Black Holes",
       "url": "https://lakshya-aga.github.io/quartz/Reith%20Lectures%20on%20Black%20Holes",
-      "updated": "2026-06-09T08:30:04.107Z"
+      "updated": "2026-06-09T16:03:25.883Z"
     },
     {
       "title": "A Tour of CPP",
-      "author": "",
+      "author": "Bjarne Stroustoup",
       "status": "",
       "rating": "",
       "finished": "",
       "started": "",
       "tags": [
-        "source"
+        "source",
+        "C++",
+        "Programming"
       ],
-      "summary": "Author: Bjarne Stroustoup Type: source book Link: https://www.amazon.sg/Tour-C-Bjarne-Stroustrup-dp-0136816487/dp/0136816487/ref=dpobimagebk Topics: C++, Programming",
+      "summary": "Last read: March 2026",
       "slug": "A Tour of CPP",
-      "url": "https://lakshya-aga.github.io/quartz/A%20Tour%20of%20CPP",
-      "updated": "2026-06-09T08:30:04.106Z"
+      "url": "https://www.amazon.sg/Tour-C-Bjarne-Stroustrup-dp-0136816487/dp/0136816487/ref=dp_ob_image_bk",
+      "updated": "2026-06-09T16:03:25.881Z"
     }
   ]
 }
