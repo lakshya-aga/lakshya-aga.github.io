@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-06-25T15:33:09.246Z",
-  "source": "github.com/lakshya-aga/ubiquitous-enigma/MolecularNotes-master/Sources",
-  "count": 8,
+  "generated_at": "2026-06-25T15:37:08.585Z",
+  "source": "github.com/lakshya-aga/ubiquitous-enigma",
+  "count": 10,
   "books": [
     {
       "title": "Advances in Financial Machine Learning",
@@ -132,6 +132,39 @@
       "slug": "A Tour of CPP",
       "url": "https://www.amazon.sg/Tour-C-Bjarne-Stroustrup-dp-0136816487/dp/0136816487/ref=dp_ob_image_bk",
       "updated": "2026-06-09T16:03:25.881Z"
+    },
+    {
+      "title": "Effective C++",
+      "author": "Scott Meyers",
+      "status": "",
+      "rating": "",
+      "finished": "",
+      "started": "",
+      "tags": [
+        "source",
+        "define",
+        "CPP"
+      ],
+      "summary": "- C - OOP - Templates - STL",
+      "slug": "Effective C++",
+      "url": "https://lakshya-aga.github.io/quartz/Effective-C%2B%2B",
+      "updated": "2026-06-09T16:03:25.873Z"
+    },
+    {
+      "title": "Effective modern C++",
+      "author": "Scott Meyers",
+      "status": "",
+      "rating": "",
+      "finished": "",
+      "started": "",
+      "tags": [
+        "source",
+        "CPP"
+      ],
+      "summary": "- Key idea 1 - Key idea 2",
+      "slug": "Effective modern C++",
+      "url": "https://lakshya-aga.github.io/quartz/Effective-modern-C%2B%2B",
+      "updated": "2026-06-09T16:03:25.873Z"
     }
   ]
 }
