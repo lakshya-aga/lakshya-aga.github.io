@@ -194,14 +194,18 @@ function splitTopicList(s) {
   return out;
 }
 
-function deriveSlug(filePath) {
-  return path.basename(filePath, path.extname(filePath));
+function deriveSlug(filePath, vaultDir) {
+  const rel = path.relative(vaultDir, filePath).replace(/\\/g, '/');
+  return rel.replace(/\.md$/i, '');
 }
 
 function quartzUrl(slug) {
-  // Quartz serves notes at hyphenated basenames; folder structure is stripped.
-  const base = slug.split('/').pop().trim().replace(/\s+/g, '-');
-  return `${QUARTZ_BASE}/${encodeURIComponent(base).replace(/%2D/g, '-')}`;
+  // Quartz mirrors the vault folder structure; each path segment has its
+  // spaces collapsed to hyphens. Reserved chars are URL-encoded.
+  const parts = slug.split('/').map(seg =>
+    encodeURIComponent(seg.trim().replace(/\s+/g, '-'))
+  );
+  return `${QUARTZ_BASE}/${parts.join('/')}`;
 }
 
 // ---------- walk ----------
@@ -260,7 +264,7 @@ function main() {
 
     const fileBase = path.basename(file, path.extname(file));
     const title = fm.title || fm.book || fileBase;
-    const slug = deriveSlug(file);
+    const slug = deriveSlug(file, VAULT_DIR);
     const stat = fs.statSync(file);
 
     const summary = fm.summary || fm.description || fm.review || firstParagraph(reviewBody);
