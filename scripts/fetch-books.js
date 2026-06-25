@@ -200,8 +200,9 @@ function deriveSlug(filePath, vaultDir) {
 }
 
 function quartzUrl(slug) {
-  const parts = slug.split('/').map(seg => encodeURIComponent(seg));
-  return `${QUARTZ_BASE}/${parts.join('/')}`;
+  // Quartz serves notes at hyphenated basenames; folder structure is stripped.
+  const base = slug.split('/').pop().trim().replace(/\s+/g, '-');
+  return `${QUARTZ_BASE}/${encodeURIComponent(base).replace(/%2D/g, '-')}`;
 }
 
 // ---------- walk ----------
