@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-06-25T15:37:08.585Z",
+  "generated_at": "2026-06-25T15:47:06.200Z",
   "source": "github.com/lakshya-aga/ubiquitous-enigma",
-  "count": 10,
+  "count": 12,
   "books": [
     {
       "title": "Advances in Financial Machine Learning",
-      "author": "Lopez de Prado",
+      "author": "Lopez de Prado 1",
       "status": "",
       "rating": "",
       "finished": "",
@@ -18,7 +18,7 @@
       "summary": "I like the width and cases of how some of these techniques are useful. Code snippets really get rid of any ambiguity. The book needs better semantic explanations. It relies on code to actually get the algorithms across and barely touches on the why and when. Too much focus on the \"how\" which can be found fairly easily on demand.",
       "slug": "Advances in Financial Machine Learning",
       "url": "https://lakshya-aga.github.io/quartz/Advances-in-Financial-Machine-Learning",
-      "updated": "2026-06-09T16:03:25.883Z"
+      "updated": "2026-06-25T15:47:02.176Z"
     },
     {
       "title": "Brief History of Time",
@@ -34,7 +34,7 @@
       "summary": "The book is absolutely fantastic to get a glimpse of how our understanding of the universe evolved. It starts off with some theories primarily based in supernatural powers stating the geocentric theory. This was later replaced by the helio centric theory.",
       "slug": "Brief History of Time",
       "url": "https://lakshya-aga.github.io/quartz/Brief-History-of-Time",
-      "updated": "2026-06-09T16:03:25.883Z"
+      "updated": "2026-06-25T15:47:02.176Z"
     },
     {
       "title": "Designing Data Intensive Applications",
@@ -50,7 +50,57 @@
       "summary": "- There is a tradeoff between read and write for these models - Normalised RDBMS have the quality of returning data through joins which means if an object property such as profile picture of a user changes, all references do not need to be updated - However, the joins can sometimes(less often than you would think) prove to be expensive. Instead systems like",
       "slug": "Designing Data Intensive Applications",
       "url": "https://lakshya-aga.github.io/quartz/Designing-Data-Intensive-Applications",
-      "updated": "2026-06-09T16:03:25.883Z"
+      "updated": "2026-06-25T15:47:02.176Z"
+    },
+    {
+      "title": "Effective C++",
+      "author": "Scott Meyers",
+      "status": "",
+      "rating": "",
+      "finished": "",
+      "started": "",
+      "tags": [
+        "source",
+        "define",
+        "include",
+        "CPP"
+      ],
+      "summary": "- C - OOP - Templates - STL",
+      "slug": "Effective C++",
+      "url": "https://lakshya-aga.github.io/quartz/Effective-C%2B%2B",
+      "updated": "2026-06-25T15:47:02.176Z"
+    },
+    {
+      "title": "Effective modern C++",
+      "author": "Scott Meyers",
+      "status": "",
+      "rating": "",
+      "finished": "",
+      "started": "",
+      "tags": [
+        "source",
+        "include",
+        "CPP"
+      ],
+      "summary": "Understanding Template Type deduction",
+      "slug": "Effective modern C++",
+      "url": "https://lakshya-aga.github.io/quartz/Effective-modern-C%2B%2B",
+      "updated": "2026-06-25T15:47:02.176Z"
+    },
+    {
+      "title": "Fooled by Randomness",
+      "author": "",
+      "status": "",
+      "rating": "",
+      "finished": "",
+      "started": "",
+      "tags": [
+        "source"
+      ],
+      "summary": "Chapter 1 lays out the premise of Nero, w cautious and intellectually curious trader. Although certain in his methods, he gets waivered by someone around him, doing visibly better even though he knows that a lot of his counterpart's success is attributable to randomness. A saying Aimad Taleb during my time at Astignes said aligns with this - there are no old",
+      "slug": "Fooled by Randomness",
+      "url": "https://lakshya-aga.github.io/quartz/Fooled-by-Randomness",
+      "updated": "2026-06-25T15:47:02.176Z"
     },
     {
       "title": "Math Primer for Financial Engineering",
@@ -66,7 +116,23 @@
       "summary": "Very frequently recommended book. Calculus ideas are very friendly. Builds intuition all the way from first principles.",
       "slug": "Math Primer for Financial Engineering",
       "url": "https://lakshya-aga.github.io/quartz/Math-Primer-for-Financial-Engineering",
-      "updated": "2026-06-09T16:03:25.883Z"
+      "updated": "2026-06-25T15:47:02.176Z"
+    },
+    {
+      "title": "Mean Markets and Lizard Brains",
+      "author": "Terry Burnham",
+      "status": "",
+      "rating": "",
+      "finished": "",
+      "started": "",
+      "tags": [
+        "source",
+        "Finance"
+      ],
+      "summary": "The first part of the book largely argues against the efficient market hypothesis and how irrationality may be capitalised on. The main argument for this is impirical. Such as why were tulip bulbs more expensive than a house in Amsterdam even though you can potentially produce infinite tulips from one, driving up supply. Warren buffet is another example of t",
+      "slug": "Mean Markets and Lizard Brains",
+      "url": "https://lakshya-aga.github.io/quartz/Mean-Markets-and-Lizard-Brains",
+      "updated": "2026-06-25T15:47:02.176Z"
     },
     {
       "title": "Principles",
@@ -77,12 +143,12 @@
       "started": "",
       "tags": [
         "source",
-        "Finance"
+        "Finance 1"
       ],
       "summary": "Primarily a story book. Kind of motivational. Provides some examples of how unconventional thinking is Helpful. Example McDonald's Chicken nuggets were possible because of hay futures! Because price of chicken was volatile primarily due to chicken feed",
       "slug": "Principles",
       "url": "https://lakshya-aga.github.io/quartz/Principles",
-      "updated": "2026-06-09T16:03:25.883Z"
+      "updated": "2026-06-25T15:47:02.176Z"
     },
     {
       "title": "Psychology of Intelligence Analysis",
@@ -98,7 +164,7 @@
       "summary": "General introduction. Perception is active not passive. Perception is reconstruction of reality, not merely recording it. Perception is influenced by - Past experience - Cultural values - education and 2 other factors I cannot recollect --- Demonstrates how trajectory of information matters A more ambiguous start leads to less favourable outcomes as more inf",
       "slug": "Psychology of Intelligence Analysis",
       "url": "https://lakshya-aga.github.io/quartz/Psychology-of-Intelligence-Analysis",
-      "updated": "2026-06-09T16:03:25.883Z"
+      "updated": "2026-06-25T15:47:02.176Z"
     },
     {
       "title": "Reith Lectures on Black Holes",
@@ -114,7 +180,7 @@
       "summary": "Very short and simple compilation of basic ideas of Black holes. Some funny history is also there such as French going against the name Black Hole - trou noire because of it being obscene. Interesting theories are presented. What can be inferred from a black hole - spin, charge and mass. Does black hole retain information? As much as catching ash when a book",
       "slug": "Reith Lectures on Black Holes",
       "url": "https://lakshya-aga.github.io/quartz/Reith-Lectures-on-Black-Holes",
-      "updated": "2026-06-09T16:03:25.883Z"
+      "updated": "2026-06-25T15:47:02.176Z"
     },
     {
       "title": "A Tour of CPP",
@@ -131,40 +197,7 @@
       "summary": "Last read: March 2026",
       "slug": "A Tour of CPP",
       "url": "https://www.amazon.sg/Tour-C-Bjarne-Stroustrup-dp-0136816487/dp/0136816487/ref=dp_ob_image_bk",
-      "updated": "2026-06-09T16:03:25.881Z"
-    },
-    {
-      "title": "Effective C++",
-      "author": "Scott Meyers",
-      "status": "",
-      "rating": "",
-      "finished": "",
-      "started": "",
-      "tags": [
-        "source",
-        "define",
-        "CPP"
-      ],
-      "summary": "- C - OOP - Templates - STL",
-      "slug": "Effective C++",
-      "url": "https://lakshya-aga.github.io/quartz/Effective-C%2B%2B",
-      "updated": "2026-06-09T16:03:25.873Z"
-    },
-    {
-      "title": "Effective modern C++",
-      "author": "Scott Meyers",
-      "status": "",
-      "rating": "",
-      "finished": "",
-      "started": "",
-      "tags": [
-        "source",
-        "CPP"
-      ],
-      "summary": "- Key idea 1 - Key idea 2",
-      "slug": "Effective modern C++",
-      "url": "https://lakshya-aga.github.io/quartz/Effective-modern-C%2B%2B",
-      "updated": "2026-06-09T16:03:25.873Z"
+      "updated": "2026-06-25T15:47:02.175Z"
     }
   ]
 }
