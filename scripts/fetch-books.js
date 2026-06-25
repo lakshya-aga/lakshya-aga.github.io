@@ -194,9 +194,8 @@ function splitTopicList(s) {
   return out;
 }
 
-function deriveSlug(filePath, vaultDir) {
-  const rel = path.relative(vaultDir, filePath).replace(/\\/g, '/');
-  return rel.replace(/\.md$/i, '');
+function deriveSlug(filePath) {
+  return path.basename(filePath, path.extname(filePath));
 }
 
 function quartzUrl(slug) {
@@ -214,7 +213,8 @@ function walk(dir, acc = []) {
     return acc;
   }
   for (const entry of entries) {
-    if (entry.name.startsWith('.')) continue;
+    // Skip dotfiles and Obsidian system folders (_templates, _attachments, _scripts).
+    if (entry.name.startsWith('.') || entry.name.startsWith('_')) continue;
     const full = path.join(dir, entry.name);
     if (entry.isDirectory()) {
       walk(full, acc);
@@ -260,7 +260,7 @@ function main() {
 
     const fileBase = path.basename(file, path.extname(file));
     const title = fm.title || fm.book || fileBase;
-    const slug = deriveSlug(file, VAULT_DIR);
+    const slug = deriveSlug(file);
     const stat = fs.statSync(file);
 
     const summary = fm.summary || fm.description || fm.review || firstParagraph(reviewBody);
@@ -291,7 +291,7 @@ function main() {
 
   const payload = {
     generated_at: new Date().toISOString(),
-    source: 'github.com/lakshya-aga/ubiquitous-enigma/MolecularNotes-master/Sources',
+    source: 'github.com/lakshya-aga/ubiquitous-enigma',
     count: books.length,
     books
   };
