@@ -486,24 +486,55 @@ ul.list > li { display: flex; }
 .hero-name {
   font-family: var(--serif);
   font-weight: 600;
-  font-size: clamp(2rem, 5vw, 2.8rem);
+  font-size: clamp(1.9rem, 4.5vw, 2.4rem);
   letter-spacing: -0.015em;
   line-height: 1.1;
   color: var(--text-primary);
+}
+
+/* ---------- SIGNATURE (Fourier-on-demand) ---------- */
+.signature-row {
   display: flex;
   flex-direction: column;
-  gap: 0.1em;
+  gap: 0.75rem;
+  margin-top: 1rem;
 }
-.hero-first {
-  display: block;
-  color: var(--text-primary);
+.signature-play {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  width: max-content;
+  background: transparent;
+  border: 0.5px solid var(--border-primary);
+  color: var(--text-tertiary);
+  padding: 0.4rem 0.85rem;
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  font-weight: 500;
+  border-radius: 999px;
+  transition: color var(--t-fast) ease, border-color var(--t-fast) ease, opacity var(--t-fast) ease;
 }
+.signature-play:hover { color: var(--text-primary); border-color: var(--text-tertiary); }
+.signature-play[disabled], .signature-play.played {
+  opacity: 0;
+  pointer-events: none;
+  height: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  transition: opacity 200ms ease, height 200ms ease 200ms, padding 200ms ease 200ms;
+  overflow: hidden;
+}
+.signature-play svg { flex-shrink: 0; }
+
+.fourier-wrap { width: 100%; }
 .fourier-hero {
   display: block;
   width: 100%;
-  height: clamp(70px, 9vw, 110px);
+  height: clamp(80px, 11vw, 130px);
   position: relative;
   color: var(--text-primary);
+  animation: fadeUp 400ms ease both;
 }
 .fourier-hero canvas {
   position: absolute; inset: 0;
@@ -514,10 +545,11 @@ ul.list > li { display: flex; }
   position: absolute; inset: 0;
   display: flex; align-items: center;
   font-family: var(--serif);
-  font-weight: 600;
-  font-size: clamp(2rem, 5vw, 2.8rem);
-  color: var(--text-primary);
-  letter-spacing: -0.015em;
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  color: var(--text-quaternary);
+  letter-spacing: 0.01em;
   line-height: 1;
   transition: opacity 400ms ease;
 }
