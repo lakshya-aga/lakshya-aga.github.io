@@ -33,7 +33,7 @@
   <header class="page-header">
     <div class="crumb">05 &nbsp;/ &nbsp;Reading log</div>
     <h1>Reviews</h1>
-    <p>An auto-published index of book notes from my Obsidian vault. Anything I tag <code>#book</code> in <a href="https://github.com/ubiquitous-enigma/sources" target="_blank" rel="noopener noreferrer" style="color:var(--accent2);text-decoration:none;">ubiquitous-enigma/sources</a> gets parsed by a daily GitHub Actions workflow and rendered here. Each card links back to the full note so the long-form review lives in one canonical place.</p>
+    <p>An auto-published index of book notes from my Obsidian vault. Anything I tag <code>#book</code> in <a href="https://github.com/ubiquitous-enigma/sources" target="_blank" rel="noopener noreferrer" style="color:var(--accent2);text-decoration:none;">ubiquitous-enigma/sources</a> gets parsed by a daily GitHub Actions workflow and rendered here. Each card links back to the full note so the long-form review lives in one canonical place. For ratings and a fuller shelf, see my <a href="https://www.goodreads.com/user/show/199429918-lakshya" target="_blank" rel="noopener noreferrer" style="color:var(--accent2);text-decoration:none;">Goodreads profile</a>.</p>
   </header>
 </div>
 
@@ -47,10 +47,6 @@
 
     <div class="books-controls reveal">
       <input id="book-search" class="search-input" type="search" placeholder="Search title, author, or tag&hellip;" aria-label="Search books"/>
-      <button class="filter-btn active" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="finished">Finished</button>
-      <button class="filter-btn" data-filter="reading">Reading</button>
-      <button class="filter-btn" data-filter="to-read">To read</button>
     </div>
 
     <div id="books-meta" class="books-meta reveal"></div>
@@ -61,22 +57,10 @@
 </div>
 
 <div class="wrapper">
-  <section id="contact">
-    <div class="contact-inner">
-      <div class="contact-cta reveal">
-        <h3>Reading suggestions?</h3>
-        <p>Always interested in good reads on quant, ML, agents, and systems. Drop a line.</p>
-      </div>
-      <div class="contact-links reveal">
-        <a href="mailto:lakshya001@e.ntu.edu.sg" class="btn primary">&#9993; Email</a>
-        <a href="https://lakshya-aga.github.io/quartz/" target="_blank" rel="noopener noreferrer" class="btn">&#8599; Full notes garden</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>&copy; 2026 Lakshya Agarwal</p>
-      <p><a href="index.html" style="color:var(--muted);text-decoration:none;">&larr; Home</a></p>
-    </div>
-  </section>
+  <div class="footer-bottom">
+    <p>&copy; 2026 Lakshya Agarwal</p>
+    <p><a href="index.html" style="color:var(--muted);text-decoration:none;">&larr; Home</a></p>
+  </div>
 </div>
 
 <script src="assets/site.js?v=2"></script>
@@ -85,9 +69,7 @@
   const grid = document.getElementById('books-grid');
   const meta = document.getElementById('books-meta');
   const search = document.getElementById('book-search');
-  const filterButtons = Array.from(document.querySelectorAll('.filter-btn'));
   let books = [];
-  let activeFilter = 'all';
 
   const STATUS_LABELS = {
     'finished': 'Finished',
@@ -145,9 +127,6 @@
   function render() {
     const q = search.value.trim().toLowerCase();
     const filtered = books.filter(b => {
-      if (activeFilter !== 'all') {
-        if (statusKey(b.status) !== activeFilter) return false;
-      }
       if (!q) return true;
       const haystack = [
         b.title, b.author, b.summary, b.status,
@@ -170,7 +149,7 @@
     }
 
     if (!filtered.length) {
-      grid.innerHTML = `<div class="books-empty">No reviews match the current filter.</div>`;
+      grid.innerHTML = `<div class="books-empty">No reviews match the search.</div>`;
       return;
     }
 
@@ -215,14 +194,6 @@
     });
   }
 
-  filterButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterButtons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      activeFilter = btn.dataset.filter;
-      render();
-    });
-  });
   search.addEventListener('input', render);
 
   fetch('books.json', { cache: 'no-store' })
