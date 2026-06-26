@@ -54,7 +54,8 @@
     .tci.gold .tci-num{color:var(--gold);}
     .tci.silv .tci-num{color:var(--silver);}
     .tci.bron .tci-num{color:var(--bronze);}
-    .tcup{display:inline-block;vertical-align:middle;object-fit:contain;flex-shrink:0;}
+    .tcup{display:inline-block;vertical-align:middle;width:auto;flex-shrink:0;filter:drop-shadow(0 1px 1px rgba(0,0,0,0.06));}
+    .tcup-lg{height:42px;}
 
     .games-wrap{padding:1rem 0 0;}
     .games-lbl{font-size:1rem;color:var(--text-quaternary);font-weight:500;margin-bottom:1rem;}
@@ -170,10 +171,10 @@
     </div>
 
     <div class="tcounts" id="tcoEl">
-      <div class="tci plat"><img class="tcup" src="assets/trophy_images/platinum.png" alt="Platinum" width="34" height="34"/><span class="tci-num" id="pN">—</span></div>
-      <div class="tci gold"><img class="tcup" src="assets/trophy_images/gold.png" alt="Gold" width="34" height="34"/><span class="tci-num" id="gN">—</span></div>
-      <div class="tci silv"><img class="tcup" src="assets/trophy_images/silver.png" alt="Silver" width="34" height="34"/><span class="tci-num" id="sN">—</span></div>
-      <div class="tci bron"><img class="tcup" src="assets/trophy_images/bronze.png" alt="Bronze" width="34" height="34"/><span class="tci-num" id="bN">—</span></div>
+      <div class="tci plat"><img class="tcup tcup-lg" src="assets/trophy_images/platinum.png" alt="Platinum"/><span class="tci-num" id="pN">—</span></div>
+      <div class="tci gold"><img class="tcup tcup-lg" src="assets/trophy_images/gold.png" alt="Gold"/><span class="tci-num" id="gN">—</span></div>
+      <div class="tci silv"><img class="tcup tcup-lg" src="assets/trophy_images/silver.png" alt="Silver"/><span class="tci-num" id="sN">—</span></div>
+      <div class="tci bron"><img class="tcup tcup-lg" src="assets/trophy_images/bronze.png" alt="Bronze"/><span class="tci-num" id="bN">—</span></div>
     </div>
 
     <div class="games-wrap">
@@ -202,7 +203,7 @@ const TROPHY_GRADES = ['platinum','gold','silver','bronze'];
 
 function cupSVG(g, sz){
   const grade = TROPHY_GRADES.includes(g) ? g : 'bronze';
-  return `<img class="tcup" src="assets/trophy_images/${grade}.png" alt="${grade}" width="${sz}" height="${sz}"/>`;
+  return `<img class="tcup" src="assets/trophy_images/${grade}.png" alt="${grade}" height="${sz}" style="height:${sz}px;"/>`;
 }
 
 function barColor(p){
@@ -291,7 +292,7 @@ function renderG(){
           <div class="tdesc">${t.desc}</div>
         </div>
         <div class="tright">
-          ${cupSVG(t.grade,22)}
+          ${cupSVG(t.grade,28)}
           ${t.rare?'<div class="trare">RARE</div>':''}
         </div>
       </div>`).join('');
@@ -301,7 +302,7 @@ function renderG(){
         <div class="gbody">
           <div class="gtitle">${g.title}</div>
           <div class="gpips">
-            ${['platinum','gold','silver','bronze'].map(gr=>`<div class="pip">${cupSVG(gr,14)}<span>${e[gr]||0}</span></div>`).join('')}
+            ${['platinum','gold','silver','bronze'].map(gr=>`<div class="pip">${cupSVG(gr,20)}<span>${e[gr]||0}</span></div>`).join('')}
           </div>
           <div class="gbar"><div class="gbarfill" data-w="${p}" style="background:${col}"></div></div>
         </div>

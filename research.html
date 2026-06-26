@@ -84,12 +84,12 @@
 
     <div class="strategy">
       <span class="eyebrow">Strategy card &middot; PMFG / Peripheral Trading</span>
-      <h3 style="font-family:var(--serif);font-size:1.3rem;font-weight:600;color:var(--text-primary);margin-top:0.25rem;">Peripheral Trading with Planar Maximally Filtered Graphs</h3>
-      <p class="strategy-lead" style="margin-top:0.5rem;">A graph-based equity strategy inspired by <strong>Pozzi, Di Matteo, and Aste (2013)</strong> using a PMFG network to hunt for peripheral names and turn them into a tradeable basket. It expresses a view about market topology, not just factor exposure.</p>
+      <h3 class="strategy-title">Peripheral Trading with Planar Maximally Filtered Graphs</h3>
+      <p class="strategy-lead">A graph-based equity strategy inspired by <strong>Pozzi, Di Matteo, and Aste (2013)</strong> using a PMFG network to hunt for peripheral names and turn them into a tradeable basket. It expresses a view about market topology, not just factor exposure.</p>
 
       <div class="tags"><span class="tag">Graph-based alpha</span><span class="tag">PMFG</span><span class="tag">Network filtering</span><span class="tag">Python</span></div>
 
-      <p class="body-text" style="margin-top:1rem;">Built to turn a paper idea into something tradeable and measurable. The workflow takes the daily PMFG selection, enters at the <strong>next trading day close</strong>, exits at the <strong>next rebalance close</strong>, and marks the final basket to the latest available close.</p>
+      <p class="body-text spaced-top">Built to turn a paper idea into something tradeable and measurable. The workflow takes the daily PMFG selection, enters at the <strong>next trading day close</strong>, exits at the <strong>next rebalance close</strong>, and marks the final basket to the latest available close.</p>
       <p class="body-text">What I like about it is the interpretability. Instead of running another flat ranking model, I can use <strong>network topology</strong> as the signal itself and directly test whether peripheral names behave differently from the dense market core.</p>
       <div class="paper-cite">Inspired by Pozzi, F., Di Matteo, T., &amp; Aste, T. (2013), <em>Exponential smoothing weighted correlations and financial time series modeling</em>.</div>
 
@@ -114,7 +114,7 @@
         <div class="metric"><div class="metric-label">Best basket period</div><div class="metric-value positive">+1.96%</div></div>
         <div class="metric"><div class="metric-label">Worst basket period</div><div class="metric-value negative">-3.84%</div></div>
         <div class="metric"><div class="metric-label">Names per rebalance</div><div class="metric-value">10</div></div>
-        <div class="metric"><div class="metric-label">Latest marked close</div><div class="metric-value" style="font-size:0.95rem;">2026-03-26</div></div>
+        <div class="metric"><div class="metric-label">Latest marked close</div><div class="metric-value compact">2026-03-26</div></div>
       </div>
 
       <div class="chart-wrap" id="pmfg-chart-wrap">
@@ -126,12 +126,12 @@
         <svg id="pmfg-chart" class="chart-svg" viewBox="0 0 420 220" role="img" aria-label="Interactive PMFG forward P and L chart"></svg>
       </div>
 
-      <p class="body-text" style="margin-top:0.75rem;font-size:0.9rem;color:var(--text-tertiary);">Forward P&amp;L generated from the PMFG research repo using a simple execution rule: next-day close entry, next-signal close exit, equal-weight basket. The notebook does <em>not</em> define a canonical execution model, so this dashboard is an explicit research wrapper, not a polished production backtest.</p>
+      <p class="note">Forward P&amp;L generated from the PMFG research repo using a simple execution rule: next-day close entry, next-signal close exit, equal-weight basket. The notebook does <em>not</em> define a canonical execution model, so this dashboard is an explicit research wrapper, not a polished production backtest.</p>
     </div>
 
     <div class="strategy">
       <span class="eyebrow">Placeholder</span>
-      <p class="body-text" style="margin-top:0.5rem;">More strategy cards will land here as soon as they have a clean hypothesis, a minimally defensible execution rule, and at least one honest result worth showing. If a strategy can&rsquo;t hit those bars, it stays in the notebook.</p>
+      <p class="body-text spaced-top-sm">More strategy cards will land here as soon as they have a clean hypothesis, a minimally defensible execution rule, and at least one honest result worth showing. If a strategy can&rsquo;t hit those bars, it stays in the notebook.</p>
     </div>
   </section>
 
