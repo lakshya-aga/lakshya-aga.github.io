@@ -9,220 +9,101 @@
   <link rel="shortcut icon" href="assets/profile.jpg" />
   <link rel="apple-touch-icon" href="assets/profile.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet"/>
-    <script>(function(){try{var t=localStorage.getItem("theme");if(t==="light")document.documentElement.classList.add("light");}catch(e){}})();</script>
-  <link rel="stylesheet" href="assets/styles.css"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet"/>
+  <script>(function(){try{var t=localStorage.getItem("theme");if(t==="dark")document.documentElement.classList.add("dark");}catch(e){}})();</script>
+  <link rel="stylesheet" href="assets/styles.css?v=3"/>
 </head>
 <body>
 
-<div class="grid-bg"></div>
-
-<nav>
-  <a href="index.html" class="nav-logo"><img class="nav-avatar" src="assets/profile.jpg" alt="Lakshya profile"/>LA</a>
-  <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
-  <ul class="nav-links" id="site-nav">
-    <li><a href="index.html" data-page="index.html">Home</a></li>
-    <li><a href="experience.html" data-page="experience.html">Experience</a></li>
-    <li><a href="research.html" data-page="research.html">Research</a></li>
-    <li><a href="projects.html" data-page="projects.html">Projects</a></li>
-    <li><a href="books.html" data-page="books.html">Reviews</a></li>
-    <li><a href="trophies.html" data-page="trophies.html">Trophies</a></li>
-  </ul>
-  <button class="theme-toggle" type="button" aria-label="Toggle theme"><span class="theme-icon-moon">☽ Dark</span><span class="theme-icon-sun">☀ Light</span></button>
+<nav class="topbar" id="topbar">
+  <div class="topbar-inner">
+    <a href="index.html" class="brand"><img class="nav-avatar" src="assets/profile.jpg" alt="Lakshya profile"/>Lakshya Agarwal</a>
+    <span class="divider">/</span>
+    <a href="experience.html">Experience</a>
+    <a href="research.html">Research</a>
+    <a href="projects.html">Projects</a>
+    <a href="books.html">Reviews</a>
+    <a href="trophies.html">Trophies</a>
+    <button class="theme-toggle" type="button" aria-label="Toggle theme">
+      <span class="icon-moon">Dark</span><span class="icon-sun">Light</span>
+    </button>
+  </div>
 </nav>
 
-<div class="wrapper">
-  <section id="hero">
-    <p class="hero-tag">// Agentic AI &nbsp;&middot;&nbsp; Quantitative Research &nbsp;&middot;&nbsp; Systems Engineering</p>
-    <div class="hero-head">
-      <h1 class="hero-title">
-        <span class="hero-firstname">Lakshya</span>
-        <span class="fourier-hero" id="fourier-hero" aria-label="Agarwal">
-          <span class="fourier-fallback">Agarwal</span>
-        </span>
-      </h1>
-      <img class="hero-photo" src="assets/profile.jpg" alt="Lakshya Agarwal" />
-    </div>
-    <p class="hero-sub">
-      I build <strong>agentic AI systems</strong>, <strong>quant research tooling</strong>, and <strong>data infrastructure</strong> &mdash; from MCP servers and code retrieval to market-data workflows and autonomous analysis tools.
-    </p>
-    <div class="focus-banner">
-      <div class="dot"></div>
-      <span>Current focus: agentic AI for finance research at Synapse Trading</span>
-    </div>
-    <div class="hero-links">
-      <a href="https://synapsetrading.net" target="_blank" rel="noopener noreferrer" class="btn primary">&#8599; Synapse Trading</a>
-      <a href="https://github.com/lakshya-aga" target="_blank" rel="noopener noreferrer" class="btn">&#8599; GitHub</a>
-      <a href="https://www.linkedin.com/in/lakshya-agarwal-7567ba1b3/" target="_blank" rel="noopener noreferrer" class="btn">&#8599; LinkedIn</a>
-      <a href="mailto:lakshya001@e.ntu.edu.sg" class="btn">&#9993; Email</a>
-    </div>
-  </section>
-</div>
+<main class="container page-body">
 
-<div class="wrapper">
-  <section id="venture">
-    <div class="section-header reveal">
-      <span class="section-num">00</span>
-      <h2>Venture</h2>
-      <div class="section-line"></div>
-    </div>
-    <div class="venture-card reveal">
-      <div>
-        <div class="venture-tag">Startup &middot; Agentic AI for Finance Research</div>
-        <h3>Synapse Trading</h3>
-        <p>
-          Synapse Trading is the venture I&rsquo;m building around <strong>agentic AI for quantitative finance research</strong> &mdash; turning planner/orchestrator agents, MCP-backed data layers, and code retrieval into a workbench that compresses the research loop from idea to evaluated strategy.
-        </p>
-        <p>
-          The bet: research teams should spend their time on <strong>hypotheses and execution</strong>, not on glue code, dataset wrangling, or rebuilding the same backtest scaffolding. Synapse focuses on the substrate that makes agentic research reliable enough to trust with real workflows.
-        </p>
-        <div class="venture-cta">
-          <a href="https://synapsetrading.net" target="_blank" rel="noopener noreferrer" class="btn primary">&#8599; synapsetrading.net</a>
-          <a href="research.html" class="btn">Research stack &rarr;</a>
-        </div>
-      </div>
-      <aside class="venture-side">
-        <div>
-          <strong>Stack</strong>
-          MCP servers, retrieval over internal libraries, financial data wrappers, planner-orchestrator agents, notebook automation.
-        </div>
-        <div>
-          <strong>Problems</strong>
-          Discoverable research code, reproducible data, multi-step analysis, honest evaluation against live marks.
-        </div>
-        <div>
-          <strong>Status</strong>
-          Building &amp; iterating with research workflows. Open to conversations with quant teams and researchers.
-        </div>
-      </aside>
-    </div>
+  <section class="section fade-in">
+    <img class="avatar" src="assets/profile.jpg" alt="Lakshya Agarwal"/>
+    <h1 class="display">Lakshya Agarwal</h1>
+    <span class="fourier-hero" id="fourier-hero" aria-label="Agarwal — Fourier-traced signature">
+      <span class="fourier-fallback">Agarwal</span>
+    </span>
+    <p class="tagline">I build <strong>agentic AI systems</strong>, <strong>quant research tooling</strong>, and <strong>data infrastructure</strong> &mdash; from MCP servers and code retrieval to market-data workflows and autonomous analysis tools.</p>
+    <p class="focus-banner"><span class="dot"></span><span>Current focus: agentic AI for finance research at Synapse Trading.</span></p>
   </section>
-</div>
 
-<div class="wrapper">
-  <section id="navigator">
-    <div class="section-header reveal">
-      <span class="section-num">01</span>
-      <h2>Sections</h2>
-      <div class="section-line"></div>
-    </div>
-    <div class="nav-panel">
-      <a class="nav-panel-card reveal" href="experience.html">
-        <div class="panel-num">/ 02</div>
-        <div class="nav-panel-heading">Experience &amp; Education</div>
-        <p>Career timeline across quant developer, ML, and systems roles. Education at NTU and WorldQuant University, plus honors and awards.</p>
-        <div class="nav-panel-sub"><span>Career &middot; NTU &middot; WQU</span><span class="arrow">&rarr;</span></div>
+  <section class="section fade-in d1">
+    <span class="section-heading">Elsewhere</span>
+    <div class="icon-row">
+      <a class="icon-link" href="mailto:lakshya001@e.ntu.edu.sg" aria-label="Email">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="m22 6-10 7L2 6"/></svg>
       </a>
-      <a class="nav-panel-card reveal" href="research.html">
-        <div class="panel-num">/ 03</div>
-        <div class="nav-panel-heading">Quant Research</div>
-        <p>The research stack behind Synapse Trading: agentic infrastructure, financial data layers, and live strategy cards including the PMFG peripheral-trading study.</p>
-        <div class="nav-panel-sub"><span>Agentic AI &middot; Strategies</span><span class="arrow">&rarr;</span></div>
+      <a class="icon-link" href="https://github.com/lakshya-aga" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.6.5.5 5.6.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.4-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2.9-.3 2-.4 3-.4s2 .1 3 .4c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.5-2.7 5.5-5.3 5.8.4.4.8 1.1.8 2.2v3.2c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.6 18.4.5 12 .5Z"/></svg>
       </a>
-      <a class="nav-panel-card reveal" href="projects.html">
-        <div class="panel-num">/ 04</div>
-        <div class="nav-panel-heading">Projects &amp; Repositories</div>
-        <p>Selected builds across full-stack apps, backend services, derivatives pricing, databases, and ML research projects.</p>
-        <div class="nav-panel-sub"><span>Code &middot; Systems</span><span class="arrow">&rarr;</span></div>
+      <a class="icon-link" href="https://www.linkedin.com/in/lakshya-agarwal-7567ba1b3/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.22 8h4.56v14H.22V8zm7.5 0h4.37v1.92h.06c.61-1.15 2.1-2.36 4.32-2.36 4.62 0 5.48 3.04 5.48 7v8.44h-4.56v-7.49c0-1.79-.03-4.09-2.49-4.09-2.49 0-2.87 1.95-2.87 3.96V22H7.72V8z"/></svg>
       </a>
-      <a class="nav-panel-card reveal" href="books.html">
-        <div class="panel-num">/ 05</div>
-        <div class="nav-panel-heading">Reviews</div>
-        <p>Reading notes auto-published from my Obsidian vault. Anything tagged <code>#book</code> in the source repo flows here.</p>
-        <div class="nav-panel-sub"><span>Auto-synced from vault</span><span class="arrow">&rarr;</span></div>
-      </a>
-      <a class="nav-panel-card reveal" href="https://lakshya-aga.github.io/quartz/" target="_blank" rel="noopener noreferrer">
-        <div class="panel-num">/ 06</div>
-        <div class="nav-panel-heading">Research Notes</div>
-        <p>Quartz-powered digital garden for quant ideas, papers, and agent experiments. The full Obsidian vault, published.</p>
-        <div class="nav-panel-sub"><span>Digital garden</span><span class="arrow">&#8599;</span></div>
-      </a>
-      <a class="nav-panel-card reveal" href="trophies.html">
-        <div class="panel-num">/ 07</div>
-        <div class="nav-panel-heading">Trophies</div>
-        <p>PSN trophy tracker built as a fun side project, with daily auto-updates via GitHub Actions.</p>
-        <div class="nav-panel-sub"><span>Side project</span><span class="arrow">&rarr;</span></div>
+      <a class="icon-link" href="https://www.goodreads.com/user/show/199429918-lakshya" target="_blank" rel="noopener noreferrer" aria-label="Goodreads">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M14.4 14.6c-.4 1.6-1.5 3-3.5 3-3 0-4.3-2.4-4.3-5.2 0-2.8 1.5-5.3 4.3-5.3 2 0 3.2 1.4 3.5 3v4.5zM21 1H3a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zm-4.1 19.4c-.5 2-2.3 3.4-5.3 3.4-1.5 0-3.3-.5-4.3-1.7l1.3-1.5c.8.9 1.9 1.5 3.1 1.5 2.4 0 3.4-1.5 3.4-3.7v-1.6h-.1c-.7 1.4-2.1 2.4-3.7 2.4-3.6 0-5.7-2.8-5.7-6.2 0-3.4 2-6.4 5.6-6.4 1.7 0 3.2 1 3.8 2.3h.1v-2h2v13.5h-.2z"/></svg>
       </a>
     </div>
   </section>
-</div>
 
-<div class="wrapper">
-  <section id="about">
-    <div class="section-header reveal">
-      <span class="section-num">02</span>
-      <h2>About</h2>
-      <div class="section-line"></div>
-    </div>
-    <div class="about-grid">
-      <div class="about-text reveal">
-        <p>I&rsquo;m an <strong>engineer</strong> from Nanyang Technological University focused on <strong>agentic AI</strong>, <strong>quant research infrastructure</strong>, and <strong>practical systems design</strong>.</p>
-        <p>I build MCP servers, retrieval systems, market-data wrappers, pricing services, and research pipelines that help humans and models work with code and data more effectively.</p>
-        <p>Through <strong>Synapse Trading</strong>, I&rsquo;m turning that work into a coherent product for quantitative research teams &mdash; tools that are measurable, debuggable, and useful beyond a demo.</p>
-        <p>With a constant internal dialogue that is a bit hard to turn off and some feedback from friends who seem to enjoy my (almost clich&eacute;) thoughts, I decided to start spamming the internet with these.</p>
-        <p>On this website you can find my <a href="experience.html" style="color:var(--accent2);text-decoration:none;">resume</a> (I am young man, always on the lookout for the next interesting thing), my unoriginal <a href="https://lakshya-aga.github.io/quartz/" target="_blank" rel="noopener noreferrer" style="color:var(--accent2);text-decoration:none;">digital garden</a>, my <a href="books.html" style="color:var(--accent2);text-decoration:none;">reading logs</a> and a glimpse into how much I have indulged into the virtual world measured by my <a href="trophies.html" style="color:var(--accent2);text-decoration:none;">trophies</a> (the true trophies are really the sleepless nights adorning my face given to me by Malenia and the random griefers in GTA).</p>
-        <p>I also love <strong>bouldering</strong> and <strong>Kayaking</strong> when I can neither fly nor swim.</p>
-      </div>
-      <div class="reveal">
-        <div class="skills-grid">
-          <div class="skill-group">
-            <h4>Languages</h4>
-            <div class="skill-tags">
-              <span class="tag">Python</span><span class="tag">C++</span><span class="tag">C#</span><span class="tag">Go</span><span class="tag">Julia</span><span class="tag">Java</span>
-            </div>
-          </div>
-          <div class="skill-group">
-            <h4>Agentic AI</h4>
-            <div class="skill-tags">
-              <span class="tag">MCP</span><span class="tag">RAG</span><span class="tag">ChromaDB</span><span class="tag">LLM Tool Use</span>
-            </div>
-          </div>
-          <div class="skill-group">
-            <h4>Quant</h4>
-            <div class="skill-tags">
-              <span class="tag">QuantLib</span><span class="tag">QuantConnect</span><span class="tag">Monte Carlo</span><span class="tag">Kelly Criterion</span>
-            </div>
-          </div>
-          <div class="skill-group">
-            <h4>ML / Data</h4>
-            <div class="skill-tags">
-              <span class="tag">PyTorch</span><span class="tag">TensorFlow</span><span class="tag">Pandas</span><span class="tag">Polars</span>
-            </div>
-          </div>
-          <div class="skill-group">
-            <h4>Systems</h4>
-            <div class="skill-tags">
-              <span class="tag">Linux</span><span class="tag">HPC</span><span class="tag">MPI/OpenMP</span><span class="tag">FastAPI</span>
-            </div>
-          </div>
-        </div>
-      </div>
+  <section class="section fade-in d1">
+    <a class="section-heading" href="#about" aria-label="About">
+      About<span class="chev">›</span>
+    </a>
+    <p class="body-text">I&rsquo;m an <strong>engineer</strong> from Nanyang Technological University focused on <strong>agentic AI</strong>, <strong>quant research infrastructure</strong>, and <strong>practical systems design</strong>. I build MCP servers, retrieval systems, market-data wrappers, pricing services, and research pipelines that help humans and models work with code and data more effectively.</p>
+    <p class="body-text">Through <strong>Synapse Trading</strong>, I&rsquo;m turning that work into a coherent product for quantitative research teams &mdash; tools that are measurable, debuggable, and useful beyond a demo.</p>
+    <p class="body-text">With a constant internal dialogue that is a bit hard to turn off and some feedback from friends who seem to enjoy my (almost clich&eacute;) thoughts, I decided to start spamming the internet with these.</p>
+    <p class="body-text">On this website you can find my <a href="experience.html" class="link">resume</a> (I am young man, always on the lookout for the next interesting thing), my unoriginal <a href="https://lakshya-aga.github.io/quartz/" target="_blank" rel="noopener noreferrer" class="link">digital garden</a>, my <a href="books.html" class="link">reading logs</a> and a glimpse into how much I have indulged into the virtual world measured by my <a href="trophies.html" class="link">trophies</a> (the true trophies are really the sleepless nights adorning my face given to me by Malenia and the random griefers in GTA).</p>
+    <p class="body-text">I also love <strong>bouldering</strong> and <strong>Kayaking</strong> when I can neither fly nor swim.</p>
+  </section>
+
+  <section class="section fade-in d2">
+    <a class="section-heading" href="https://synapsetrading.net" target="_blank" rel="noopener noreferrer">
+      Venture<span class="chev">›</span>
+    </a>
+    <div class="venture">
+      <span class="eyebrow">Startup &middot; Agentic AI for finance research</span>
+      <h3>Synapse Trading</h3>
+      <p>Turning planner/orchestrator agents, MCP-backed data layers, and code retrieval into a workbench that compresses the research loop from idea to evaluated strategy. The bet: research teams should spend their time on <strong>hypotheses and execution</strong>, not on glue code, dataset wrangling, or rebuilding the same backtest scaffolding.</p>
+      <p>Open to conversations with quant teams and researchers. <a class="link" href="https://synapsetrading.net" target="_blank" rel="noopener noreferrer">synapsetrading.net</a> &middot; <a class="link" href="research.html">Research stack</a></p>
     </div>
   </section>
-</div>
 
-<div class="wrapper">
-  <section id="contact">
-    <div class="contact-inner">
-      <div class="contact-cta reveal">
-        <h3>Let&rsquo;s build<br>useful systems.</h3>
-        <p>Open to roles and collaborations in agentic AI, quantitative engineering, and research infrastructure.</p>
-      </div>
-      <div class="contact-links reveal">
-        <a href="mailto:lakshya001@e.ntu.edu.sg" class="btn primary">&#9993; lakshya001@e.ntu.edu.sg</a>
-        <a href="https://github.com/lakshya-aga" target="_blank" rel="noopener noreferrer" class="btn">&#8599; GitHub</a>
-        <a href="https://www.linkedin.com/in/lakshya-agarwal-7567ba1b3/" target="_blank" rel="noopener noreferrer" class="btn">&#8599; LinkedIn</a>
-        <a href="https://synapsetrading.net" target="_blank" rel="noopener noreferrer" class="btn">&#8599; Synapse Trading</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>&copy; 2026 Lakshya Agarwal</p>
-      <p>Let&rsquo;s build.</p>
-    </div>
+  <section class="section fade-in d2">
+    <span class="section-heading">Sections</span>
+    <ul class="list">
+      <li><a class="list-item" href="experience.html"><span class="label">Experience &amp; Education</span><span class="sub">&middot; Career timeline, NTU, WQU</span><span class="arrow">›</span></a></li>
+      <li><a class="list-item" href="research.html"><span class="label">Quant Research</span><span class="sub">&middot; Agentic infra, strategies</span><span class="arrow">›</span></a></li>
+      <li><a class="list-item" href="projects.html"><span class="label">Projects &amp; Repositories</span><span class="sub">&middot; Selected code &amp; systems</span><span class="arrow">›</span></a></li>
+      <li><a class="list-item" href="books.html"><span class="label">Reviews</span><span class="sub">&middot; Auto-synced from my vault</span><span class="arrow">›</span></a></li>
+      <li><a class="list-item" href="https://lakshya-aga.github.io/quartz/" target="_blank" rel="noopener noreferrer"><span class="label">Research Notes</span><span class="sub">&middot; Quartz digital garden</span><span class="arrow">↗</span></a></li>
+      <li><a class="list-item" href="trophies.html"><span class="label">Trophies</span><span class="sub">&middot; PSN tracker</span><span class="arrow">›</span></a></li>
+    </ul>
   </section>
-</div>
 
-<script src="assets/site.js?v=2"></script>
-<script src="assets/fourier-hero.js?v=5" defer></script>
+  <footer class="footer">
+    <span>&copy; 2026 Lakshya Agarwal</span>
+    <span><a href="mailto:lakshya001@e.ntu.edu.sg">Email me</a></span>
+  </footer>
+
+</main>
+
+<script src="assets/site.js?v=3"></script>
+<script src="assets/fourier-hero.js?v=6" defer></script>
 </body>
 </html>
