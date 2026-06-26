@@ -18,7 +18,7 @@
 
 <nav class="topbar" id="topbar">
   <div class="topbar-inner">
-    <a href="index.html" class="brand"><img class="nav-avatar" src="assets/profile.jpg" alt="Lakshya profile"/>Lakshya Agarwal</a>
+    <a href="index.html" class="brand">Lakshya Agarwal</a>
     <span class="divider">/</span>
     <a href="experience.html">Experience</a>
     <a href="research.html">Research</a>
@@ -35,14 +35,20 @@
 
   <section class="section fade-in">
     <img class="avatar" src="assets/profile.jpg" alt="Lakshya Agarwal"/>
-    <h1 class="hero-name">
-      <span class="hero-first">Lakshya</span>
-      <span class="fourier-hero" id="fourier-hero" aria-label="Agarwal — Fourier-traced signature">
-        <span class="fourier-fallback">Agarwal</span>
-      </span>
-    </h1>
+    <h1 class="display hero-name">Lakshya Agarwal</h1>
     <p class="tagline">I build <strong>agentic AI systems</strong>, <strong>quant research tooling</strong>, and <strong>data infrastructure</strong> &mdash; from MCP servers and code retrieval to market-data workflows and autonomous analysis tools.</p>
     <p class="focus-banner"><span class="dot"></span><span>Current focus: agentic AI for finance research at Synapse Trading.</span></p>
+    <div class="signature-row">
+      <button type="button" class="signature-play" id="signature-play" aria-controls="fourier-wrap" aria-expanded="false">
+        <svg width="11" height="12" viewBox="0 0 11 12" fill="currentColor" aria-hidden="true"><path d="M1 1.27V10.73a.5.5 0 0 0 .77.42l8.06-4.73a.5.5 0 0 0 0-.86L1.77.85A.5.5 0 0 0 1 1.27Z"/></svg>
+        Play signature
+      </button>
+      <div class="fourier-wrap" id="fourier-wrap" hidden>
+        <span class="fourier-hero" id="fourier-hero" aria-label="Agarwal — Fourier-traced signature">
+          <span class="fourier-fallback">Agarwal</span>
+        </span>
+      </div>
+    </div>
   </section>
 
   <section class="section fade-in d1">
@@ -106,6 +112,25 @@
 </main>
 
 <script src="assets/site.js?v=3"></script>
-<script src="assets/fourier-hero.js?v=6" defer></script>
+<script>
+  (function () {
+    const btn = document.getElementById('signature-play');
+    const wrap = document.getElementById('fourier-wrap');
+    if (!btn || !wrap) return;
+    let loaded = false;
+    btn.addEventListener('click', () => {
+      if (loaded) return;
+      loaded = true;
+      wrap.hidden = false;
+      btn.setAttribute('aria-expanded', 'true');
+      btn.disabled = true;
+      btn.classList.add('played');
+      const s = document.createElement('script');
+      s.src = 'assets/fourier-hero.js?v=7';
+      s.defer = true;
+      document.body.appendChild(s);
+    });
+  })();
+</script>
 </body>
 </html>
