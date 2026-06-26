@@ -3,173 +3,199 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Trophies — Lakshya Agarwal</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <title>Trophies &mdash; Lakshya Agarwal</title>
+  <link rel="icon" type="image/jpeg" href="assets/profile.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet"/>
+  <script>(function(){try{var t=localStorage.getItem("theme");if(t==="dark")document.documentElement.classList.add("dark");}catch(e){}})();</script>
+  <link rel="stylesheet" href="assets/styles.css?v=3"/>
   <style>
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    :root{
-      --bg:#111215;--surface:#1a1c20;--border:#252830;
-      --text:#ffffff;--sub:#8b9099;
-      --plat:#9bb0d4;--gold:#c8961e;--silver:#7e9ab5;--bronze:#9b5f2e;
-      --green:#1db954;
+    /* Trophy-specific palette tokens (overlay onto shared design system). */
+    :root {
+      --plat: #6b7a96;
+      --gold: #c8961e;
+      --silver: #5a7a95;
+      --bronze: #9b5f2e;
+      --psn-green: #1db954;
     }
-    body{background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,sans-serif;font-size:14px;-webkit-font-smoothing:antialiased;min-height:100vh;}
-    .page{max-width:680px;margin:0 auto;padding-bottom:60px;}
+    html.dark {
+      --plat: #9bb0d4;
+      --silver: #7e9ab5;
+    }
 
-    /* PROFILE */
-    .profile{padding:28px 20px 18px;display:flex;align-items:center;gap:14px;}
+    .profile{padding:0 0 1.5rem;display:flex;align-items:center;gap:0.9rem;}
     .av-wrap{position:relative;flex-shrink:0;}
-    .av{width:60px;height:60px;border-radius:50%;background:#2a2d35;border:2px solid #333;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:1.5rem;}
+    .av{width:60px;height:60px;border-radius:50%;background:var(--surface);border:0.5px solid var(--border-primary);overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:1.5rem;}
     .av img{width:100%;height:100%;object-fit:cover;}
-    .dot{position:absolute;bottom:1px;right:1px;width:12px;height:12px;border-radius:50%;background:var(--green);border:2.5px solid var(--bg);}
-    .handle{font-size:.75rem;color:var(--sub);margin-bottom:2px;}
-    .dname{font-size:1.2rem;font-weight:700;}
+    .dot{position:absolute;bottom:1px;right:1px;width:11px;height:11px;border-radius:50%;background:var(--psn-green);border:2px solid var(--bg);}
+    .handle{font-size:0.78rem;color:var(--text-quaternary);margin-bottom:2px;letter-spacing:0.04em;}
+    .dname{font-family:var(--serif);font-size:1.4rem;font-weight:600;color:var(--text-primary);}
 
-    /* LEVEL ROW */
-    .level-row{display:flex;align-items:center;gap:20px;padding:18px 20px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
-
-    /* Level trophy badge */
+    .level-row{display:flex;align-items:center;gap:1.5rem;padding:1.25rem 0;border-top:0.5px solid var(--border-secondary);border-bottom:0.5px solid var(--border-secondary);}
     .badge-col{display:flex;flex-direction:column;align-items:center;gap:5px;flex-shrink:0;}
-    .badge-svg{width:60px;height:60px;}
-    .badge-lbl{font-size:.7rem;color:var(--sub);font-weight:500;letter-spacing:.04em;}
-
-    /* Circle ring */
-    .ring-col{position:relative;flex-shrink:0;width:76px;height:76px;}
+    .badge-svg{width:54px;height:54px;}
+    .badge-lbl{font-size:0.7rem;color:var(--text-quaternary);font-weight:500;letter-spacing:0.04em;}
+    .ring-col{position:relative;flex-shrink:0;width:72px;height:72px;}
     .ring-col svg{transform:rotate(-90deg);}
-    .rtrack{fill:none;stroke:#2a2d35;stroke-width:6;}
-    .rfill{fill:none;stroke-width:6;stroke-linecap:butt;stroke:#ccc;transition:stroke-dashoffset 1.2s cubic-bezier(.4,0,.2,1);}
+    .rtrack{fill:none;stroke:var(--surface-2);stroke-width:5;}
+    .rfill{fill:none;stroke-width:5;stroke-linecap:butt;stroke:var(--brand);transition:stroke-dashoffset 1.2s cubic-bezier(.4,0,.2,1);}
     .ring-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;}
-    .ring-pct{font-size:1rem;font-weight:700;}
-    .ring-sub{font-size:.6rem;color:var(--sub);font-weight:500;}
-
-    /* Total */
+    .ring-pct{font-size:0.95rem;font-weight:600;color:var(--text-primary);}
+    .ring-sub{font-size:0.58rem;color:var(--text-quaternary);font-weight:500;}
     .total-col{flex:1;}
-    .total-num{font-size:2.2rem;font-weight:700;line-height:1;}
-    .total-lbl{font-size:.8rem;color:var(--sub);margin-top:3px;}
+    .total-num{font-family:var(--serif);font-size:2rem;font-weight:600;line-height:1;color:var(--text-primary);}
+    .total-lbl{font-size:0.72rem;color:var(--text-quaternary);margin-top:4px;letter-spacing:0.04em;text-transform:uppercase;}
 
-    /* TROPHY COUNTS */
-    .tcounts{display:flex;padding:0 20px 20px;gap:0;}
-    .tci{display:flex;align-items:center;gap:8px;flex:1;}
-    .tci-num{font-size:1.25rem;font-weight:700;}
+    .tcounts{display:flex;padding:1.25rem 0;gap:0;}
+    .tci{display:flex;align-items:center;gap:0.5rem;flex:1;}
+    .tci-num{font-size:1.1rem;font-weight:600;}
     .tci.plat .tci-num{color:var(--plat);}
     .tci.gold .tci-num{color:var(--gold);}
     .tci.silv .tci-num{color:var(--silver);}
     .tci.bron .tci-num{color:var(--bronze);}
 
-    /* GAMES */
-    .games-wrap{padding:0 20px;}
-    .games-lbl{font-size:1rem;font-weight:600;margin-bottom:12px;}
-    .controls{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
-    .src{flex:1;min-width:130px;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:7px 14px;color:var(--text);font-family:inherit;font-size:.84rem;outline:none;}
-    .src:focus{border-color:#404350;}
-    .src::placeholder{color:var(--sub);}
-    .fb{background:var(--surface);border:1px solid var(--border);color:var(--sub);padding:7px 14px;border-radius:20px;cursor:pointer;font-family:inherit;font-size:.8rem;font-weight:500;transition:all .15s;white-space:nowrap;}
-    .fb:hover{color:var(--text);}
-    .fb.on{background:var(--text);border-color:var(--text);color:#111;}
+    .games-wrap{padding:1rem 0 0;}
+    .games-lbl{font-size:1rem;color:var(--text-quaternary);font-weight:500;margin-bottom:1rem;}
+    .controls{display:flex;gap:0.5rem;margin-bottom:1.25rem;flex-wrap:wrap;}
+    .src{flex:1;min-width:160px;background:transparent;border:0.5px solid var(--border-primary);border-radius:0.5rem;padding:0.55rem 0.85rem;color:var(--text-primary);font-family:inherit;font-size:0.9rem;outline:none;}
+    .src:focus{border-color:var(--text-tertiary);}
+    .src::placeholder{color:var(--text-quaternary);}
+    .fb{background:transparent;border:0.5px solid var(--border-primary);color:var(--text-tertiary);padding:0.4rem 0.85rem;border-radius:999px;cursor:pointer;font-family:inherit;font-size:0.78rem;font-weight:500;transition:color 150ms ease, border-color 150ms ease, background 150ms ease;white-space:nowrap;}
+    .fb:hover{color:var(--text-primary);border-color:var(--text-tertiary);}
+    .fb.on{background:var(--text-primary);border-color:var(--text-primary);color:var(--bg);}
 
-    /* GAME LIST */
     .glist{display:flex;flex-direction:column;}
-    .grow{border-bottom:1px solid var(--border);overflow:hidden;}
-    .grow:first-child{border-top:1px solid var(--border);}
-    .gmain{display:flex;align-items:center;gap:14px;padding:14px 0;cursor:pointer;user-select:none;}
-    .gcover{width:90px;height:90px;border-radius:10px;background:#0a0a0a;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.8rem;overflow:hidden;}
-    .gcover img{width:100%;height:100%;object-fit:contain;object-position:center;}
+    .grow{border-bottom:0.5px solid var(--border-secondary);overflow:hidden;}
+    .grow:first-child{border-top:0.5px solid var(--border-secondary);}
+    .gmain{display:flex;align-items:center;gap:1rem;padding:1rem 0;cursor:pointer;user-select:none;}
+    .gcover{width:72px;height:72px;border-radius:0.5rem;background:var(--surface);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.6rem;overflow:hidden;}
+    .gcover img{width:100%;height:100%;object-fit:contain;}
     .gbody{flex:1;min-width:0;}
-    .gtitle{font-size:.94rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:8px;}
-    .gpips{display:flex;gap:12px;align-items:center;margin-bottom:8px;}
-    .pip{display:flex;align-items:center;gap:4px;font-size:.82rem;font-weight:500;color:var(--sub);}
-    .gbar{height:2px;background:var(--border);border-radius:1px;overflow:hidden;}
+    .gtitle{font-size:0.95rem;font-weight:600;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:0.5rem;}
+    .gpips{display:flex;gap:0.85rem;align-items:center;margin-bottom:0.5rem;}
+    .pip{display:flex;align-items:center;gap:0.25rem;font-size:0.78rem;font-weight:500;color:var(--text-tertiary);}
+    .gbar{height:2px;background:var(--border-secondary);border-radius:1px;overflow:hidden;}
     .gbarfill{height:100%;border-radius:1px;width:0;transition:width 1s ease;}
-    .gright{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0;padding-left:8px;}
-    .gpct{font-size:.95rem;font-weight:600;}
-    .chev{color:var(--sub);font-size:.7rem;transition:transform .25s;}
+    .gright{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0;padding-left:0.5rem;}
+    .gpct{font-size:0.9rem;font-weight:600;color:var(--text-primary);}
+    .chev{color:var(--text-quaternary);font-size:0.7rem;transition:transform 250ms;}
     .grow.open .chev{transform:rotate(180deg);}
 
-    /* TROPHY PANEL */
-    .tpanel{display:none;flex-direction:column;padding-bottom:6px;}
+    .tpanel{display:none;flex-direction:column;padding-bottom:0.5rem;}
     .grow.open .tpanel{display:flex;}
-    .trow{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--border);}
-    .timg{width:54px;height:54px;border-radius:8px;background:var(--surface);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.3rem;overflow:hidden;}
-    .timg img{width:100%;height:100%;object-fit:contain;background:#1a1c20;}
+    .trow{display:flex;align-items:center;gap:0.8rem;padding:0.65rem 0;border-top:0.5px solid var(--border-secondary);}
+    .timg{width:46px;height:46px;border-radius:0.5rem;background:var(--surface);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.2rem;overflow:hidden;}
+    .timg img{width:100%;height:100%;object-fit:contain;}
     .tbody{flex:1;min-width:0;}
-    .tname{font-size:.87rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-    .tdesc{font-size:.75rem;color:var(--sub);margin-top:2px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+    .tname{font-size:0.85rem;font-weight:600;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .tdesc{font-size:0.78rem;color:var(--text-tertiary);margin-top:2px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
     .tright{flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:3px;}
-    .trare{font-size:.63rem;color:#c9485b;font-weight:600;letter-spacing:.04em;}
-    .trow.locked{opacity:.35;}
-    .empty{padding:36px 0;text-align:center;color:var(--sub);}
-    @keyframes fu{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
-    .grow{animation:fu .28s ease both;}
+    .trare{font-size:0.62rem;color:#c9485b;font-weight:600;letter-spacing:0.06em;}
+    .trow.locked{opacity:0.45;}
+    .empty{padding:2rem 0;text-align:center;color:var(--text-tertiary);}
   </style>
 </head>
 <body>
-<div class="page">
-  <div class="profile">
-    <div class="av-wrap">
-      <div class="av" id="avEl">👤</div>
-      <div class="dot"></div>
-    </div>
-    <div>
-      <div class="handle" id="hdEl"></div>
-      <div class="dname" id="dnEl">—</div>
-    </div>
+
+<nav class="topbar" id="topbar">
+  <div class="topbar-inner">
+    <a href="index.html" class="brand"><img class="nav-avatar" src="assets/profile.jpg" alt="Lakshya profile"/>Lakshya Agarwal</a>
+    <span class="divider">/</span>
+    <a href="experience.html">Experience</a>
+    <a href="research.html">Research</a>
+    <a href="projects.html">Projects</a>
+    <a href="books.html">Reviews</a>
+    <a href="trophies.html">Trophies</a>
+    <button class="theme-toggle" type="button" aria-label="Toggle theme">
+      <span class="icon-moon">Dark</span><span class="icon-sun">Light</span>
+    </button>
   </div>
+</nav>
 
-  <div class="level-row">
-    <div class="badge-col">
-      <svg class="badge-svg" viewBox="0 0 80 80" fill="none">
-        <path d="M8 42Q1 32 8 23Q17 30 18 40Z" fill="#8B5E3C" opacity=".85"/>
-        <path d="M72 42Q79 32 72 23Q63 30 62 40Z" fill="#8B5E3C" opacity=".85"/>
-        <path d="M3 46Q-1 34 8 27Q15 36 16 46Z" fill="#7A4C2C" opacity=".6"/>
-        <path d="M77 46Q81 34 72 27Q65 36 64 46Z" fill="#7A4C2C" opacity=".6"/>
-        <path d="M25 14H55V42A15 15 0 0 1 25 42Z" fill="url(#cg)"/>
-        <path d="M17 16H25V34A7 7 0 0 1 12 28V20A4 4 0 0 1 17 16Z" fill="#a05e35"/>
-        <path d="M63 16H55V34A7 7 0 0 0 68 28V20A4 4 0 0 0 63 16Z" fill="#a05e35"/>
-        <rect x="36" y="57" width="8" height="9" rx="1" fill="#c0724a"/>
-        <rect x="27" y="65" width="26" height="5" rx="2" fill="#b06030"/>
-        <path d="M29 18Q36 23 34 36" stroke="rgba(255,255,255,.22)" stroke-width="3" stroke-linecap="round"/>
-        <defs><linearGradient id="cg" x1="25" y1="14" x2="55" y2="57" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#e08050"/><stop offset="100%" stop-color="#8B3A18"/></linearGradient></defs>
-      </svg>
-      <div class="badge-lbl">Level <span id="lvEl">—</span></div>
-    </div>
+<main class="container page-body">
 
-    <div class="ring-col">
-      <svg width="76" height="76" viewBox="0 0 76 76">
-        <circle class="rtrack" cx="38" cy="38" r="30"/>
-        <circle class="rfill" id="rfill" cx="38" cy="38" r="30" stroke-dasharray="188.5" stroke-dashoffset="188.5"/>
-      </svg>
-      <div class="ring-inner">
-        <div class="ring-pct" id="rpct">0%</div>
-        <div class="ring-sub">next level</div>
+  <section class="section fade-in">
+    <span class="eyebrow">Trophies</span>
+    <h1 class="display">PlayStation Network.</h1>
+    <p class="lead">Trophy tracker for my PSN library, refreshed daily via GitHub Actions. The true trophies, of course, are the sleepless nights adorning my face given to me by Malenia and the random griefers in GTA.</p>
+  </section>
+
+  <section class="section fade-in d1">
+    <div class="profile">
+      <div class="av-wrap">
+        <div class="av" id="avEl">👤</div>
+        <div class="dot"></div>
+      </div>
+      <div>
+        <div class="handle" id="hdEl"></div>
+        <div class="dname" id="dnEl">—</div>
       </div>
     </div>
 
-    <div class="total-col">
-      <div class="total-num" id="totalEl">—</div>
-      <div class="total-lbl">Total Trophies</div>
+    <div class="level-row">
+      <div class="badge-col">
+        <svg class="badge-svg" viewBox="0 0 80 80" fill="none">
+          <path d="M8 42Q1 32 8 23Q17 30 18 40Z" fill="#8B5E3C" opacity=".85"/>
+          <path d="M72 42Q79 32 72 23Q63 30 62 40Z" fill="#8B5E3C" opacity=".85"/>
+          <path d="M3 46Q-1 34 8 27Q15 36 16 46Z" fill="#7A4C2C" opacity=".6"/>
+          <path d="M77 46Q81 34 72 27Q65 36 64 46Z" fill="#7A4C2C" opacity=".6"/>
+          <path d="M25 14H55V42A15 15 0 0 1 25 42Z" fill="url(#cg)"/>
+          <path d="M17 16H25V34A7 7 0 0 1 12 28V20A4 4 0 0 1 17 16Z" fill="#a05e35"/>
+          <path d="M63 16H55V34A7 7 0 0 0 68 28V20A4 4 0 0 0 63 16Z" fill="#a05e35"/>
+          <rect x="36" y="57" width="8" height="9" rx="1" fill="#c0724a"/>
+          <rect x="27" y="65" width="26" height="5" rx="2" fill="#b06030"/>
+          <path d="M29 18Q36 23 34 36" stroke="rgba(255,255,255,.22)" stroke-width="3" stroke-linecap="round"/>
+          <defs><linearGradient id="cg" x1="25" y1="14" x2="55" y2="57" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#e08050"/><stop offset="100%" stop-color="#8B3A18"/></linearGradient></defs>
+        </svg>
+        <div class="badge-lbl">Level <span id="lvEl">—</span></div>
+      </div>
+
+      <div class="ring-col">
+        <svg width="72" height="72" viewBox="0 0 76 76">
+          <circle class="rtrack" cx="38" cy="38" r="30"/>
+          <circle class="rfill" id="rfill" cx="38" cy="38" r="30" stroke-dasharray="188.5" stroke-dashoffset="188.5"/>
+        </svg>
+        <div class="ring-inner">
+          <div class="ring-pct" id="rpct">0%</div>
+          <div class="ring-sub">next level</div>
+        </div>
+      </div>
+
+      <div class="total-col">
+        <div class="total-num" id="totalEl">—</div>
+        <div class="total-lbl">Total trophies</div>
+      </div>
     </div>
-  </div>
 
-  <div class="tcounts" id="tcoEl">
-    <div class="tci plat"><svg width="36" height="36" viewBox="0 0 40 40" id="svgP"></svg><span class="tci-num" id="pN">—</span></div>
-    <div class="tci gold"><svg width="36" height="36" viewBox="0 0 40 40" id="svgG"></svg><span class="tci-num" id="gN">—</span></div>
-    <div class="tci silv"><svg width="36" height="36" viewBox="0 0 40 40" id="svgS"></svg><span class="tci-num" id="sN">—</span></div>
-    <div class="tci bron"><svg width="36" height="36" viewBox="0 0 40 40" id="svgB"></svg><span class="tci-num" id="bN">—</span></div>
-  </div>
-
-  <div class="games-wrap">
-    <div class="games-lbl">Games played</div>
-    <div class="controls">
-      <input class="src" type="text" id="srcEl" placeholder="Search games…"/>
-      <button class="fb on" data-f="all">All</button>
-      <button class="fb" data-f="platinum">Platinum</button>
-      <button class="fb" data-f="complete">100%</button>
-      <button class="fb" data-f="incomplete">Incomplete</button>
+    <div class="tcounts" id="tcoEl">
+      <div class="tci plat"><svg width="32" height="32" viewBox="0 0 40 40" id="svgP"></svg><span class="tci-num" id="pN">—</span></div>
+      <div class="tci gold"><svg width="32" height="32" viewBox="0 0 40 40" id="svgG"></svg><span class="tci-num" id="gN">—</span></div>
+      <div class="tci silv"><svg width="32" height="32" viewBox="0 0 40 40" id="svgS"></svg><span class="tci-num" id="sN">—</span></div>
+      <div class="tci bron"><svg width="32" height="32" viewBox="0 0 40 40" id="svgB"></svg><span class="tci-num" id="bN">—</span></div>
     </div>
-    <div class="glist" id="glist"><div class="empty">Loading…</div></div>
-  </div>
-</div>
 
+    <div class="games-wrap">
+      <div class="games-lbl">Games played</div>
+      <div class="controls">
+        <input class="src" type="text" id="srcEl" placeholder="Search games…"/>
+        <button class="fb on" data-f="all">All</button>
+        <button class="fb" data-f="platinum">Platinum</button>
+        <button class="fb" data-f="complete">100%</button>
+        <button class="fb" data-f="incomplete">Incomplete</button>
+      </div>
+      <div class="glist" id="glist"><div class="empty">Loading…</div></div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <span>&copy; 2026 Lakshya Agarwal</span>
+    <span><a href="index.html">&larr; Home</a></span>
+  </footer>
+
+</main>
+
+<script src="assets/site.js?v=3"></script>
 <script>
 const GRADE={
   platinum:{f:'#9bb0d4',s:'#7a94b8'},
@@ -197,7 +223,6 @@ function cupInner(g){
 
 function cupSVG(g,sz){return `<svg width="${sz}" height="${sz}" viewBox="0 0 40 40">${cupInner(g)}</svg>`;}
 
-// Inject tc icons
 ['svgP','svgG','svgS','svgB'].forEach((id,i)=>{
   document.getElementById(id).innerHTML=cupInner(['platinum','gold','silver','bronze'][i]);
 });
@@ -205,8 +230,8 @@ function cupSVG(g,sz){return `<svg width="${sz}" height="${sz}" viewBox="0 0 40 
 function barColor(p){
   if(p===100)return '#c8961e';
   if(p>=70)return '#1db954';
-  if(p>=30)return '#2e6db4';
-  return '#4a4d55';
+  if(p>=30)return '#2c6bb3';
+  return '#737373';
 }
 
 const DEMO={
@@ -246,17 +271,14 @@ async function init(){
 function render(data){
   const{profile,games}=data;
   allG=[...games].sort((a,b)=>b.completion-a.completion);
-
   if(profile.avatarUrl)document.getElementById('avEl').innerHTML=`<img src="${profile.avatarUrl}" alt=""/>`;
   document.getElementById('hdEl').textContent=profile.onlineId||'';
   document.getElementById('dnEl').textContent=profile.displayName||'Player';
   document.getElementById('lvEl').textContent=profile.trophyLevel||0;
-
   const pct=profile.progress||0;
   document.getElementById('rpct').textContent=pct+'%';
   const circ=2*Math.PI*30;
   setTimeout(()=>{document.getElementById('rfill').style.strokeDashoffset=circ-(pct/100)*circ;},120);
-
   const t=profile.earnedTrophies||{};
   const tot=(t.platinum||0)+(t.gold||0)+(t.silver||0)+(t.bronze||0);
   document.getElementById('totalEl').textContent=tot.toLocaleString();
@@ -264,7 +286,6 @@ function render(data){
   document.getElementById('gN').textContent=t.gold||0;
   document.getElementById('sN').textContent=t.silver||0;
   document.getElementById('bN').textContent=t.bronze||0;
-
   renderG();
 }
 
@@ -279,7 +300,6 @@ function renderG(){
   });
   const list=document.getElementById('glist');
   if(!gs.length){list.innerHTML='<div class="empty">No games found.</div>';return;}
-
   list.innerHTML=gs.map((g,i)=>{
     const e=g.trophies?.earned||{};
     const p=g.completion||0;
@@ -293,17 +313,17 @@ function renderG(){
           <div class="tdesc">${t.desc}</div>
         </div>
         <div class="tright">
-          ${cupSVG(t.grade,24)}
+          ${cupSVG(t.grade,22)}
           ${t.rare?'<div class="trare">RARE</div>':''}
         </div>
       </div>`).join('');
-    return `<div class="grow" id="${g.id}" style="animation-delay:${i*28}ms">
+    return `<div class="grow" id="${g.id}">
       <div class="gmain" onclick="tog('${g.id}')">
         <div class="gcover">${cov}</div>
         <div class="gbody">
           <div class="gtitle">${g.title}</div>
           <div class="gpips">
-            ${['platinum','gold','silver','bronze'].map(gr=>`<div class="pip">${cupSVG(gr,16)}<span>${e[gr]||0}</span></div>`).join('')}
+            ${['platinum','gold','silver','bronze'].map(gr=>`<div class="pip">${cupSVG(gr,14)}<span>${e[gr]||0}</span></div>`).join('')}
           </div>
           <div class="gbar"><div class="gbarfill" data-w="${p}" style="background:${col}"></div></div>
         </div>
@@ -312,10 +332,9 @@ function renderG(){
           <div class="chev">▾</div>
         </div>
       </div>
-      <div class="tpanel">${trs||'<div style="padding:10px 0;color:var(--sub);font-size:.83rem">No trophy details available.</div>'}</div>
+      <div class="tpanel">${trs||'<div style="padding:10px 0;color:var(--text-tertiary);font-size:0.83rem">No trophy details available.</div>'}</div>
     </div>`;
   }).join('');
-
   requestAnimationFrame(()=>setTimeout(()=>{
     document.querySelectorAll('.gbarfill').forEach(el=>{el.style.width=el.dataset.w+'%';});
   },80));

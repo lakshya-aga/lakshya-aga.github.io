@@ -7,63 +7,53 @@
   <meta name="description" content="Reading log auto-published from the ubiquitous-enigma Obsidian vault. Anything tagged #book lands here."/>
   <link rel="icon" type="image/jpeg" href="assets/profile.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet"/>
-    <script>(function(){try{var t=localStorage.getItem("theme");if(t==="light")document.documentElement.classList.add("light");}catch(e){}})();</script>
-  <link rel="stylesheet" href="assets/styles.css"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet"/>
+  <script>(function(){try{var t=localStorage.getItem("theme");if(t==="dark")document.documentElement.classList.add("dark");}catch(e){}})();</script>
+  <link rel="stylesheet" href="assets/styles.css?v=3"/>
 </head>
 <body>
 
-<div class="grid-bg"></div>
-
-<nav>
-  <a href="index.html" class="nav-logo"><img class="nav-avatar" src="assets/profile.jpg" alt="Lakshya profile"/>LA</a>
-  <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
-  <ul class="nav-links" id="site-nav">
-    <li><a href="index.html" data-page="index.html">Home</a></li>
-    <li><a href="experience.html" data-page="experience.html">Experience</a></li>
-    <li><a href="research.html" data-page="research.html">Research</a></li>
-    <li><a href="projects.html" data-page="projects.html">Projects</a></li>
-    <li><a href="books.html" data-page="books.html">Reviews</a></li>
-    <li><a href="trophies.html" data-page="trophies.html">Trophies</a></li>
-  </ul>
-  <button class="theme-toggle" type="button" aria-label="Toggle theme"><span class="theme-icon-moon">☽ Dark</span><span class="theme-icon-sun">☀ Light</span></button>
+<nav class="topbar" id="topbar">
+  <div class="topbar-inner">
+    <a href="index.html" class="brand"><img class="nav-avatar" src="assets/profile.jpg" alt="Lakshya profile"/>Lakshya Agarwal</a>
+    <span class="divider">/</span>
+    <a href="experience.html">Experience</a>
+    <a href="research.html">Research</a>
+    <a href="projects.html">Projects</a>
+    <a href="books.html">Reviews</a>
+    <a href="trophies.html">Trophies</a>
+    <button class="theme-toggle" type="button" aria-label="Toggle theme">
+      <span class="icon-moon">Dark</span><span class="icon-sun">Light</span>
+    </button>
+  </div>
 </nav>
 
-<div class="wrapper">
-  <header class="page-header">
-    <div class="crumb">05 &nbsp;/ &nbsp;Reading log</div>
-    <h1>Reviews</h1>
-    <p>An auto-published index of book notes from my Obsidian vault. Anything I tag <code>#book</code> in <a href="https://github.com/ubiquitous-enigma/sources" target="_blank" rel="noopener noreferrer" style="color:var(--accent2);text-decoration:none;">ubiquitous-enigma/sources</a> gets parsed by a daily GitHub Actions workflow and rendered here. Each card links back to the full note so the long-form review lives in one canonical place. For ratings and a fuller shelf, see my <a href="https://www.goodreads.com/user/show/199429918-lakshya" target="_blank" rel="noopener noreferrer" style="color:var(--accent2);text-decoration:none;">Goodreads profile</a>.</p>
-  </header>
-</div>
+<main class="container page-body">
 
-<div class="wrapper">
-  <section id="books">
-    <div class="section-header reveal">
-      <span class="section-num">05.1</span>
-      <h2>Library</h2>
-      <div class="section-line"></div>
-    </div>
+  <section class="section fade-in">
+    <span class="eyebrow">Reading log</span>
+    <h1 class="display">Reviews.</h1>
+    <p class="lead">An auto-published index of book notes from my Obsidian vault. Anything I tag <code>#book</code> in <a class="link" href="https://github.com/ubiquitous-enigma/sources" target="_blank" rel="noopener noreferrer">ubiquitous-enigma/sources</a> gets parsed by a daily GitHub Actions workflow and rendered here. Each card links back to the full note. For ratings and a fuller shelf, see my <a class="link" href="https://www.goodreads.com/user/show/199429918-lakshya" target="_blank" rel="noopener noreferrer">Goodreads profile</a>.</p>
+  </section>
 
-    <div class="books-controls reveal">
-      <input id="book-search" class="search-input" type="search" placeholder="Search title, author, or tag&hellip;" aria-label="Search books"/>
-    </div>
-
-    <div id="books-meta" class="books-meta reveal"></div>
-    <div id="books-grid" class="books-grid">
+  <section class="section fade-in d1">
+    <span class="section-heading">Library</span>
+    <input id="book-search" class="search" type="search" placeholder="Search title, author, or tag…" aria-label="Search books"/>
+    <div id="books-meta" class="books-meta"></div>
+    <div id="books-grid" class="books">
       <div class="books-empty">Loading book reviews&hellip;</div>
     </div>
   </section>
-</div>
 
-<div class="wrapper">
-  <div class="footer-bottom">
-    <p>&copy; 2026 Lakshya Agarwal</p>
-    <p><a href="index.html" style="color:var(--muted);text-decoration:none;">&larr; Home</a></p>
-  </div>
-</div>
+  <footer class="footer">
+    <span>&copy; 2026 Lakshya Agarwal</span>
+    <span><a href="index.html">&larr; Home</a></span>
+  </footer>
 
-<script src="assets/site.js?v=2"></script>
+</main>
+
+<script src="assets/site.js?v=3"></script>
 <script>
 (function () {
   const grid = document.getElementById('books-grid');
@@ -72,16 +62,10 @@
   let books = [];
 
   const STATUS_LABELS = {
-    'finished': 'Finished',
-    'read': 'Finished',
-    'completed': 'Finished',
-    'reading': 'Currently reading',
-    'in-progress': 'Currently reading',
-    'to-read': 'To read',
-    'tbr': 'To read',
-    'wishlist': 'To read',
-    'dropped': 'Dropped',
-    'paused': 'Paused'
+    'finished': 'Finished', 'read': 'Finished', 'completed': 'Finished',
+    'reading': 'Currently reading', 'in-progress': 'Currently reading',
+    'to-read': 'To read', 'tbr': 'To read', 'wishlist': 'To read',
+    'dropped': 'Dropped', 'paused': 'Paused'
   };
 
   function statusKey(s) {
@@ -94,12 +78,10 @@
     if (k === 'paused') return 'paused';
     return k;
   }
-
   function statusLabel(s) {
     const k = statusKey(s);
     return STATUS_LABELS[k] || (s ? String(s) : 'Note');
   }
-
   function ratingStars(r) {
     if (r === undefined || r === null || r === '') return '';
     const n = Number(r);
@@ -110,14 +92,12 @@
     for (let i = 0; i < max; i++) out.push(i < filled ? '★' : '☆');
     return out.join('');
   }
-
   function shortDate(s) {
     if (!s) return '';
     const d = new Date(s);
     if (Number.isNaN(d.getTime())) return String(s);
     return d.toISOString().slice(0, 10);
   }
-
   function escapeHtml(s) {
     return String(s == null ? '' : s)
       .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
@@ -143,11 +123,10 @@
       grid.innerHTML = `
         <div class="books-empty">
           No book reviews yet.<br>
-          Tag any note in <a href="https://github.com/ubiquitous-enigma/sources" target="_blank" rel="noopener noreferrer" style="color:var(--accent2);">ubiquitous-enigma/sources</a> with <code>#book</code> and the daily workflow will pick it up.
+          Tag any note in <a class="link" href="https://github.com/ubiquitous-enigma/sources" target="_blank" rel="noopener noreferrer">ubiquitous-enigma/sources</a> with <code>#book</code> and the daily workflow will pick it up.
         </div>`;
       return;
     }
-
     if (!filtered.length) {
       grid.innerHTML = `<div class="books-empty">No reviews match the search.</div>`;
       return;
@@ -168,18 +147,10 @@
           ${b.summary ? `<div class="book-summary">${escapeHtml(b.summary)}</div>` : ''}
           <div class="book-foot">
             <span class="book-rating">${stars}</span>
-            <span>${escapeHtml(dateStr)} <span class="arrow">&rarr;</span></span>
+            <span>${escapeHtml(dateStr)} →</span>
           </div>
         </a>`;
     }).join('');
-
-    if (window.__siteRevealObserver) {
-      grid.querySelectorAll('.book-card').forEach((el, i) => {
-        el.classList.add('reveal');
-        el.style.transitionDelay = (i * 0.04) + 's';
-        window.__siteRevealObserver.observe(el);
-      });
-    }
   }
 
   function sortBooks(list) {
@@ -209,10 +180,7 @@
       }
       render();
     })
-    .catch(() => {
-      books = [];
-      render();
-    });
+    .catch(() => { books = []; render(); });
 })();
 </script>
 </body>

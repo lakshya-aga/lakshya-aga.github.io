@@ -148,32 +148,12 @@
       }
       ctx.stroke();
 
-      // Faint circles for each epicycle (only for the ~20 biggest, to reduce noise)
-      ctx.strokeStyle = colors.circle;
-      ctx.lineWidth = 0.7;
-      const N = Math.min(joints.length - 1, 28);
-      for (let i = 0; i < N; i++) {
-        const center = dataToScreen(joints[i]);
-        const tip = dataToScreen(joints[i + 1]);
-        const r = Math.hypot(tip[0] - center[0], tip[1] - center[1]);
-        if (r < 0.6) continue;
-        ctx.beginPath();
-        ctx.arc(center[0], center[1], r, 0, Math.PI * 2);
-        ctx.stroke();
-      }
-
-      // Pen tip
+      // Pen tip — small dot, no glow
       const tip = dataToScreen(joints[joints.length - 1]);
       ctx.fillStyle = colors.trail;
       ctx.beginPath();
-      ctx.arc(tip[0], tip[1], 2.6, 0, Math.PI * 2);
+      ctx.arc(tip[0], tip[1], 2, 0, Math.PI * 2);
       ctx.fill();
-      ctx.shadowColor = colors.glow;
-      ctx.shadowBlur = 8;
-      ctx.beginPath();
-      ctx.arc(tip[0], tip[1], 1.8, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.shadowBlur = 0;
 
       ctx.restore();
     }
@@ -183,11 +163,9 @@
       ctx.save();
       ctx.scale(dpr, dpr);
       ctx.strokeStyle = colors.trail;
-      ctx.lineWidth = 2.2;
+      ctx.lineWidth = 1.8;
       ctx.lineCap = 'round';
       ctx.lineJoin = 'round';
-      ctx.shadowColor = colors.glow;
-      ctx.shadowBlur = 6;
       ctx.beginPath();
       const p0 = dataToScreen(trail[0]);
       ctx.moveTo(p0[0], p0[1]);
@@ -237,15 +215,8 @@
           frozenAt = elapsed;
         }
       } else if (phase === 'paused') {
-        // Hold the final reconstruction for a moment, then start over
+        // Hold the final reconstruction forever; one quiet sweep, then stop animating.
         t = Math.PI * 2 - 0.0001;
-        if (elapsed - pauseStart > 2.5) {
-          phase = 'drawing';
-          startTs = now - (now - now); // reset clock for next cycle
-          startTs = now;
-          cyclesDone = 0;
-          trail = [];
-        }
       }
 
       const joints = chainAt(t);
@@ -260,12 +231,12 @@
       drawTrail();
       if (phase === 'drawing') {
         drawEpicycles(joints);
+        raf = requestAnimationFrame(frame);
       } else if (phase === 'paused') {
-        // Draw the reconstructed full curve only (no arms)
+        // Settled. Draw the static reconstruction once and stop the RAF loop.
         drawFullReconstruction();
+        raf = null;
       }
-
-      raf = requestAnimationFrame(frame);
     }
 
     // Pre-render the entire reconstruction as a static path (used during pause).
@@ -283,11 +254,9 @@
       ctx.save();
       ctx.scale(dpr, dpr);
       ctx.strokeStyle = colors.trail;
-      ctx.lineWidth = 2.2;
+      ctx.lineWidth = 1.8;
       ctx.lineCap = 'round';
       ctx.lineJoin = 'round';
-      ctx.shadowColor = colors.glow;
-      ctx.shadowBlur = 8;
       ctx.beginPath();
       const p0 = dataToScreen(fullPathCache[0]);
       ctx.moveTo(p0[0], p0[1]);
