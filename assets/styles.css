@@ -122,10 +122,10 @@ button { cursor: pointer; font-family: inherit; }
   display: flex;
   flex-direction: column;
   gap: var(--gap-8);
-  padding: 4rem 0 6rem;
+  padding: 2.5rem 0 5rem;
 }
 @media (min-width: 640px) {
-  .page-body { padding: 6rem 0 8rem; }
+  .page-body { padding: 4.5rem 0 7rem; }
 }
 
 /* ---------- TOP NAV ---------- */
@@ -147,6 +147,29 @@ nav.topbar.scrolled { border-bottom-color: var(--border-secondary); }
   display: flex;
   align-items: center;
   gap: 0.25rem;
+  min-width: 0;
+}
+@media (max-width: 640px) {
+  nav.topbar { padding: 0 0.5rem; }
+  .topbar .topbar-inner {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .topbar .topbar-inner::-webkit-scrollbar { display: none; }
+  .topbar .topbar-inner > * { flex-shrink: 0; }
+  .topbar .brand { padding-left: 0.25rem; }
+  .theme-toggle {
+    position: sticky;
+    right: 0;
+    background: linear-gradient(to right, transparent, var(--bg) 18%);
+    padding-left: 1rem;
+    margin-left: auto;
+    border: none;
+    color: var(--text-tertiary);
+  }
+  .theme-toggle:hover { background: var(--bg); color: var(--text-primary); }
 }
 
 .topbar a, .topbar .divider {
@@ -459,34 +482,48 @@ ul.list > li { display: flex; }
   font-weight: 500;
 }
 
-/* ---------- HERO (index) ---------- */
-.hero { display: flex; flex-direction: column; gap: 0.75rem; }
-.hero h1.display { font-size: 1.6rem; }
-.hero .fourier-hero {
+/* ---------- HERO NAME ---------- */
+.hero-name {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  gap: 0.1em;
+}
+.hero-first {
+  display: block;
+  color: var(--text-primary);
+}
+.fourier-hero {
   display: block;
   width: 100%;
-  height: clamp(80px, 11vw, 120px);
+  height: clamp(70px, 9vw, 110px);
   position: relative;
   color: var(--text-primary);
 }
-.hero .fourier-hero canvas {
+.fourier-hero canvas {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
   display: block;
 }
-.hero .fourier-hero .fourier-fallback {
+.fourier-hero .fourier-fallback {
   position: absolute; inset: 0;
   display: flex; align-items: center;
   font-family: var(--serif);
   font-weight: 600;
-  font-size: clamp(1.5rem, 4vw, 2.6rem);
+  font-size: clamp(2rem, 5vw, 2.8rem);
   color: var(--text-primary);
   letter-spacing: -0.015em;
+  line-height: 1;
   transition: opacity 400ms ease;
 }
-.hero .fourier-hero.ready .fourier-fallback { opacity: 0; }
-.hero .fourier-hero.fallback canvas { display: none; }
-.hero .fourier-hero.fallback .fourier-fallback { opacity: 1; }
+.fourier-hero.ready .fourier-fallback { opacity: 0; }
+.fourier-hero.fallback canvas { display: none; }
+.fourier-hero.fallback .fourier-fallback { opacity: 1; }
 
 /* ---------- VENTURE BLOCK ---------- */
 .venture {
@@ -564,7 +601,15 @@ ul.list > li { display: flex; }
   border-top: 0.5px solid var(--border-secondary);
   padding-top: 1.25rem;
 }
-.strategy-lead { color: var(--text-secondary); line-height: 1.7; }
+.strategy-title {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-top: 0.25rem;
+  line-height: 1.25;
+}
+.strategy-lead { color: var(--text-secondary); line-height: 1.7; margin-top: 0.5rem; }
 .strategy-lead strong { color: var(--text-primary); font-weight: 600; }
 .strategy-points { display: grid; gap: 0.75rem; margin-top: 1rem; }
 .strategy-point {
@@ -633,6 +678,15 @@ html.dark .metric-value.positive { color: #4ade80; }
 .chart-tooltip.visible { opacity: 1; transform: translateY(0); }
 .chart-tooltip .muted { color: var(--text-quaternary); }
 .paper-cite { color: var(--text-tertiary); font-size: 0.85rem; margin-top: 0.75rem; line-height: 1.7; font-style: italic; }
+.metric-value.compact { font-size: 0.95rem; }
+.note {
+  color: var(--text-tertiary);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  margin-top: 0.75rem;
+}
+.spaced-top { margin-top: 1rem; }
+.spaced-top-sm { margin-top: 0.5rem; }
 
 /* ---------- TROPHIES (kept functional, restyled) ---------- */
 .trophy-summary { display: grid; grid-template-columns: repeat(auto-fit,minmax(140px,1fr)); gap: 1rem; }
