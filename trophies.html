@@ -33,8 +33,8 @@
     .dname{font-family:var(--serif);font-size:1.4rem;font-weight:600;color:var(--text-primary);}
 
     .level-row{display:flex;align-items:center;gap:1.5rem;padding:1.25rem 0;border-top:0.5px solid var(--border-secondary);border-bottom:0.5px solid var(--border-secondary);}
-    .badge-col{display:flex;flex-direction:column;align-items:center;gap:5px;flex-shrink:0;}
-    .badge-svg{width:54px;height:54px;}
+    .badge-col{display:flex;flex-direction:column;align-items:center;gap:6px;flex-shrink:0;}
+    .badge-img{height:60px;width:auto;display:block;object-fit:contain;filter:drop-shadow(0 1px 1px rgba(0,0,0,0.06));}
     .badge-lbl{font-size:0.7rem;color:var(--text-quaternary);font-weight:500;letter-spacing:0.04em;}
     .ring-col{position:relative;flex-shrink:0;width:72px;height:72px;}
     .ring-col svg{transform:rotate(-90deg);}
@@ -137,19 +137,7 @@
 
     <div class="level-row">
       <div class="badge-col">
-        <svg class="badge-svg" viewBox="0 0 80 80" fill="none">
-          <path d="M8 42Q1 32 8 23Q17 30 18 40Z" fill="#8B5E3C" opacity=".85"/>
-          <path d="M72 42Q79 32 72 23Q63 30 62 40Z" fill="#8B5E3C" opacity=".85"/>
-          <path d="M3 46Q-1 34 8 27Q15 36 16 46Z" fill="#7A4C2C" opacity=".6"/>
-          <path d="M77 46Q81 34 72 27Q65 36 64 46Z" fill="#7A4C2C" opacity=".6"/>
-          <path d="M25 14H55V42A15 15 0 0 1 25 42Z" fill="url(#cg)"/>
-          <path d="M17 16H25V34A7 7 0 0 1 12 28V20A4 4 0 0 1 17 16Z" fill="#a05e35"/>
-          <path d="M63 16H55V34A7 7 0 0 0 68 28V20A4 4 0 0 0 63 16Z" fill="#a05e35"/>
-          <rect x="36" y="57" width="8" height="9" rx="1" fill="#c0724a"/>
-          <rect x="27" y="65" width="26" height="5" rx="2" fill="#b06030"/>
-          <path d="M29 18Q36 23 34 36" stroke="rgba(255,255,255,.22)" stroke-width="3" stroke-linecap="round"/>
-          <defs><linearGradient id="cg" x1="25" y1="14" x2="55" y2="57" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#e08050"/><stop offset="100%" stop-color="#8B3A18"/></linearGradient></defs>
-        </svg>
+        <img class="badge-img" src="assets/trophy_images/bronze.png" alt="Trophy level"/>
         <div class="badge-lbl">Level <span id="lvEl">—</span></div>
       </div>
 
