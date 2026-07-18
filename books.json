@@ -1,8 +1,25 @@
 {
-  "generated_at": "2026-07-17T07:15:11.541Z",
+  "generated_at": "2026-07-18T06:59:37.222Z",
   "source": "github.com/lakshya-aga/ubiquitous-enigma",
   "count": 13,
   "books": [
+    {
+      "title": "A Tour of CPP",
+      "author": "Bjarne Stroustoup",
+      "status": "",
+      "rating": "",
+      "finished": "",
+      "started": "",
+      "tags": [
+        "source",
+        "C++",
+        "Programming"
+      ],
+      "summary": "Last read: March 2026",
+      "slug": "Sources/A Tour of CPP",
+      "url": "https://www.amazon.sg/Tour-C-Bjarne-Stroustrup-dp-0136816487/dp/0136816487/ref=dp_ob_image_bk",
+      "updated": "2026-07-18T06:59:33.059Z"
+    },
     {
       "title": "Advances in Financial Machine Learning",
       "author": "Lopez de Prado",
@@ -18,7 +35,7 @@
       "summary": "I like the width and cases of how some of these techniques are useful. Code snippets really get rid of any ambiguity. The book needs better semantic explanations. It relies on code to actually get the algorithms across and barely touches on the why and when. Too much focus on the \"how\" which can be found fairly easily on demand.",
       "slug": "Sources/Advances in Financial Machine Learning",
       "url": "https://lakshya-aga.github.io/quartz/Sources/Advances-in-Financial-Machine-Learning",
-      "updated": "2026-07-17T07:15:07.526Z"
+      "updated": "2026-07-18T06:59:33.059Z"
     },
     {
       "title": "Brief History of Time",
@@ -34,7 +51,7 @@
       "summary": "The book is absolutely fantastic to get a glimpse of how our understanding of the universe evolved. It starts off with some theories primarily based in supernatural powers stating the geocentric theory. This was later replaced by the helio centric theory.",
       "slug": "Sources/Brief History of Time",
       "url": "https://lakshya-aga.github.io/quartz/Sources/Brief-History-of-Time",
-      "updated": "2026-07-17T07:15:07.526Z"
+      "updated": "2026-07-18T06:59:33.059Z"
     },
     {
       "title": "Designing Data Intensive Applications",
@@ -50,7 +67,7 @@
       "summary": "- There is a tradeoff between read and write for these models - Normalised RDBMS have the quality of returning data through joins which means if an object property such as profile picture of a user changes, all references do not need to be updated - However, the joins can sometimes(less often than you would think) prove to be expensive. Instead systems like",
       "slug": "Sources/Designing Data Intensive Applications",
       "url": "https://lakshya-aga.github.io/quartz/Sources/Designing-Data-Intensive-Applications",
-      "updated": "2026-07-17T07:15:07.526Z"
+      "updated": "2026-07-18T06:59:33.059Z"
     },
     {
       "title": "Effective C++",
@@ -68,7 +85,7 @@
       "summary": "- C - OOP - Templates - STL",
       "slug": "Sources/Effective C++",
       "url": "https://lakshya-aga.github.io/quartz/Sources/Effective-C%2B%2B",
-      "updated": "2026-07-17T07:15:07.526Z"
+      "updated": "2026-07-18T06:59:33.059Z"
     },
     {
       "title": "Effective modern C++",
@@ -85,7 +102,7 @@
       "summary": "Understanding Template Type deduction",
       "slug": "Sources/Effective modern C++",
       "url": "https://lakshya-aga.github.io/quartz/Sources/Effective-modern-C%2B%2B",
-      "updated": "2026-07-17T07:15:07.526Z"
+      "updated": "2026-07-18T06:59:33.059Z"
     },
     {
       "title": "Fooled by Randomness",
@@ -100,7 +117,7 @@
       "summary": "Chapter 1 lays out the premise of Nero, w cautious and intellectually curious trader. Although certain in his methods, he gets waivered by someone around him, doing visibly better even though he knows that a lot of his counterpart's success is attributable to randomness. A saying Aimad Taleb during my time at Astignes said aligns with this - there are no old",
       "slug": "Sources/Fooled by Randomness",
       "url": "https://lakshya-aga.github.io/quartz/Sources/Fooled-by-Randomness",
-      "updated": "2026-07-17T07:15:07.526Z"
+      "updated": "2026-07-18T06:59:33.059Z"
     },
     {
       "title": "Math Primer for Financial Engineering",
@@ -116,7 +133,7 @@
       "summary": "Very frequently recommended book. Calculus ideas are very friendly. Builds intuition all the way from first principles.",
       "slug": "Sources/Math Primer for Financial Engineering",
       "url": "https://lakshya-aga.github.io/quartz/Sources/Math-Primer-for-Financial-Engineering",
-      "updated": "2026-07-17T07:15:07.526Z"
+      "updated": "2026-07-18T06:59:33.059Z"
     },
     {
       "title": "Mean Markets and Lizard Brains",
@@ -132,7 +149,7 @@
       "summary": "The first part of the book largely argues against the efficient market hypothesis and how irrationality may be capitalised on. The main argument for this is impirical. Such as why were tulip bulbs more expensive than a house in Amsterdam even though you can potentially produce infinite tulips from one, driving up supply. Warren buffet is another example of t",
       "slug": "Sources/Mean Markets and Lizard Brains",
       "url": "https://lakshya-aga.github.io/quartz/Sources/Mean-Markets-and-Lizard-Brains",
-      "updated": "2026-07-17T07:15:07.526Z"
+      "updated": "2026-07-18T06:59:33.059Z"
     },
     {
       "title": "Principles",
@@ -148,7 +165,7 @@
       "summary": "Primarily a story book. Kind of motivational. Provides some examples of how unconventional thinking is Helpful. Example McDonald's Chicken nuggets were possible because of hay futures! Because price of chicken was volatile primarily due to chicken feed",
       "slug": "Sources/Principles",
       "url": "https://lakshya-aga.github.io/quartz/Sources/Principles",
-      "updated": "2026-07-17T07:15:07.526Z"
+      "updated": "2026-07-18T06:59:33.059Z"
     },
     {
       "title": "Psychology of Intelligence Analysis",
@@ -164,7 +181,7 @@
       "summary": "General introduction. Perception is active not passive. Perception is reconstruction of reality, not merely recording it. Perception is influenced by - Past experience - Cultural values - education and 2 other factors I cannot recollect --- Demonstrates how trajectory of information matters A more ambiguous start leads to less favourable outcomes as more inf",
       "slug": "Sources/Psychology of Intelligence Analysis",
       "url": "https://lakshya-aga.github.io/quartz/Sources/Psychology-of-Intelligence-Analysis",
-      "updated": "2026-07-17T07:15:07.526Z"
+      "updated": "2026-07-18T06:59:33.059Z"
     },
     {
       "title": "Reith Lectures on Black Holes",
@@ -180,7 +197,7 @@
       "summary": "Very short and simple compilation of basic ideas of Black holes. Some funny history is also there such as French going against the name Black Hole - trou noire because of it being obscene. Interesting theories are presented. What can be inferred from a black hole - spin, charge and mass. Does black hole retain information? As much as catching ash when a book",
       "slug": "Sources/Reith Lectures on Black Holes",
       "url": "https://lakshya-aga.github.io/quartz/Sources/Reith-Lectures-on-Black-Holes",
-      "updated": "2026-07-17T07:15:07.526Z"
+      "updated": "2026-07-18T06:59:33.059Z"
     },
     {
       "title": "Volatility Trading",
@@ -198,24 +215,7 @@
       "summary": "Chapter 1 introduces how to use models. Generally identify the assumptions. Most importantly it helps to use models for intuition building rather than quantitative risk control. For tail risks, either trade far out of the money options or trade a small portion. Hedging will fail when jumps occur otherwise and you are left a sitting duck. It is a good pricing",
       "slug": "Sources/Volatility Trading",
       "url": "https://lakshya-aga.github.io/quartz/Sources/Volatility-Trading",
-      "updated": "2026-07-17T07:15:07.526Z"
-    },
-    {
-      "title": "A Tour of CPP",
-      "author": "Bjarne Stroustoup",
-      "status": "",
-      "rating": "",
-      "finished": "",
-      "started": "",
-      "tags": [
-        "source",
-        "C++",
-        "Programming"
-      ],
-      "summary": "Last read: March 2026",
-      "slug": "Sources/A Tour of CPP",
-      "url": "https://www.amazon.sg/Tour-C-Bjarne-Stroustrup-dp-0136816487/dp/0136816487/ref=dp_ob_image_bk",
-      "updated": "2026-07-17T07:15:07.525Z"
+      "updated": "2026-07-18T06:59:33.059Z"
     }
   ]
 }
